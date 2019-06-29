@@ -1,4 +1,4 @@
-Entity,Code,Year,Underweight (%),Healthy (%),Overweight or Obese (%)
+Entity,Code,Year,f_Underweight (%),f_Healthy (%),f_Overweight or Obese (%)
 Afghanistan,AFG,1975,30.2,62.7,7.1
 Afghanistan,AFG,1976,30,62.7,7.3
 Afghanistan,AFG,1977,29.8,62.7,7.4
