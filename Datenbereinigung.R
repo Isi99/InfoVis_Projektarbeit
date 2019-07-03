@@ -51,7 +51,7 @@ library(tidyverse)
 #supply <- supply %>% filter(`Daily caloric supply (kcal/person/day)` != "NA")
 
 ###Writing Rds and reading in new Dataframes ----
-#write_rds(Meat_YPC,"meat.rds")
+#write_rds(Meat_YPC,"meatnew.rds")
 #write_rds(mortality, "mortality.rds")
 #write_rds(UnderOver_gender,"underover_gender.rds")
 #write_rds(prevalence_overweight, "prevalence_overweight.rds")
@@ -60,7 +60,7 @@ library(tidyverse)
 #write_rds(obes_region,"obes_region.rds")
 
 ###Neue Datensätze einlesen ----
-meat <- read_rds("meat.rds")
+meat <- read_rds("meatnew.rds")
 mortality <- read_rds("mortality.rds")
 indicator_weight <- read_rds("prevalence_overweight.rds")
 supply <- read_rds("supply.rds")
