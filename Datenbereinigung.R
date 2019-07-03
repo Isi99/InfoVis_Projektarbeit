@@ -12,7 +12,7 @@ library(tidyverse)
 
 ###CSV in Dataframes umwandeln ----
 #Caloric_Supply_DPC <- read_csv("daily-per-capita-caloric-supply.csv")
-Exercise <- readxl::read_xlsx("week16_exercise (1).xlsx")
+#Exercise <- readxl::read_xlsx("week16_exercise (1).xlsx")
 #FatSupply_DPC <- read_csv("daily-per-capita-fat-supply.csv")
 #FatSupply_region <- read_csv("fat-supply-by-region.csv")
 #Obesity_GenderCompare <- read_csv("obesity-in-men-vs-obesity-in-women.csv")
