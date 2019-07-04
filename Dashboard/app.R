@@ -4,7 +4,7 @@ library(tidyverse)
 library(ggplot2)
 
 ### Datensätze einlesen ----
-meat <- read_rds("meat.rds")
+meat <- read_rds("meatnew.rds")
 mortality <- read_rds("mortality.rds")
 indicator_weight <- read_rds("prevalence_overweight.rds")
 supply <- read_rds("supply.rds")
@@ -20,11 +20,12 @@ ui <- dashboardPage(
                    #Menü einrichten----
                    sidebarMenu(
                      menuItem("Home Page",tabName = "homepage",icon=icon("fas fa-globe")),
-                     menuItem("Tab1",tabName = "ta1",icon=icon("gulp")),
-                     menuItem("Tab2",tabName = "ta2",icon=icon("chart-line")),
-                     menuItem("Tab3",tabName = "ta3",icon=icon("fas fa-globe")),
-                     menuItem("Tab4",tabName = "ta4",icon=icon("gulp")),
-                     menuItem("About this Project",tabName = "aboutus",icon=icon("chart-line"))
+                     menuItem("Was passiert mit uns?",tabName = "ta1",icon=icon("question")),
+                     menuItem("Unterernährung",tabName = "ta2",icon=icon("feather")),
+                     menuItem("Globale Ernährung",tabName = "ta3",icon=icon("fas fa-utensils")),
+                     menuItem("Übergewicht und Fettleibigkeit",tabName = "ta4",icon=icon("weight")),
+                     menuItem("Home Page",tabName = "homepage",icon=icon("drumstick-bite")),
+                     menuItem("About this Project",tabName = "aboutus",icon=icon("comment-alt"))
                    )  
   ),
   
@@ -66,11 +67,12 @@ server <- function(input, output) {
   output$menu <- renderMenu ({
     sidebarMenu(
       menuItem("Home Page",tabName = "homepage",icon=icon("fas fa-globe")),
-      menuItem("Tab1",tabName = "ta1",icon=icon("gulp")),
-      menuItem("Tab2",tabName = "ta2",icon=icon("chart-line")),
-      menuItem("Tab3",tabName = "ta3",icon=icon("gulp")),
-      menuItem("Tab4",tabName = "ta4",icon=icon("chart-line")),
-      menuItem("About this Project",tabName = "aboutus",icon=icon("gulp"))
+      menuItem("Was passiert mit uns?",tabName = "ta1",icon=icon("question")),
+      menuItem("Unterernährung",tabName = "ta2",icon=icon("feather")),
+      menuItem("Globale Ernährung",tabName = "ta3",icon=icon("fas fa-utensils")),
+      menuItem("Übergewicht und Fettleibigkeit",tabName = "ta4",icon=icon("weight")),
+      menuItem("Home Page",tabName = "homepage",icon=icon("drumstick-bite")),
+      menuItem("About this Project",tabName = "aboutus",icon=icon("comment-alt"))
     )  
   })
   
