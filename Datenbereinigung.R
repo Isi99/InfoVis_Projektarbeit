@@ -1,6 +1,7 @@
 #Packages und Libraries laden
 library(readr)
 library(tidyverse)
+library(codebook)
 
 ###Begriffserklärung Abkürzungen:----
 #DPC = Daily Per Capita
@@ -38,7 +39,7 @@ library(tidyverse)
 #UnderOver_gender <- WeightCompare_F %>% left_join(WeightOver_M_Categories)
 #prevalence_overweight <- WeightOver_general %>% left_join(Obesity_general, by = c("Entity","Code","Year"))
 #Supply <- SupplyFat %>% left_join(SupplyCalories, by = c("Entity","Code","Year","GDP per capita (2011 international-$)"))
-#Weight <- WeightOver_vs_CalorieSupply_M %>% left_join((WeightUnder_vs_CalorieSupply))
+#Weight_combine <- WeightOver_vs_CalorieSupply_M %>% left_join((WeightUnder_vs_CalorieSupply))
 #weight_new <- UnderOver_fm %>% left_join(Weight)
 
 ###Deleting irrelevant columns in GlobalMortality ----
@@ -46,6 +47,8 @@ library(tidyverse)
 #prevalence_overweight <- prevalence_overweight[,c(-4, -5, -7, -8)]
 #Supply <- Supply[,c(-6)]
 #Weight <- Weight[,c(-7,-9)]
+
+
 #weight_new <- weight_new[,c(-11)]
 #obes_region <- ObesityRegion[,c(-2)]
 #supply <- supply %>% filter(`Daily caloric supply (kcal/person/day)` != "NA")
@@ -59,6 +62,15 @@ library(tidyverse)
 #write_rds(weight_new,"weight.rds")
 #write_rds(obes_region,"obes_region.rds")
 
+###Gruppierung von Underweight und Overweight ----
+#weight_new <- weight %>% mutate(Underweight_total = `f_Underweight (%)`+ `m_Underweight (%)`) %>% mutate(Overweight_total = `f_Overweight or Obese (%)`+ `m_Overweight or Obese (%)`)
+#write.table(weight_new,"weightnew.csv", sep=";")
+#weight_over <- read.csv("weight_over.csv", sep = ";")
+#weight_under <- read.csv("weight_under.csv", sep = ";")
+
+#weight_comb <- weight_over %>% full_join(weight_under)
+#write_rds(weight_comb,"weight_comb.rds")
+
 ###Neue Datensätze einlesen ----
 meat <- read_rds("meatnew.rds")
 mortality <- read_rds("mortality.rds")
@@ -66,3 +78,5 @@ indicator_weight <- read_rds("prevalence_overweight.rds")
 supply <- read_rds("supply.rds")
 weight <- read_rds("weight.rds")
 obes_region <- read_rds("obes_region.rds")
+weight_comb <- read_rds("weight_comb.rds")
+

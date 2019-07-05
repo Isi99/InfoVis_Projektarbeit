@@ -42,12 +42,25 @@ ui <- dashboardPage(
                     status = "warning",
                     "Plastic pollution is a major and growing problem, negatively affecting oceans and wildlife health. This app provides an overview of mismanaged plastic waste of 148 countries in 2010. Furthermore, it discusses whether there is a correlation between the amount of plastic that is produced and the GDP of each country.")
               )
-      )
+      ),
       
       #Second tab content ----
     
       
       #Third tab content----
+      tabItem(tabName = "ta2",
+              fluidRow(
+                sidebarLayout(
+                  sidebarPanel(
+                    selectInput("countselect","Select a Country", choices = weight$Entity, multiple = TRUE, selected = "Germany")
+                  ),
+                  box(width="12",
+                      title="Übergewicht im Vergleich zu Unterernährung",
+                      plotOutput("underplot")
+                  )
+                )
+              )            
+      )
       
       #Fourth tab content----
       
@@ -95,7 +108,20 @@ server <- function(input, output) {
   })
   
   #Output Plot Tab2 ----
-
+  output$underplot <- renderPlot({
+    
+    temp <- weight %>% 
+      filter(Entity %in% input$countselect)
+    
+    temp %>%      ggplot(
+      aes(x = , y = Year, fill= Entity)) + 
+      geom_col(position = "dodge2") +
+      labs(x="Countries",
+           y="Percentage of Females who are Underweight",
+           title= "Comparison of Females who are Overweight or Obese and Underweight",
+           fill = "Percentage of Females who are Overweight or Obese")+
+      coord_flip()
+  })
   
   #Output Plot Tab3----  
 
