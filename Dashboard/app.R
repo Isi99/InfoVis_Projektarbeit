@@ -10,6 +10,7 @@ indicator_weight <- read_rds("prevalence_overweight.rds")
 supply <- read_rds("supply.rds")
 weight <- read_rds("weight.rds")
 obes_region <- read_rds("obes_region.rds")
+weight_comb <- read_rds("weight_comb.rds")
 
 #UI ----
 # Define UI for application that draws a histogram
@@ -52,7 +53,7 @@ ui <- dashboardPage(
               fluidRow(
                 sidebarLayout(
                   sidebarPanel(
-                    selectInput("countselect","Select a Country", choices = weight$Entity, multiple = TRUE, selected = "Germany")
+                    selectInput("countselect","Select a Country", choices = weight_comb$Year, multiple = TRUE, selected = "2013")
                   ),
                   box(width="12",
                       title="Übergewicht im Vergleich zu Unterernährung",
@@ -110,11 +111,11 @@ server <- function(input, output) {
   #Output Plot Tab2 ----
   output$underplot <- renderPlot({
     
-    temp <- weight %>% 
-      filter(Entity %in% input$countselect)
+    temp <- weight_comb %>% 
+      filter(Year %in% input$countselect)
     
     temp %>%      ggplot(
-      aes(x = , y = Year, fill= Entity)) + 
+      aes(x = Year, y = weight_total, fill= weight_type, group = weight_type)) + 
       geom_col(position = "dodge2") +
       labs(x="Countries",
            y="Percentage of Females who are Underweight",
