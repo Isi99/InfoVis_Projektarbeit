@@ -80,3 +80,34 @@ weight <- read_rds("weight.rds")
 obes_region <- read_rds("obes_region.rds")
 weight_comb <- read_rds("weight_comb.rds")
 
+#[DELETE]tab content Untergewicht ----
+#     tabItem(tabName = "ta2",
+#              fluidRow(
+#                sidebarLayout(
+#                  sidebarPanel(
+#                    selectInput("countselect","Select a Country", choices = weight_comb$Entity, multiple = TRUE, selected = "Germany"),
+#                    selectInput("yearselect","Select a Year", choices = weight_comb$Year, multiple = TRUE, selected = "2014")
+#                  ),
+#                  box(width="12",
+#                      title="Übergewicht im Vergleich zu Unterernährung",
+#                      plotOutput("underplot")
+#                  )
+#                )
+#              )
+#      ),  
+
+#Output Plot Untergewicht----
+#  output$underplot <- renderPlot({
+
+#    temp2 <- weight_comb %>% 
+#      filter(Entity %in% input$countselect) %>% filter(Year %in% input$yearselect)
+
+#    temp2 %>%      ggplot(
+#      aes(x = Entity, y = weight_total, fill= weight_type, group = weight_type)) + 
+#      geom_col(position = "dodge2") +
+#      labs(x="Countries",
+#           y="Percentage of People who are Underweight",
+#           title= "Comparison of People who are Overweight/Obese and Underweight",
+#           fill = "Percentage of People who are Overweight/Obese or Underweight")+
+#           coord_flip()
+#  })
