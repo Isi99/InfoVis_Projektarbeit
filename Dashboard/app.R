@@ -31,7 +31,8 @@ ui <- dashboardPage(
                      menuItem("Globale Ernährung",tabName = "ta3",icon=icon("fas fa-utensils")),
                      menuItem("Übergewicht und Fettleibigkeit",tabName = "ta4",icon=icon("weight")),
                      menuItem("Fleischkonsum",tabName = "ta5",icon=icon("drumstick-bite")),
-                     menuItem("About this Project",tabName = "ta6",icon=icon("comment-alt"))
+                     menuItem("In Form",tabName = "ta6",icon=icon("walking")),
+                     menuItem("About this Project",tabName = "ta7",icon=icon("comment-alt"))
                    )  
   ),
   
@@ -40,8 +41,10 @@ ui <- dashboardPage(
       #First tab content---- 
       tabItem(tabName = "ta1",
               fluidRow(
-              #Bild einfügen??
-                
+                mainPanel(
+                  imageOutput(
+                  png(filename = "Lebensmittelkorb.png",
+                      width = 480, height=360, units="px"))),
                 box(width = 12,
                     title = "Neue Ära der Gesundheit",
                     status = "warning",
@@ -115,7 +118,10 @@ ui <- dashboardPage(
             )
     ),    
     
-      #Sixth tab content----
+      #Sixth tab contenct ----
+    
+    
+      #Seventh tab content----
     tabItem(tabName = "ta6",
             fluidRow(
                box(width = 12,
@@ -153,11 +159,19 @@ server <- function(input, output) {
       menuItem("Globale Ernährung",tabName = "ta3",icon=icon("fas fa-utensils")),
       menuItem("Übergewicht und Fettleibigkeit",tabName = "ta4",icon=icon("weight")),
       menuItem("Fleischkonsum",tabName = "ta5",icon=icon("drumstick-bite")),
-      menuItem("About this Project",tabName = "ta6",icon=icon("comment-alt"))
+      menuItem("In Form",tabName = "ta6",icon=icon("walking")),
+      menuItem("About this Project",tabName = "ta7",icon=icon("comment-alt"))
     )  
   })
   
   #Output Text Homepage----
+  #Bild einfügen
+  output$image <- renderImage({input$image
+    # outfile <- tempfile(fileext = "Lebensmittelkorb.png")
+  
+  })
+   
+  
   output$text <- renderText({input$text})
   
 
@@ -212,7 +226,7 @@ server <- function(input, output) {
   output$diseasecountplot <- renderPlot({
     
     temp22 <- mortality_select %>% 
-      filter(Disease_type %in% input$diseasecount) %>% filter(country == c("Central African Republic", "Germany", "United States"))
+      filter(Disease_type %in% input$diseasecount) %>%  filter(country == c("Germany"))
     
     temp22 %>%      ggplot(
       aes(x = year, y= `Disease (%)`, colour= Disease_type, group= Disease_type)) + 
@@ -268,15 +282,15 @@ server <- function(input, output) {
       filter(Entity %in% input$countselect) %>% filter(`Food Balance Sheets: Meat - Food supply quantity (kg/capita/yr) (FAO (2017)) (kg)` != "2007")
     
     temp5 %>%      ggplot(
-      aes(x = Year, fill= `Food Balance Sheets: Meat - Food supply quantity (kg/capita/yr) (FAO (2017)) (kg)`)) + 
-      geom_density() +
+      aes(x = Year, y = `Food Balance Sheets: Meat - Food supply quantity (kg/capita/yr) (FAO (2017)) (kg)`)) + 
+      geom_line() +
         labs(x="Years",
            y="Density",
            title= "Food Supply quantity (kg/capita/year) over Years",
-           fill = "Food Supply quantity (kg/capita/year)")+
-      ylim(0,100)
+           fill = "Food Supply quantity (kg/capita/year)")
   })
- 
+
+  
   #Output Plot 6 ----
   
   output$text <- renderText({input$text})
