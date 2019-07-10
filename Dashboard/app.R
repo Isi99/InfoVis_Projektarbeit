@@ -14,7 +14,7 @@ indicator_weight <- read_rds("prevalence_overweight.rds")
 supply <- read_rds("supply.rds")
 weight <- read_rds("weight.rds")
 obes_region <- read_rds("obes_region.rds")
-#weight_comb <- read_rds("weight_comb.rds")
+weight_comb <- read_rds("weight_comb.rds")
 mortality_select <- readxl::read_xlsx("global_mortality_selection.xlsx")
 
 
@@ -106,12 +106,24 @@ ui <- dashboardPage(
             fluidRow(
               sidebarLayout(
                 sidebarPanel(
-                  selectInput("countselect","Select a Country", choices = meat$Entity, multiple = TRUE, selected = "Germany")
+                  selectInput("countselect","Select a Country", choices = meat$Entity, multiple = TRUE, selected = c("Germany", "United States", "Central African Republic"))
                 ),
-              box(width="12",
-                  title="Fleischkonsum",
-                  plotOutput("fleischplot")
-                  )
+                  box(width="12",
+                      title="Fleischkonsum",
+                      plotOutput("fleischplot")
+                      )
+              ),
+              
+              infoBoxOutput("totalbox5", width = 12),
+              
+              sidebarLayout(
+                sidebarPanel(
+                  selectInput("countselect","Select a Country", choices = weight_comb$Entity, multiple = TRUE, selected = c("Germany", "United States", "Central African Republic"))
+                ),
+                   box(width="12",
+                      title="Übergewicht",
+                      plotOutput("overweightplot")
+              )
               )
             )
     ),    
@@ -249,7 +261,7 @@ server <- function(input, output) {
   temp31 <- supply %>%
     filter(Year == "2013")
   
-  temp31 %>%  plot_ly() +
+  temp31 %>% plot_ly() +
     aes(x = `GDP per capita (2011 international-$)`, y = `Daily per capita fat supply (grams per day) (g/person/day)`) +
     geom_point() +
     theme_minimal() 
@@ -277,10 +289,11 @@ server <- function(input, output) {
   output$fleischplot <- renderPlot({
     
     temp5 <- meat %>% 
-      filter(Entity %in% input$countselect) %>% filter(`Food Balance Sheets: Meat - Food supply quantity (kg/capita/yr) (FAO (2017)) (kg)` != "2007")
+    filter(Entity == c("Central African Republic", "Germany", "United States")) %>% 
+     filter(Entity %in% input$countselect) %>% filter(`Food Balance Sheets: Meat - Food supply quantity (kg/capita/yr) (FAO (2017)) (kg)` != "2007")
     
     temp5 %>%      ggplot(
-      aes(x = Year, y = `Food Balance Sheets: Meat - Food supply quantity (kg/capita/yr) (FAO (2017)) (kg)`)) + 
+      aes(x = Year, y = `Food Balance Sheets: Meat - Food supply quantity (kg/capita/yr) (FAO (2017)) (kg)`, group = Entity, colour = Entity)) + 
       geom_line() +
         labs(x="Years",
            y="Density",
@@ -288,6 +301,28 @@ server <- function(input, output) {
            fill = "Food Supply quantity (kg/capita/year)")
   })
 
+  output$totalbox5 <- renderInfoBox({
+    infoBox(
+      "Was fällt hier auf?", icon = icon("lightbulb"),
+      color = "green"
+    )
+  })  
+  
+  output$overweightplot <- renderPlot({
+    
+    temp5 <- weight_comb %>% 
+      filter(Entity == c("Central African Republic", "Germany", "United States")) %>% 
+      filter(weight_type == "Overweight") %>% 
+      filter(Entity %in% input$countselect) 
+    
+    temp5 %>%      ggplot(
+      aes(x = Year, y = weight_total, group = Entity, colour = Entity)) + 
+      geom_line() +
+      labs(x="Years",
+           y="Overweight",
+           title= "Overweight over Years",
+           fill = "Land")
+  })
 
   #Output Plot 6 ----
   
