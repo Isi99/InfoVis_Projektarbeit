@@ -41,10 +41,8 @@ ui <- dashboardPage(
       #First tab content---- 
       tabItem(tabName = "ta1",
               fluidRow(
-                mainPanel(
-                  imageOutput(
-                  png(filename = "Lebensmittelkorb.png",
-                      width = 480, height=360, units="px"))),
+                mainPanel( 
+                  HTML('<p><img src="Lebensmittelkorb.png"/></p>') ),
                 box(width = 12,
                     title = "Neue Ära der Gesundheit",
                     status = "warning",
@@ -166,10 +164,10 @@ server <- function(input, output) {
   
   #Output Text Homepage----
   #Bild einfügen
-  output$image <- renderImage({input$image
+#  output$image <- renderImage({
+#    })
     # outfile <- tempfile(fileext = "Lebensmittelkorb.png")
   
-  })
    
   
   output$text <- renderText({input$text})
@@ -290,7 +288,7 @@ server <- function(input, output) {
            fill = "Food Supply quantity (kg/capita/year)")
   })
 
-  
+
   #Output Plot 6 ----
   
   output$text <- renderText({input$text})
