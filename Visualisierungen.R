@@ -80,7 +80,7 @@ obes_region <- read_rds("obes_region.rds")
 
 ## (1) Weltkarte: Daily caloric supply in den verschiedenen Ländern ---- auf das aktuellste Jahr beziehen
 
-# Video zu leaflet vom Calero !
+# Video zu leaflet vom Calero ! oder ChoroMap?
 
 
 ## (2) BubbleChart: GDP per Capita und Daily per capita fat supply ----
