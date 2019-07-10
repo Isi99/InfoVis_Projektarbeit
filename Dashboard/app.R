@@ -41,10 +41,8 @@ ui <- dashboardPage(
       #First tab content---- 
       tabItem(tabName = "ta1",
               fluidRow(
-                mainPanel(
-                  imageOutput(
-                  png(filename = "Lebensmittelkorb.png",
-                      width = 480, height=360, units="px"))),
+                mainPanel( 
+                  HTML('<p><img src="Lebensmittelkorb.png"/></p>') ),
                 box(width = 12,
                     title = "Neue Ära der Gesundheit",
                     status = "warning",
@@ -113,7 +111,11 @@ ui <- dashboardPage(
               box(width="12",
                   title="Fleischkonsum",
                   plotOutput("fleischplot")
-                  )
+                  ),
+              box(width="12",
+                  title="Übergewicht",
+                  plotOutput("overweightplot")
+              )
               )
             )
     ),    
@@ -166,10 +168,10 @@ server <- function(input, output) {
   
   #Output Text Homepage----
   #Bild einfügen
-  output$image <- renderImage({input$image
+#  output$image <- renderImage({
+#    })
     # outfile <- tempfile(fileext = "Lebensmittelkorb.png")
   
-  })
    
   
   output$text <- renderText({input$text})
@@ -290,6 +292,19 @@ server <- function(input, output) {
            fill = "Food Supply quantity (kg/capita/year)")
   })
 
+  output$overweightplot <- renderPlot({
+    
+    temp5 <- meat %>% 
+      filter(Entity %in% input$countselect) %>% filter(`Food Balance Sheets: Meat - Food supply quantity (kg/capita/yr) (FAO (2017)) (kg)` != "2007")
+    
+    temp5 %>%      ggplot(
+      aes(x = Year, y = `Food Balance Sheets: Meat - Food supply quantity (kg/capita/yr) (FAO (2017)) (kg)`)) + 
+      geom_line() +
+      labs(x="Years",
+           y="Density",
+           title= "Food Supply quantity (kg/capita/year) over Years",
+           fill = "Food Supply quantity (kg/capita/year)")
+  })
   
   #Output Plot 6 ----
   
