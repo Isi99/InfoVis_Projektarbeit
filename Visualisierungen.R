@@ -12,7 +12,7 @@ meat <- read_rds("meatnew.rds")
 mortality <- read_rds("mortality.rds")
 indicator_weight <- read_rds("prevalence_overweight.rds")
 supply <- read_rds("supply.rds")
-weight <- read_rds("weight.rds")
+weight <- read_rds("weight.rds") 
 obes_region <- read_rds("obes_region.rds")
 
 
