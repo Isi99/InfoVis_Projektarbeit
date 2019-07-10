@@ -111,11 +111,7 @@ ui <- dashboardPage(
               box(width="12",
                   title="Fleischkonsum",
                   plotOutput("fleischplot")
-                  ),
-              box(width="12",
-                  title="Übergewicht",
-                  plotOutput("overweightplot")
-              )
+                  )
               )
             )
     ),    
@@ -292,20 +288,7 @@ server <- function(input, output) {
            fill = "Food Supply quantity (kg/capita/year)")
   })
 
-  output$overweightplot <- renderPlot({
-    
-    temp5 <- meat %>% 
-      filter(Entity %in% input$countselect) %>% filter(`Food Balance Sheets: Meat - Food supply quantity (kg/capita/yr) (FAO (2017)) (kg)` != "2007")
-    
-    temp5 %>%      ggplot(
-      aes(x = Year, y = `Food Balance Sheets: Meat - Food supply quantity (kg/capita/yr) (FAO (2017)) (kg)`)) + 
-      geom_line() +
-      labs(x="Years",
-           y="Density",
-           title= "Food Supply quantity (kg/capita/year) over Years",
-           fill = "Food Supply quantity (kg/capita/year)")
-  })
-  
+
   #Output Plot 6 ----
   
   output$text <- renderText({input$text})
