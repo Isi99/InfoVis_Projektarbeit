@@ -261,11 +261,11 @@ server <- function(input, output) {
   temp31 <- supply %>%
     filter(Year == "2013")
   
-  temp31 %>% plot_ly() +
+  p1 <- temp31 %>% ggplot() +
     aes(x = `GDP per capita (2011 international-$)`, y = `Daily per capita fat supply (grams per day) (g/person/day)`) +
     geom_point() +
     theme_minimal() 
-
+  ggplotly(p1)
   })
   
   ## (2.1) BubbleChart: GDP per Capita und Daily per capita fat supply für die Länder USA, Deutschland und Central African Republik ----
@@ -275,12 +275,12 @@ server <- function(input, output) {
     filter(Entity == c("Central African Republic", "Germany", "United States"))
   
   
-  temp32 %>% plot_ly() +
+  p <- temp32 %>% ggplot() +
     aes(x = `GDP per capita (2011 international-$)`, y = `Daily per capita fat supply (grams per day) (g/person/day)`, color = Entity, size = `Total population (Gapminder)`) +
     geom_point() +
     theme_minimal() +
     scale_x_log10() 
-  
+  ggplotly(p)
 })
   
   #Output Plot Tab 4----
