@@ -18,7 +18,6 @@ obes_region <- read_rds("obes_region.rds")
 
 
 
-
 #### Visualisierungen ----
 
 
@@ -144,5 +143,6 @@ ggplotly(p2)
 
 # Wie beide Variablen indicator_over & indicator_obes in einem Plot anzeigen lassen? 
 # in App: Select Funktion
+
 
 

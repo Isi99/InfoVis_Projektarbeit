@@ -28,6 +28,7 @@ supply_countries_all <- supply %>%
 # Define UI for application that draws a histogram
 
 ui <- dashboardPage(
+  skin = "green",
   dashboardHeader(title = "Gesundheit 4.0"),
   dashboardSidebar(width = 250,
                    #Menü einrichten----
@@ -174,13 +175,22 @@ ui <- dashboardPage(
     ),    
     
       #Sixth tab contenct ----
+    tabItem(tabName = "ta6",
+            fluidRow(
+              box(widht = "12",
+               title = "Projekt", 
+               status = "warning",
+                "https://www.bmel.de/DE/Startseite/startseite_node.html"
+                 )
+                    )
+            ),
       # Infos zum Proejkt In form
       # Broschüre als PDF downloaden
       # Link zu Freya und Nicoles App
     
     
       #Seventh tab content----
-    tabItem(tabName = "ta6",
+    tabItem(tabName = "ta7",
             fluidRow(
                box(width = 12,
                   title = "Motivation",
@@ -367,7 +377,12 @@ server <- function(input, output) {
   output$totalbox6 <- renderInfoBox({
     infoBox(
       "Was ist der Unterschied zwischen Übergewicht und Fettleibigkeit ?",
-      paste0(25 + input$text,"Übergewicht ist..."), icon = icon("question"),
+      paste0(25 + input$text,"Übergewicht und Adipositas sind nicht dasselbe.
+             Übergewicht bedeutet, dass der Betroffene über seinem Normalgewicht liegt. Es handelt sich dabei um den Übergang vom Normalgewicht zur Adipositas. 
+             Der Begriff Adipositas bedeutet, dass jemand sehr starkes Übergewicht und dadurch einen krankhaft erhöhten Körperfettanteil hat. Daher wird Adipositas auch Fettleibigkeit oder Fettsucht genannt.
+             Zu Definition dient die Kennzahl des Body-Mass-Index (BMI).
+             Ein BMI ab 25 kg/m2 gilt per Definition als Übergewicht, ein BMI von 30 kg/m2 und höher als Adipositas.
+             (Quelle: https://www.vigo.de/rubriken/krankheit-und-therapie/stoffwechsel/lesen/uebergewicht-und-adipositas-volkskrankheiten.html)"), icon = icon("question"),
       color = "red"
     )
   })
