@@ -87,6 +87,16 @@ ui <- dashboardPage(
       #Third tab content ----
       tabItem(tabName = "ta3",
               fluidRow(
+                  box(width = "12",
+                      title = "Kalorienkonsum",
+                      plotOutput("caloricplot")
+                      ),
+                  box(
+                    checkboxGroupInput("continent_sel",
+                                       label = "Please Select the Continent or Country",
+                                       choices = supply_countires_all$Entity %>% unique(),
+                                       selected = c("Germany", "Indonesia", "United States"))
+                      ),
                   box(width="12",
                       title="GDP1",
                       plotlyOutput("gdp1plot")
@@ -95,7 +105,7 @@ ui <- dashboardPage(
                       title="GDP2",
                       plotlyOutput("gdp2plot")    
                       )
-            )
+                       )
       ),        
 
       
@@ -251,7 +261,19 @@ server <- function(input, output) {
   
   ## (1) Weltkarte: Daily caloric supply in den verschiedenen Ländern ---- auf das aktuellste Jahr beziehen
   
-  # Video zu leaflet vom Calero !
+  output$caloricplot <- renderPlot({
+    
+    temp23 <- supply_countires_all %>%
+      filter(Entity %in% input$continent_sel)
+    
+    temp23 %>%  ggplot(
+      aes(x = Entity, y = `Daily caloric supply (kcal/person/day)`, fill = Entity)) + # Filter(year)?
+      geom_boxplot() + #oder geom_bar?
+      labs(x = "Country/Continent",
+           y = "Y",
+           title = "Daily caloric supply highest in US") +
+      guides(fill = FALSE)
+  })
   
   
   ## (2) BubbleChart: GDP per Capita und Daily per capita fat supply ----

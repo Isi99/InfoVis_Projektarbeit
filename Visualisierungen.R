@@ -82,6 +82,9 @@ obes_region <- read_rds("obes_region.rds")
 
 # Video zu leaflet vom Calero ! oder ChoroMap?
 
+library(ggplot2)
+
+
 
 ## (2) BubbleChart: GDP per Capita und Daily per capita fat supply ----
 
