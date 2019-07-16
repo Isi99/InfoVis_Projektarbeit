@@ -62,6 +62,7 @@ library(codebook)
 #write_rds(weight_new,"weight.rds")
 #write_rds(obes_region,"obes_region.rds")
 
+
 ###Gruppierung von Underweight und Overweight ----
 #weight_new <- weight %>% mutate(Underweight_total = `f_Underweight (%)`+ `m_Underweight (%)`) %>% mutate(Overweight_total = `f_Overweight or Obese (%)`+ `m_Overweight or Obese (%)`)
 #write.table(weight_new,"weightnew.csv", sep=";")

@@ -18,6 +18,12 @@ weight_comb <- read_rds("weight_comb.rds")
 mortality_select <- readxl::read_xlsx("global_mortality_selection.xlsx")
 
 
+### Anmerkungen
+# im suppy_contries_all Datensatz werden nicht alle Jahre angezeigt
+supply_countries_all <- supply %>%
+  filter(Entity == c("Australia", "Brazil", "Central African Republic", "China", "Germany", "United Kingdom", "United States", "Sweden",
+                     "Indonesia"))
+
 #UI ----
 # Define UI for application that draws a histogram
 
@@ -88,14 +94,28 @@ ui <- dashboardPage(
       tabItem(tabName = "ta3",
               fluidRow(
                   box(width = "12",
+                      title = "Einführung...",
+                      status = "warning",
+                      "..."
+                      ), 
+                  box(width = "12",
                       title = "Kalorienkonsum",
                       plotOutput("caloricplot")
+                      ),
+                  box(width = "12",
+                      title = "KalorienkonsumsA2",
+                      plotlyOutput("caloricA2plot")
                       ),
                   box(
                     checkboxGroupInput("continent_sel",
                                        label = "Please Select the Continent or Country",
-                                       choices = supply_countires_all$Entity %>% unique(),
+                                       choices = supply_countries_all$Entity %>% unique(),
                                        selected = c("Germany", "Indonesia", "United States"))
+                      ),
+                  box(width = "12",
+                      title = "Fettkonsum & GDP",
+                      status = "warning",
+                      "..."
                       ),
                   box(width="12",
                       title="GDP1",
@@ -110,6 +130,21 @@ ui <- dashboardPage(
 
       
       #Fourth tab content ----
+    tabItem(tabName = "ta4",
+            fluidRow(
+                  box(widht = "12",
+                       title = "Einleitung", 
+                       status = "warning",
+                       "..."
+                       ),
+                  infoBoxOutput("totalbox6", width = 12)
+                  ,
+                  box(width = "12",
+                    title = "Übergewicht & Fettleibigkeit",
+                    plotOutput("überfettplot")
+                    )
+                    )
+            ),
 
       #Fifth tab content----
     tabItem(tabName = "ta5",
@@ -139,6 +174,9 @@ ui <- dashboardPage(
     ),    
     
       #Sixth tab contenct ----
+      # Infos zum Proejkt In form
+      # Broschüre als PDF downloaden
+      # Link zu Freya und Nicoles App
     
     
       #Seventh tab content----
@@ -230,8 +268,8 @@ server <- function(input, output) {
     
     output$totalbox3 <- renderInfoBox({
       infoBox(
-        "Diabetes", paste0(25 + input$count,"0,44 Mrd."), icon = icon("crutch"),
-        color = "purple"
+        "Diabetes", paste0(25 + input$count,"0,44 Mrd."), icon = icon("syringe"),
+        color = "yellow"
       )
     })
   
@@ -263,16 +301,32 @@ server <- function(input, output) {
   
   output$caloricplot <- renderPlot({
     
-    temp23 <- supply_countires_all %>%
+    temp23 <- supply_countries_all %>%
       filter(Entity %in% input$continent_sel)
     
-    temp23 %>%  ggplot(
-      aes(x = Entity, y = `Daily caloric supply (kcal/person/day)`, fill = Entity)) + # Filter(year)?
+    temp23 %>%  ggplot() + 
+      aes(x = Entity, y = `Daily caloric supply (kcal/person/day)`, fill = Entity) + # Filter(year)?
       geom_boxplot() + #oder geom_bar?
       labs(x = "Country/Continent",
            y = "Y",
            title = "Daily caloric supply highest in US") +
+      theme_minimal() +
       guides(fill = FALSE)
+  
+  })
+  
+  ## (1.1) Alternative: Daily caloric supply im Verlauf der Jahre
+  
+  output$caloricA2plot <- renderPlotly({
+    
+    temp24 <- supply_countries_all %>%
+      filter(Entity %in% input$continent_sel)
+    
+    p4 <- temp24 %>% ggplot() + 
+      aes(x = Year, y = `Daily caloric supply (kcal/person/day)`, color = Entity) + # x Achse bis 2013 anzeigen lassen?
+      geom_line()+
+      theme_minimal() 
+    ggplotly(p4)
   })
   
   
@@ -306,6 +360,18 @@ server <- function(input, output) {
 })
   
   #Output Plot Tab 4----
+  #Output Progess Box---- 
+  
+  #Überschrift Differenzierung Übergewicht und Fettleibigkeit
+  
+  output$totalbox6 <- renderInfoBox({
+    infoBox(
+      "Was ist der Unterschied zwischen Übergewicht und Fettleibigkeit ?",
+      paste0(25 + input$text,"Übergewicht ist..."), icon = icon("question"),
+      color = "red"
+    )
+  })
+  
   
   #Output Plot Tab 5----  
   output$fleischplot <- renderPlot({

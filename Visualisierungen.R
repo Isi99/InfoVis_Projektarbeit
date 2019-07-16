@@ -7,6 +7,7 @@ library(plotly)
 #install.packages("gapminder")
 library(gapminder)
 
+
 #### Datensätze einlesen ----
 meat <- read_rds("meatnew.rds")
 mortality <- read_rds("mortality.rds")
@@ -14,6 +15,8 @@ indicator_weight <- read_rds("prevalence_overweight.rds")
 supply <- read_rds("supply.rds")
 weight <- read_rds("weight.rds") 
 obes_region <- read_rds("obes_region.rds")
+
+
 
 
 #### Visualisierungen ----
@@ -82,8 +85,30 @@ obes_region <- read_rds("obes_region.rds")
 
 # Video zu leaflet vom Calero ! oder ChoroMap?
 
-library(ggplot2)
+# Alternative 1: Boxplot caloric supply in verschiedenen ausgewählten Ländern
 
+supply_countries_all <- supply %>%
+  filter(Entity == c("Australia", "Brazil", "Central African Republic", "China", "Germany", "United Kingdom", "United States", "Sweden",
+                     "Indonesia"))
+
+p0 <- ggplot(data = supply_countries_all) + 
+  aes(x = Entity, y = `Daily caloric supply (kcal/person/day)`, fill = Entity) + # Filter(year)?
+  geom_boxplot() + #oder geom_bar?
+  labs(x = "Country/Continent",
+       y = "Y",
+       title = "Daily caloric supply highest in US") +
+  guides(fill = FALSE)
+
+ggplotly(p0)
+
+# Alternative 2: Liniendiagramm
+
+p3 <- ggplot(data = supply_countries_all) +
+  aes(x = Year, y = `Daily caloric supply (kcal/person/day)`, color = Entity) +
+  geom_line() +
+  theme_minimal()
+
+ggplotly(p3)
 
 
 ## (2) BubbleChart: GDP per Capita und Daily per capita fat supply ----
@@ -119,3 +144,5 @@ ggplotly(p2)
 
 # Wie beide Variablen indicator_over & indicator_obes in einem Plot anzeigen lassen? 
 # in App: Select Funktion
+
+
