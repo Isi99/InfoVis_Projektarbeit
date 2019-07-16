@@ -180,8 +180,13 @@ ui <- dashboardPage(
               box(widht = "12",
                title = "Projekt", 
                status = "warning",
-                "https://www.bmel.de/DE/Startseite/startseite_node.html"
-                 )
+                "..."
+                 ),
+              actionLink("linkinfo", label = "Weitere Informationen zum Thema
+                         'Gesunde Ernährung' finden Sie hier.", icon=icon ("seedling")
+                         ),
+              
+              actionLink("linkproject", label = "Ein weiteres spannendes Projekt zur Entwicklung der Ernährung finden Sie hier.", icon=icon ("external-link-alt"))
                     )
             ),
       # Infos zum Proejkt In form
