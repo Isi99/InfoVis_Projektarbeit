@@ -436,6 +436,8 @@ server <- function(input, output) {
     
   })
   
+  # Infoboxen einfügen: DEU 2014: 48,6 % Frauen übergewichtig, 64 & Männer !!!
+  
   #Output Plot Tab 5----  
   output$fleischplot <- renderPlot({
     
