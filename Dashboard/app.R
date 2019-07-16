@@ -117,7 +117,9 @@ ui <- dashboardPage(
                       title = "Fettkonsum & GDP",
                       status = "warning",
                       "..."
+                      )
                       ),
+              splitLayout(
                   box(width="12",
                       title="GDP1",
                       plotlyOutput("gdp1plot")
@@ -132,7 +134,7 @@ ui <- dashboardPage(
       
       #Fourth tab content ----
     tabItem(tabName = "ta4",
-            fluidRow(
+              fluidRow(
                   box(widht = "12",
                        title = "Einleitung", 
                        status = "warning",
@@ -144,7 +146,21 @@ ui <- dashboardPage(
                     title = "Übergewicht & Fettleibigkeit",
                     plotOutput("überfettplot")
                     )
-                    )
+                    ),
+                  sliderInput("select_year", label ="Select a Year",
+                              min = min(weight$Year),
+                              max = max(weight$Year),
+                              value = 2014),
+             splitLayout(
+                 box(width = "12",
+                   title = "Übergewicht Frau",
+                   plotOutput("womenplot")
+                     ),
+                box(width = "12",
+                  title = "Übergwicht Mann",
+                  plotOutput("manplot")
+                )
+              )
             ),
 
       #Fifth tab content----
@@ -377,7 +393,7 @@ server <- function(input, output) {
   #Output Plot Tab 4----
   #Output Progess Box---- 
   
-  #Überschrift Differenzierung Übergewicht und Fettleibigkeit
+  # (1) Überschrift Differenzierung Übergewicht und Fettleibigkeit
   
   output$totalbox6 <- renderInfoBox({
     infoBox(
@@ -392,6 +408,33 @@ server <- function(input, output) {
     )
   })
   
+  # (2) Entwicklung und Kontrast Übergewicht und Fettleibigkeit 
+  
+  # Übergwicht Frauen
+  
+  output$womenplot <- renderPlot ({
+    
+    temp25 <- weight %>%
+      filter(Entity == c("Central African Republic", "Germany", "United States")) 
+     
+    
+    temp25 %>%  ggplot(
+      aes(y = `f_Overweight or Obese (%)`,x = Year, colour = Entity)) +
+        geom_line()
+   
+  })
+  
+  # Übergwicht Männer
+  output$manplot <- renderPlot ({
+    
+    temp26 <- weight %>%
+      filter(Entity == c("Central African Republic", "Germany", "United States")) 
+    
+    temp26 %>% ggplot(
+      aes(y = `m_Overweight or Obese (%)`, x = Year, color = Entity)) + 
+      geom_line()
+    
+  })
   
   #Output Plot Tab 5----  
   output$fleischplot <- renderPlot({
