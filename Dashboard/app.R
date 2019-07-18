@@ -82,7 +82,7 @@ ui <- dashboardPage(
                 
                 sidebarLayout(
                   sidebarPanel(
-                    selectInput("diseasecount","Select a Disease", choices = mortality_select$Disease_type, multiple = TRUE, selected = "Diabetes")
+                    selectInput("countselect22","Select a Country", choices = mortality_select$country, multiple = TRUE, selected = c("Germany","United States"))
                   ),
                   box(width="12",
                       title="diseasecount",
@@ -165,7 +165,7 @@ ui <- dashboardPage(
       #Plot1 Entwicklung Übergewicht und Fettleibigkeit           
                  box(width = "12",
                     title = "Übergewicht & Fettleibigkeit",
-                    plotOutput("überfettplot")
+                    plotlyOutput("überfettplot")
                     )
                     ),
       
@@ -290,7 +290,7 @@ server <- function(input, output) {
   
 
   #Output Plot Tab 2----  
-  #Plot Disease
+  #Plot 1 Disease
   output$diseaseplot <- renderPlot({
     
     temp21 <- mortality_select %>% 
@@ -305,7 +305,7 @@ server <- function(input, output) {
            fill = "X")
   })
   
-  #Output Progess Box---- 
+  #Output Progess Box
   #Überschrift Kontrast Weltbevölkerung und Tote durch (Stand 2016)...
 
   output$totalbox1 <- renderInfoBox({
@@ -340,15 +340,18 @@ server <- function(input, output) {
   output$diseasecountplot <- renderPlot({
     
     temp22 <- mortality_select %>% 
-      filter(Disease_type %in% input$diseasecount) %>%  filter(country == c("Germany"))
+      filter(country %in% input$countselect22) 
     
     temp22 %>%      ggplot(
-      aes(x = year, y= `Disease (%)`, colour= Disease_type, group= Disease_type)) + 
-      geom_line() +
+      aes(x = country, y= `Disease (%)`, fill= Disease_type, group= Disease_type)) + 
+      geom_col() +
+      scale_fill_discrete() +
       labs(x="Jahr",
            y="Y",
            title= "X",
-           fill = "X")
+           fill = "X")+
+      coord_flip()
+    
   })
   
   #Output Plot Tab 3----
@@ -386,7 +389,7 @@ server <- function(input, output) {
   })
   
   
-  ## (2) BubbleChart: GDP per Capita und Daily per capita fat supply ----
+  ## (2) BubbleChart: GDP per Capita und Daily per capita fat supply 
 
   output$gdp1plot <- renderPlotly({
   
@@ -400,7 +403,7 @@ server <- function(input, output) {
   ggplotly(p1)
   })
   
-  ## (2.1) BubbleChart: GDP per Capita und Daily per capita fat supply für die Länder USA, Deutschland und Central African Republik ----
+  ## (2.1) BubbleChart: GDP per Capita und Daily per capita fat supply für die Länder USA, Deutschland und Central African Republik 
   output$gdp2plot <- renderPlotly({
   
     temp32 <- supply %>%
@@ -416,7 +419,7 @@ server <- function(input, output) {
 })
   
   #Output Plot Tab 4----
-  #Output Progess Box---- 
+  #Output Progess Box
   
   # (1) Überschrift Differenzierung Übergewicht und Fettleibigkeit
   
