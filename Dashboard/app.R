@@ -140,11 +140,15 @@ ui <- dashboardPage(
       #Fourth tab content ----
     tabItem(tabName = "ta4",
               fluidRow(
+                
+      #Einleitungsbox           
                   box(widht = "12",
                        title = "Einleitung", 
                        status = "warning",
                        "..."
                        ),
+                  
+      #Infobox Differenzierung Übergewicht und Fettleibigkeit
                   infoBoxOutput("totalbox6", width = 12)
                   ,
                   box(width = "12",
@@ -158,11 +162,17 @@ ui <- dashboardPage(
                        Ein BMI ab 25 kg/m2 gilt per Definition als Übergewicht, ein BMI von 30 kg/m2 und höher als Adipositas.
                       (Quelle: https://www.vigo.de/rubriken/krankheit-und-therapie/stoffwechsel/lesen/uebergewicht-und-adipositas-volkskrankheiten.html)"
                       ),
-                  box(width = "12",
+      
+      #SelectionInput Country für Plot1
+                  selectInput("countselect41","Select a Country", choices = indicator$Entity, multiple = TRUE, selected = c("Germany","United States", "Central African Republic")),
+      
+      #Plot1 Entwicklung Übergewicht und Fettleibigkeit           
+                 box(width = "12",
                     title = "Übergewicht & Fettleibigkeit",
                     plotOutput("überfettplot")
                     )
                     ),
+<<<<<<< HEAD
                   box(width = "12",
                       title = "Einführung + Titel",
                       status = "warning",
@@ -181,6 +191,16 @@ ui <- dashboardPage(
                               max = max(weight$Year),
                               value = 2014)
                   ,
+=======
+      
+      #SliderInput Year für Plot2
+                  sliderInput("select_year", label ="Select a Year",
+                              min = min(weight$Year),
+                              max = max(weight$Year),
+                              value = 2014),
+      
+      #Plot2 Vergleich Männer und Frauen Übergewicht/Fettleibigkeit
+>>>>>>> 3165160e972c15806fcdfaf4c4742cf528411ff8
              splitLayout(
                  box(width = "12",
                    title = "Übergewicht Frau",
@@ -410,14 +430,33 @@ server <- function(input, output) {
   
   output$totalbox6 <- renderInfoBox({
     infoBox(
-      "Was ist der Unterschied zwischen Übergwicht und Fettleibigkeit?", icon = icon("question"),
+      "Was ist der Unterschied zwischen Übergewicht und Fettleibigkeit (Adipositas)?", icon = icon("question"),
       color = "red"
            )
   })
+
+  # (2) Output Vergleich Übergewicht/Fettleibigkeit
+  output$überfettplot <- renderPlot({
+    
+    temp41 <- indicator %>%
+      filter(Entity %in% input$countselect41) 
+    
+  temp41 %>% 
+      ggplot( 
+        aes(x= Entity, y = indicator_total, fill = indicator_type, group = indicator_type)) + 
+      geom_col() +
+     scale_fill_discrete() +
+      labs(x="Länder",
+           y="Indikator: Body-Mass-Index (BMI)",
+           title= "Vergleich von Übergewicht und Fettleibigkeit nach Ländern",
+           fill = "Jahr")+
+      coord_flip()
+    
+  })
   
-  # (2) Entwicklung und Kontrast Übergewicht und Fettleibigkeit 
+  # (3) Entwicklung und Kontrast Übergewicht und Fettleibigkeit 
   
-  # Übergwicht Frauen
+  # Übergewicht Frauen
   
   output$womenplot <- renderPlotly ({
     
