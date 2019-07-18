@@ -75,12 +75,17 @@ library(codebook)
 ###Neue Datensätze einlesen ----
 meat <- read_rds("meatnew.rds")
 mortality <- read_rds("mortality.rds")
-indicator_weight <- read_rds("prevalence_overweight.rds")
+#indicator_weight <- read_rds("prevalence_overweight.rds")
 supply <- read_rds("supply.rds")
 weight <- read_rds("weight.rds")
 obes_region <- read_rds("obes_region.rds")
 weight_comb <- read_rds("weight_comb.rds")
 
+#write.table(indicator_weight, "indicator.csv", sep=";")
+indicator <- read.csv("indicator.csv", sep = ";")
+
+
+#Untergewicht aus App gelöscht
 #[DELETE]tab content Untergewicht ----
 #     tabItem(tabName = "ta2",
 #              fluidRow(

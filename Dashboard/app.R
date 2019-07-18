@@ -10,12 +10,13 @@ library(gapminder)
 ### Datensätze einlesen ----
 meat <- read_rds("meatnew.rds")
 mortality <- read_rds("mortality.rds")
-indicator_weight <- read_rds("prevalence_overweight.rds")
+#indicator_weight <- read_rds("prevalence_overweight.rds")
 supply <- read_rds("supply.rds")
 weight <- read_rds("weight.rds")
 obes_region <- read_rds("obes_region.rds")
 weight_comb <- read_rds("weight_comb.rds")
 mortality_select <- readxl::read_xlsx("global_mortality_selection.xlsx")
+indicator <- read.csv("indicator.csv", sep = ";")
 
 
 ### Anmerkungen
