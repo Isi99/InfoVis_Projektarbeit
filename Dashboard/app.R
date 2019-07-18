@@ -17,6 +17,9 @@ obes_region <- read_rds("obes_region.rds")
 weight_comb <- read_rds("weight_comb.rds")
 mortality_select <- readxl::read_xlsx("global_mortality_selection.xlsx")
 indicator <- read.csv("indicator.csv", sep = ";")
+supply_countries_all <- supply %>%
+  filter(Entity == c("Australia", "Brazil", "Central African Republic", "China", "Germany", "United Kingdom", "United States", "Sweden",
+                     "Indonesia"))
 
 
 ### Anmerkungen
@@ -95,32 +98,33 @@ ui <- dashboardPage(
       #Third tab content ----
       tabItem(tabName = "ta3",
               fluidRow(
-                  box(width = "12",
-                      title = "Einführung...",
-                      status = "warning",
-                      "..."
-                      ), 
-                  box(width = "12",
-                      title = "Kalorienkonsum",
-                      plotOutput("caloricplot")
-                      ),
-                  box(width = "12",
-                      title = "KalorienkonsumsA2",
+                box(width = "12",
+                    title = "Einführung",
+                    status = "warning",
+                    "..."),
+                
+              sidebarLayout(
+                sidebarPanel(
+                    
+                    infoBoxOutput("totalbox9", width = 6)
+                             ),
+                  
+                mainPanel(
+                    box(width = "12",
+                      title = "KalorienkonsumA2",
                       plotlyOutput("caloricA2plot")
-                      ),
-                  box(
-                    checkboxGroupInput("continent_sel",
-                                       label = "Please Select the Continent or Country",
-                                       choices = supply_countries_all$Entity %>% unique(),
-                                       selected = c("Germany", "Indonesia", "United States"))
-                      ),
+                        )
+                            )
+                     ),
+                 
                   box(width = "12",
                       title = "Fettkonsum & GDP",
                       status = "warning",
                       "..."
                       )
                       ),
-              splitLayout(
+                
+                splitLayout(
                   box(width="12",
                       title="GDP1",
                       plotlyOutput("gdp1plot")
@@ -129,8 +133,8 @@ ui <- dashboardPage(
                       title="GDP2",
                       plotlyOutput("gdp2plot")    
                       )
-                       )
-      ),        
+                          )
+          ),        
 
       
       #Fourth tab content ----
@@ -159,18 +163,32 @@ ui <- dashboardPage(
                     plotOutput("überfettplot")
                     )
                     ),
+                  box(width = "12",
+                      title = "Einführung + Titel",
+                      status = "warning",
+                      "..."
+                      ),
+                  box(width = "12",
+                     title = "Anzahl der übergewichtigen oder fettleibigen Personen in Deutschland im Jahr 2014 in Prozent:",
+                     status = "warning"
+                     ),
+                  infoBoxOutput("totalbox7", width = 6)
+                  ,
+                  infoBoxOutput("totalbox8", width = 6)
+                  ,
                   sliderInput("select_year", label ="Select a Year",
                               min = min(weight$Year),
                               max = max(weight$Year),
-                              value = 2014),
+                              value = 2014)
+                  ,
              splitLayout(
                  box(width = "12",
                    title = "Übergewicht Frau",
-                   plotOutput("womenplot")
+                   plotlyOutput("womenplot")
                      ),
-                box(width = "12",
+                 box(width = "12",
                   title = "Übergwicht Mann",
-                  plotOutput("manplot")
+                  plotlyOutput("manplot")
                 )
               )
             ),
@@ -340,36 +358,19 @@ server <- function(input, output) {
   
   #Output Plot Tab 3----
   
-  ## (1) Weltkarte: Daily caloric supply in den verschiedenen Ländern ---- auf das aktuellste Jahr beziehen
+  ## (1) Daily caloric supply im Verlauf der Jahre
   
-  output$caloricplot <- renderPlot({
-    
-    temp23 <- supply_countries_all %>%
-      filter(Entity %in% input$continent_sel)
-    
-    temp23 %>%  ggplot() + 
-      aes(x = Entity, y = `Daily caloric supply (kcal/person/day)`, fill = Entity) + # Filter(year)?
-      geom_boxplot() + #oder geom_bar?
-      labs(x = "Country/Continent",
-           y = "Y",
-           title = "Daily caloric supply highest in US") +
-      theme_minimal() +
-      guides(fill = FALSE)
-  
-  })
-  
-  ## (1.1) Alternative: Daily caloric supply im Verlauf der Jahre
   
   output$caloricA2plot <- renderPlotly({
     
-    temp24 <- supply_countries_all %>%
-      filter(Entity %in% input$continent_sel)
+    #temp31 <- supply_countries_all %>%
+      #filter(Entity %in% input$continent_sel)
     
-    p4 <- temp24 %>% ggplot() + 
+    p31 <- supply_countries_all %>% ggplot() + 
       aes(x = Year, y = `Daily caloric supply (kcal/person/day)`, color = Entity) + # x Achse bis 2013 anzeigen lassen?
       geom_line()+
       theme_minimal() 
-    ggplotly(p4)
+    ggplotly(p31)
   })
   
   
@@ -405,7 +406,7 @@ server <- function(input, output) {
   #Output Plot Tab 4----
   #Output Progess Box---- 
   
-  # (1) Überschrift Differenzierung Übergewicht und Fettleibigkeit
+  # (1) Überschrift Differenzierung Übergewicht und Fettleibigkeit ----
   
   output$totalbox6 <- renderInfoBox({
     infoBox(
@@ -418,31 +419,48 @@ server <- function(input, output) {
   
   # Übergwicht Frauen
   
-  output$womenplot <- renderPlot ({
+  output$womenplot <- renderPlotly ({
     
-    temp25 <- weight %>%
+    temp421 <- weight %>%
       filter(Entity == c("Central African Republic", "Germany", "United States")) 
      
     
-    temp25 %>%  ggplot(
-      aes(y = `f_Overweight or Obese (%)`,x = Year, colour = Entity)) +
+   p421 <- temp421 %>%  ggplot() + 
+      aes(y = `f_Overweight or Obese (%)`,x = Year, colour = Entity) +
         geom_line()
+   ggplotly(p421)
    
   })
   
   # Übergwicht Männer
-  output$manplot <- renderPlot ({
+  output$manplot <- renderPlotly ({
     
-    temp26 <- weight %>%
+    temp422 <- weight %>%
       filter(Entity == c("Central African Republic", "Germany", "United States")) 
     
-    temp26 %>% ggplot(
-      aes(y = `m_Overweight or Obese (%)`, x = Year, color = Entity)) + 
+   p422 <- temp422 %>% ggplot() +
+      aes(y = `m_Overweight or Obese (%)`, x = Year, color = Entity) + 
       geom_line()
-    
+    ggplotly(p422)
   })
   
-  # Infoboxen einfügen: DEU 2014: 48,6 % Frauen übergewichtig, 64% Männer !!!
+  # (2.1= Infoboxen einfügen: DEU 2014: 48,6 % Frauen übergewichtig, 64% Männer !!!----
+  
+  # Infobox Frauen
+  output$totalbox7 <- renderInfoBox({
+    infoBox(
+      "Frauen", paste0(25 + input$count,"48,6 %."), icon = icon("female"),
+      color = "maroon"
+    )
+  })
+  
+  # Infobox Männer
+  output$totalbox8 <- renderInfoBox({
+    infoBox(
+      "Männer", paste0(25 + input$count, "64 %"), icon = icon("male"),
+      color = "aqua"
+    )
+  })
   
   #Output Plot Tab 5----  
   output$fleischplot <- renderPlot({
