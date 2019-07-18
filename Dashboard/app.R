@@ -144,6 +144,17 @@ ui <- dashboardPage(
                   infoBoxOutput("totalbox6", width = 12)
                   ,
                   box(width = "12",
+                      title = "Definition Übergewicht und Fettleibigkeit (Adipositas)",
+                      status = "warning",
+                      "Übergewicht und Fettleibigkeit (Adipositas) sind nicht dasselbe.
+                       Übergewicht bedeutet, dass der Betroffene über seinem Normalgewicht liegt. Es handelt sich dabei um den Übergang vom Normalgewicht zur Adipositas. 
+                       Der Begriff Adipositas bedeutet, dass jemand sehr starkes Übergewicht und dadurch einen krankhaft erhöhten Körperfettanteil hat. 
+                       Daher wird Adipositas auch Fettleibigkeit oder Fettsucht genannt.
+                       Zu Definition dient die Kennzahl des Body-Mass-Index (BMI).
+                       Ein BMI ab 25 kg/m2 gilt per Definition als Übergewicht, ein BMI von 30 kg/m2 und höher als Adipositas.
+                      (Quelle: https://www.vigo.de/rubriken/krankheit-und-therapie/stoffwechsel/lesen/uebergewicht-und-adipositas-volkskrankheiten.html)"
+                      ),
+                  box(width = "12",
                     title = "Übergewicht & Fettleibigkeit",
                     plotOutput("überfettplot")
                     )
@@ -398,15 +409,9 @@ server <- function(input, output) {
   
   output$totalbox6 <- renderInfoBox({
     infoBox(
-      "Was ist der Unterschied zwischen Übergewicht und Fettleibigkeit ?",
-      paste0(25 + input$text,"Übergewicht und Adipositas sind nicht dasselbe.
-             Übergewicht bedeutet, dass der Betroffene über seinem Normalgewicht liegt. Es handelt sich dabei um den Übergang vom Normalgewicht zur Adipositas. 
-             Der Begriff Adipositas bedeutet, dass jemand sehr starkes Übergewicht und dadurch einen krankhaft erhöhten Körperfettanteil hat. Daher wird Adipositas auch Fettleibigkeit oder Fettsucht genannt.
-             Zu Definition dient die Kennzahl des Body-Mass-Index (BMI).
-             Ein BMI ab 25 kg/m2 gilt per Definition als Übergewicht, ein BMI von 30 kg/m2 und höher als Adipositas.
-             (Quelle: https://www.vigo.de/rubriken/krankheit-und-therapie/stoffwechsel/lesen/uebergewicht-und-adipositas-volkskrankheiten.html)"), icon = icon("question"),
+      "Was ist der Unterschied zwischen Übergwicht und Fettleibigkeit?", icon = icon("question"),
       color = "red"
-    )
+           )
   })
   
   # (2) Entwicklung und Kontrast Übergewicht und Fettleibigkeit 
@@ -437,7 +442,7 @@ server <- function(input, output) {
     
   })
   
-  # Infoboxen einfügen: DEU 2014: 48,6 % Frauen übergewichtig, 64 & Männer !!!
+  # Infoboxen einfügen: DEU 2014: 48,6 % Frauen übergewichtig, 64% Männer !!!
   
   #Output Plot Tab 5----  
   output$fleischplot <- renderPlot({
