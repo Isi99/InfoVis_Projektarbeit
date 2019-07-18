@@ -1,3 +1,4 @@
+#Bibliotheken laden
 library(shiny)
 library(shinydashboard)
 library(tidyverse)
@@ -8,25 +9,15 @@ library(plotly)
 library(gapminder)
 
 ### Datensätze einlesen ----
-meat <- read_rds("meatnew.rds")
-mortality <- read_rds("mortality.rds")
-#indicator_weight <- read_rds("prevalence_overweight.rds")
-supply <- read_rds("supply.rds")
-weight <- read_rds("weight.rds")
-obes_region <- read_rds("obes_region.rds")
-weight_comb <- read_rds("weight_comb.rds")
-mortality_select <- readxl::read_xlsx("global_mortality_selection.xlsx")
-indicator <- read.csv("indicator.csv", sep = ";")
-supply_countries_all <- supply %>%
-  filter(Entity == c("Australia", "Brazil", "Central African Republic", "China", "Germany", "United Kingdom", "United States", "Sweden",
-                     "Indonesia"))
-
-
-### Anmerkungen
-# im suppy_contries_all Datensatz werden nicht alle Jahre angezeigt
-supply_countries_all <- supply %>%
-  filter(Entity == c("Australia", "Brazil", "Central African Republic", "China", "Germany", "United Kingdom", "United States", "Sweden",
-                     "Indonesia"))
+  meat <- read_rds("meatnew.rds")
+  mortality <- read_rds("mortality.rds")
+  #indicator_weight <- read_rds("prevalence_overweight.rds")
+  supply <- read_rds("supply.rds")
+  weight <- read_rds("weight.rds")
+  obes_region <- read_rds("obes_region.rds")
+  weight_comb <- read_rds("weight_comb.rds")
+  mortality_select <- readxl::read_xlsx("global_mortality_selection.xlsx")
+  indicator <- read.csv("indicator.csv", sep = ";")
 
 #UI ----
 # Define UI for application that draws a histogram
@@ -35,7 +26,8 @@ ui <- dashboardPage(
   skin = "green",
   dashboardHeader(title = "Gesundheit 4.0"),
   dashboardSidebar(width = 250,
-                   #Menü einrichten----
+
+#Menü einrichten----
                    sidebarMenu(
                      menuItem("Worum geht's?",tabName = "ta1",icon=icon("search")),
                      menuItem("Was passiert mit uns?",tabName = "ta2",icon=icon("chart-line")),
@@ -49,7 +41,8 @@ ui <- dashboardPage(
   
   dashboardBody(
     tabItems(
-      #First tab content---- 
+
+#First tab content---- 
       tabItem(tabName = "ta1",
               fluidRow(
                 mainPanel( 
@@ -64,7 +57,9 @@ ui <- dashboardPage(
               )
       ),
       
-      #Second tab content ----
+      
+
+#Second tab content ----
       tabItem(tabName = "ta2",
               fluidRow(
                 sidebarLayout(
@@ -95,7 +90,8 @@ ui <- dashboardPage(
               )
       ),    
   
-      #Third tab content ----
+
+#Third tab content ----
       tabItem(tabName = "ta3",
               fluidRow(
                 box(width = "12",
@@ -137,7 +133,8 @@ ui <- dashboardPage(
           ),        
 
       
-      #Fourth tab content ----
+
+#Fourth tab content ----
     tabItem(tabName = "ta4",
               fluidRow(
                 
@@ -164,15 +161,15 @@ ui <- dashboardPage(
                       ),
       
       #SelectionInput Country für Plot1
-                  selectInput("countselect41","Select a Country", choices = indicator$Entity, multiple = TRUE, selected = c("Germany","United States", "Central African Republic")),
+                  selectInput("countselect41","Select a Country", choices = indicator$Entity, multiple = TRUE, selected = c("Germany","United States","Central Africa Republic")),
       
       #Plot1 Entwicklung Übergewicht und Fettleibigkeit           
                  box(width = "12",
                     title = "Übergewicht & Fettleibigkeit",
-                    plotlyOutput("überfettplot")
+                    plotOutput("überfettplot")
                     )
                     ),
-<<<<<<< HEAD
+
                   box(width = "12",
                       title = "Einführung + Titel",
                       status = "warning",
@@ -186,12 +183,7 @@ ui <- dashboardPage(
                   ,
                   infoBoxOutput("totalbox8", width = 6)
                   ,
-                  sliderInput("select_year", label ="Select a Year",
-                              min = min(weight$Year),
-                              max = max(weight$Year),
-                              value = 2014)
-                  ,
-=======
+
       
       #SliderInput Year für Plot2
                   sliderInput("select_year", label ="Select a Year",
@@ -200,7 +192,7 @@ ui <- dashboardPage(
                               value = 2014),
       
       #Plot2 Vergleich Männer und Frauen Übergewicht/Fettleibigkeit
->>>>>>> 3165160e972c15806fcdfaf4c4742cf528411ff8
+
              splitLayout(
                  box(width = "12",
                    title = "Übergewicht Frau",
@@ -213,12 +205,13 @@ ui <- dashboardPage(
               )
             ),
 
-      #Fifth tab content----
+
+#Fifth tab content----
     tabItem(tabName = "ta5",
             fluidRow(
               sidebarLayout(
                 sidebarPanel(
-                  selectInput("countselect","Select a Country", choices = meat$Entity, multiple = TRUE, selected = c("Germany", "United States", "Central African Republic"))
+                  selectInput("countselect51","Select a Country", choices = meat$Entity, multiple = TRUE, selected = c("Germany", "United States", "Central African Republic"))
                 ),
                   box(width="12",
                       title="Fleischkonsum",
@@ -230,7 +223,7 @@ ui <- dashboardPage(
               
               sidebarLayout(
                 sidebarPanel(
-                  selectInput("countselect","Select a Country", choices = weight_comb$Entity, multiple = TRUE, selected = c("Germany", "United States", "Central African Republic"))
+                  selectInput("countselect52","Select a Country", choices = weight_comb$Entity, multiple = TRUE, selected = c("Germany", "United States", "Central African Republic"))
                 ),
                    box(width="12",
                       title="Übergewicht",
@@ -240,7 +233,8 @@ ui <- dashboardPage(
             )
     ),    
     
-      #Sixth tab contenct ----
+      
+#Sixth tab contenct ----
     tabItem(tabName = "ta6",
             fluidRow(
               box(widht = "12",
@@ -260,7 +254,8 @@ ui <- dashboardPage(
       # Link zu Freya und Nicoles App
     
     
-      #Seventh tab content----
+      
+#Seventh tab content----
     tabItem(tabName = "ta7",
             fluidRow(
                box(width = 12,
@@ -287,10 +282,11 @@ ui <- dashboardPage(
 
 
 
+
 #Server----
-server <- function(input, output) { 
+  server <- function(input, output) { 
   
-  #Output Menu ----
+#Output Menu ----
   output$menu <- renderMenu ({
     sidebarMenu(
       menuItem("Worum geht's?",tabName = "ta1",icon=icon("search")),
@@ -303,7 +299,7 @@ server <- function(input, output) {
     )  
   })
   
-  #Output Text Homepage----
+  #Output Text Homepage 
   #Bild einfügen
 #  output$image <- renderImage({
 #    })
@@ -314,8 +310,9 @@ server <- function(input, output) {
   output$text <- renderText({input$text})
   
 
-  #Output Plot Tab 2----  
-  #Plot 1 Disease
+  
+#Output Plot Tab 2----  
+  #Plot 21 Disease
   output$diseaseplot <- renderPlot({
     
     temp21 <- mortality_select %>% 
@@ -379,17 +376,18 @@ server <- function(input, output) {
     
   })
   
-  #Output Plot Tab 3----
+  
+#Output Plot Tab 3----
   
   ## (1) Daily caloric supply im Verlauf der Jahre
   
   
   output$caloricA2plot <- renderPlotly({
     
-    #temp31 <- supply_countries_all %>%
-      #filter(Entity %in% input$continent_sel)
-    
-    p31 <- supply_countries_all %>% ggplot() + 
+    temp31 <- supply %>%
+      filter(Entity == c("Australia", "Brazil", "Central African Republic", "China", "Germany", "United Kingdom", "United States", "Sweden","Indonesia"))
+
+    p31 <- temp31 %>% ggplot() + 
       aes(x = Year, y = `Daily caloric supply (kcal/person/day)`, color = Entity) + # x Achse bis 2013 anzeigen lassen?
       geom_line()+
       theme_minimal() 
@@ -426,10 +424,11 @@ server <- function(input, output) {
   ggplotly(p)
 })
   
-  #Output Plot Tab 4----
+
+#Output Plot Tab 4----
   #Output Progess Box
   
-  # (1) Überschrift Differenzierung Übergewicht und Fettleibigkeit ----
+  # (1) Überschrift Differenzierung Übergewicht und Fettleibigkeit 
   
   output$totalbox6 <- renderInfoBox({
     infoBox(
@@ -444,9 +443,8 @@ server <- function(input, output) {
     temp41 <- indicator %>%
       filter(Entity %in% input$countselect41) 
     
-  temp41 %>% 
-      ggplot( 
-        aes(x= Entity, y = indicator_total, fill = indicator_type, group = indicator_type)) + 
+  temp41 %>% ggplot( 
+        aes(x = Entity, y = indicator_total, fill = indicator_type, group = indicator_type)) + 
       geom_col() +
      scale_fill_discrete() +
       labs(x="Länder",
@@ -474,7 +472,7 @@ server <- function(input, output) {
    
   })
   
-  # Übergwicht Männer
+  # Übergewicht Männer
   output$manplot <- renderPlotly ({
     
     temp422 <- weight %>%
@@ -486,7 +484,7 @@ server <- function(input, output) {
     ggplotly(p422)
   })
   
-  # (2.1= Infoboxen einfügen: DEU 2014: 48,6 % Frauen übergewichtig, 64% Männer !!!----
+  # (2.1= Infoboxen einfügen: DEU 2014: 48,6 % Frauen übergewichtig, 64% Männer !!!
   
   # Infobox Frauen
   output$totalbox7 <- renderInfoBox({
@@ -504,12 +502,13 @@ server <- function(input, output) {
     )
   })
   
-  #Output Plot Tab 5----  
+
+#Output Plot Tab 5----  
   output$fleischplot <- renderPlot({
     
     temp5 <- meat %>% 
     filter(Entity == c("Central African Republic", "Germany", "United States")) %>% 
-     filter(Entity %in% input$countselect) %>% filter(`Food Balance Sheets: Meat - Food supply quantity (kg/capita/yr) (FAO (2017)) (kg)` != "2007")
+     filter(Entity %in% input$countselect51) %>% filter(`Food Balance Sheets: Meat - Food supply quantity (kg/capita/yr) (FAO (2017)) (kg)` != "2007")
     
     temp5 %>%      ggplot(
       aes(x = Year, y = `Food Balance Sheets: Meat - Food supply quantity (kg/capita/yr) (FAO (2017)) (kg)`, group = Entity, colour = Entity)) + 
@@ -532,7 +531,7 @@ server <- function(input, output) {
     temp5 <- weight_comb %>% 
       filter(Entity == c("Central African Republic", "Germany", "United States")) %>% 
       filter(weight_type == "Overweight") %>% 
-      filter(Entity %in% input$countselect) 
+      filter(Entity %in% input$countselect52) 
     
     temp5 %>%      ggplot(
       aes(x = Year, y = weight_total, group = Entity, colour = Entity)) + 
@@ -543,9 +542,13 @@ server <- function(input, output) {
            fill = "Land")
   })
 
-  #Output Plot 6 ----
+
+
+#Output Plot 6 ----
   
   output$text <- renderText({input$text})
    
+
 }
+
 shinyApp(ui, server)
