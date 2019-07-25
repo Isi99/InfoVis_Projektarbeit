@@ -7,6 +7,8 @@ library(ggplot2)
 #install.packages("gapminder")
 library(plotly)
 library(gapminder)
+#install.packages("png")
+library(png)
 
 ### Datensätze einlesen ----
   meat <- read_rds("meatnew.rds")
@@ -43,11 +45,11 @@ ui <- dashboardPage(
     tabItems(
 
 #First tab content---- 
-      tabItem(tabName = "ta1",
+      tabItem(tabName = "ta1", 
               fluidRow(
-                mainPanel( 
-                  HTML('<p><img src="Lebensmittelkorb.png"/></p>') ),
-                box(width = 12,
+                mainPanel(tags$img (src = "bacach.png")),
+               
+                 box(width = 12,
                     title = "Neue Ära der Gesundheit",
                     status = "warning",
                     "Das erste Mal in der Weltgeschichte sterben mehr Menschen auf unserem Planeten an den Folgen von 
@@ -300,16 +302,7 @@ ui <- dashboardPage(
   })
   
   #Output Text Homepage 
-  #Bild einfügen
-#  output$image <- renderImage({
-#    })
-    # outfile <- tempfile(fileext = "Lebensmittelkorb.png")
-  
-   
-  
-  output$text <- renderText({input$text})
-  
-
+#  output$text <- renderText({input$text})
   
 #Output Plot Tab 2----  
   #Plot 21 Disease
