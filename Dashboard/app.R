@@ -273,7 +273,7 @@ ui <- dashboardPage(
                box(width = 12,
                    title = "Quellen, Urheberrechte & Lizenzen",
                    status = "warning",
-                   "")
+                   "All unsere Daten sind von der Webseite 'Our World in Data'. Diese Daten sind frei zugänglich und verwendbar, wenn man die Nutung angibt. Alle Arbeiten sind unter der 'Creative Commons BY'-Lizenz.")
             )
     )   
    
