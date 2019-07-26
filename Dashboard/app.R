@@ -9,6 +9,10 @@ library(plotly)
 library(gapminder)
 #install.packages("png")
 library(png)
+#install.packages("shinyWidgets")
+library(shinyWidgets)
+#install.packages("shinydashboardPlus")
+library(shinydashboardPlus)
 
 ### Datensätze einlesen ----
   meat <- read_rds("meatnew.rds")
@@ -44,6 +48,7 @@ ui <- dashboardPage(
   dashboardBody(
     tabItems(
 
+      
 #First tab content---- 
       tabItem(tabName = "ta1", 
               fluidRow(
@@ -63,14 +68,54 @@ ui <- dashboardPage(
 
 #Second tab content ----
       tabItem(tabName = "ta2",
+              setShadow("card"),
               fluidRow(
-                sidebarLayout(
+ 
+                column(
+                  width = 12,
+                  align = "center",
+                  flipBox(
+                    id = 1,
+                    main_img = "question2.png",
+                    header_img = "island.png",
+                    front_title = "Was passiert mit uns?",
+                    hr(),
+                    back_content = tagList(
+                      column(
+                        width = 12,
+                        align = "center",
+                        "Was passiert eigentlich mit uns? Erstmals in der Geschichte
+                        sterben mehr Menschen an den Folgen von Übergewicht, als dass sie verhungern.
+                        Die beiden Grafiken sollen dies verdeutlichen. In der ersten Grafik
+                        zeigt, wie die Sterblichkeit im Verlauf der Jahre zugenommen hat.
+                        Die zweite Grafik stellt die Sterblichkeitsrate der einzelnen Länder dar. 
+                        Viel Spaß beim Explorieren!"
+                        ),
+                      plotOutput("distPlot")
+                    )
+                  )
+              ),
+                fluidRow(
+                  sidebarLayout(
                   sidebarPanel(
-                    selectInput("diseasselect","Select a Disease", choices = mortality_select$Disease_type, multiple = TRUE, selected = "Diabetes")
+                    width = 12,
+                    gradientBox(
+                      title = "My gradient Box",
+                      icon = "fa fa-th",
+                      gradientColor = "teal", 
+                      boxToolSize = "sm", 
+                      footer = selectInput(
+                        "diseasselect","Wähle eine Krankheit", 
+                        choices = mortality_select$Disease_type, 
+                        multiple = TRUE, selected = "Diabetes"
+                      ),
+                      "Schau dir an, wie sich die Sterblichkeitsrate im Hinblick auf 
+                      die beiden Krankheiten im Verlauf der Jahre geändert hat."
+                    )
+                    
                   ),
                   box(width="12",
-                      title="disease",
-                      plotOutput("diseaseplot")
+                      plotlyOutput("diseaseplot")
                       )
                 ),
                 
@@ -82,7 +127,20 @@ ui <- dashboardPage(
                 
                 sidebarLayout(
                   sidebarPanel(
-                    selectInput("countselect22","Select a Country", choices = mortality_select$country, multiple = TRUE, selected = c("Germany","United States"))
+                    width = 12,
+                    gradientBox(
+                      title = "My gradient Box",
+                      icon = "fa fa-th",
+                      gradientColor = "teal", 
+                      boxToolSize = "sm", 
+                      footer = selectInput(
+                        "countselect22","Select a Country",
+                        choices = mortality_select$country,
+                        multiple = TRUE, selected = c("Germany","United States")
+                      ),
+                      "Schau dir an, wie sich die Sterblichkeitsrate im Hinblick auf 
+                      die beiden Krankheiten im Verlauf der Jahre geändert hat."
+                    )
                   ),
                   box(width="12",
                       title="diseasecount",
@@ -90,6 +148,8 @@ ui <- dashboardPage(
                       )
                 )
               )
+              
+            )  
       ),    
   
 
@@ -306,18 +366,20 @@ ui <- dashboardPage(
   
 #Output Plot Tab 2----  
   #Plot 21 Disease
-  output$diseaseplot <- renderPlot({
+  output$diseaseplot <- renderPlotly({
     
     temp21 <- mortality_select %>% 
       filter(Disease_type %in% input$diseasselect) %>% filter(country == "World")
     
-    temp21 %>%      ggplot(
-      aes(x = year, y= `Disease (%)`, colour= Disease_type, group= Disease_type)) + 
+    p21 <- temp21 %>%      ggplot() +
+      aes(x = year, y= `Disease (%)`, colour= Disease_type, group= Disease_type) + 
       geom_line() +
-      labs(x="Jahr",
-           y="Y",
-           title= "X",
-           fill = "X")
+      labs(x="Jahre",
+           y="Sterblichkeitsrate (%)",
+           title= "Sterblichkeitsrate im Verlauf der Jahre",
+           colour = "Krankheiten")+
+       theme_minimal() 
+      ggplotly(p21)
   })
   
   #Output Progess Box
