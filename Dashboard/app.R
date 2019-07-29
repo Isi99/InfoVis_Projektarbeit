@@ -138,15 +138,17 @@ ui <- dashboardPage(
                         choices = mortality_select$country,
                         multiple = TRUE, selected = c("Germany","United States")
                       ),
-                      "Schau dir an, wie sich die Sterblichkeitsrate im Hinblick auf 
-                      die beiden Krankheiten im Verlauf der Jahre geändert hat."
+                      "Hier kannst du dir die Entwicklung der Sterblichkeitsraten 
+                      anschauen und dabei mehrere Länder miteinander vergleichen."
                     )
                   ),
+                 
                   box(width="12",
-                      title="diseasecount",
+                      title="Entwicklung der Sterblichkeitsrate nach Ländern",
                       plotOutput("diseasecountplot")
                       )
-                )
+                  
+                ) 
               )
               
             )  
@@ -270,27 +272,79 @@ ui <- dashboardPage(
 
 #Fifth tab content----
     tabItem(tabName = "ta5",
+            setShadow("card"),
             fluidRow(
+              
+              column(
+                width = 12,
+                align = "center",
+              flipBox(
+                  id = 1,
+                  main_img = "question2.png",
+                  header_img = "island.png",
+                  front_title = "Was passiert mit uns?",
+                  hr(),
+                  back_content = tagList(
+                    column(
+                      width = 12,
+                      align = "center",
+                      "Der Fleischkonsum"
+                    ),
+                    plotOutput("distPlot2")
+                    )
+                  )
+                  ),
+              
               sidebarLayout(
                 sidebarPanel(
-                  selectInput("countselect51","Select a Country", choices = meat$Entity, multiple = TRUE, selected = c("Germany", "United States", "Central African Republic"))
-                ),
-                  box(width="12",
-                      title="Fleischkonsum",
-                      plotOutput("fleischplot")
-                      )
+                  width = 12,
+                  gradientBox(
+                    title = "My gradient Box",
+                    icon = "fa fa-th",
+                    gradientColor = "teal", 
+                    boxToolSize = "sm", 
+                    footer = selectInput(
+                      "countselect51","Wähle ein Land", 
+                      choices = meat$Entity, 
+                      multiple = TRUE, selected = c("Germany", "United States", "Central African Republic")
+                    ),
+                    "Schau dir an, wie sich die Sterblichkeitsrate im Hinblick auf 
+                    die beiden Krankheiten im Verlauf der Jahre geändert hat."
+                  )
+                  
+                  ),
+                box(width="12",
+                    title = "Fleischkonsum",
+                    plotOutput("fleischplot")
+                )
               ),
+
               
               infoBoxOutput("totalbox5", width = 12),
               
+              
               sidebarLayout(
                 sidebarPanel(
-                  selectInput("countselect52","Select a Country", choices = weight_comb$Entity, multiple = TRUE, selected = c("Germany", "United States", "Central African Republic"))
-                ),
-                   box(width="12",
-                      title="Übergewicht",
-                      plotOutput("overweightplot")
-              )
+                  width = 12,
+                  gradientBox(
+                    title = "My gradient Box",
+                    icon = "fa fa-th",
+                    gradientColor = "teal", 
+                    boxToolSize = "sm", 
+                    footer = selectInput(
+                      "countselect52","Wähle ein Land", 
+                      choices = weight_comb$Entity, 
+                      multiple = TRUE, selected = c("Germany", "United States", "Central African Republic")
+                    ),
+                    "Schau dir an, wie sich die Sterblichkeitsrate im Hinblick auf 
+                    die beiden Krankheiten im Verlauf der Jahre geändert hat."
+                  )
+                  
+                  ),
+                box(width="12",
+                    title = "Übergewicht",
+                    plotOutput("overweightplot")
+                )
               )
             )
     ),    
@@ -376,7 +430,7 @@ ui <- dashboardPage(
       geom_line() +
       labs(x="Jahre",
            y="Sterblichkeitsrate (%)",
-           title= "Sterblichkeitsrate im Verlauf der Jahre",
+           title= "Wie hat sich die Sterblichkeitsrate im Verlauf der Jahre verändert?",
            colour = "Krankheiten")+
        theme_minimal() 
       ggplotly(p21)
@@ -423,10 +477,9 @@ ui <- dashboardPage(
       aes(x = country, y= `Disease (%)`, fill= Disease_type, group= Disease_type)) + 
       geom_col() +
       scale_fill_discrete() +
-      labs(x="Jahr",
-           y="Y",
-           title= "X",
-           fill = "X")+
+      labs(x="Jahre",
+           y="Länder",
+           fill = "Krankheiten")+
       coord_flip()
     
   })
