@@ -172,63 +172,121 @@ ui <- dashboardPage(
 
 #Third tab content ----
       tabItem(tabName = "ta3",
+              setShadow("card"),
               fluidRow(
-                box(width = "12",
-                    title = "Einführung",
-                    status = "warning",
-                    "..."),
-                
-              sidebarLayout(
-                sidebarPanel(
-                    
-                    infoBoxOutput("totalbox9", width = 6)
-                             ),
-                  
-                mainPanel(
-                    box(width = "12",
-                      title = "KalorienkonsumA2",
-                      plotlyOutput("caloricA2plot")
-                        )
-                            )
-                     ),
-                 
-                  box(width = "12",
-                      title = "Fettkonsum & GDP",
-                      status = "warning",
-                      "..."
-                      )
+          
+          #Einleitungsbox      
+                column(
+                  width = 12,
+                  align = "center",
+                  flipBox(
+                    id = 1,
+                    main_img = "question.png",
+                    header_img = "island.png",
+                    front_title = "Ernährung im Wandel der Zeit",
+                    hr(),
+                    back_content = tagList(
+                      column(
+                        width = 12,
+                        align = "center",
+                        "Die Welt hat sich in den letzten Jahren stark verändert.
+                         Die daraus resultierenden Folgen schlagen sich auch in unserem Essenverhalten wieder.
+                         Wärhend früher die Ernährung sehr abhängig von der Natur war und Mahlzeiten größtenteils zuhause verzerht worden sind,
+                         gibt es heute eine große Anzahl an Auswahlmöglichkeiten von Lebensmitteln, der Alltag ist von Hektik geprägt, sodass man
+                         auch mal schnell unterwegs isst. Zudem haben die Menschen heutzutage mehr Bewegungsmangel als früher.
+                         Die folgende Grafik zeigt, wie sich die tägliche Kalorienzufuhr im Laufe der Zeit in unterschiedlichen Ländern entwickelt hat."
                       ),
+                      plotOutput("globalPlot")
+                    )
+                  )
+                ),
+            # Einleitung Kalorienverbrauch     
+                gradientBox(
+                  width = 12,
+                  title = "Kalorienverbrauch im Überblick",
+                  icon = "fa fa-th",
+                  gradientColor = "teal", 
+                  boxToolSize = "sm",
+                  "Wie viel Kalorien nehmen wir eigentlich täglich zu uns? Und welches Land verbraucht am meisten Kalorien?
+                   Schau dir an, wie sich der Kalorienverbrauch in den Jahren von 1880 - 2013 verändert hat. "),
                 
-                splitLayout(
+                  
+                box(width = "12",
+                      title = "Enwticklung der täglichen Kalorienversorgung im Laufe der Zeit",
+                      plotlyOutput("caloricA2plot")
+                        ),
+                
+                infoBoxOutput("totalbox9", width = 12),
+                   
+             # Einleitung Wohlstand und Kalorienverbrauch     
+                gradientBox(
+                  width = 12,
+                  title = "Wohlstand und Fettversorgung  - ein Zusammenhang?",
+                  icon = "fa fa-th",
+                  gradientColor = "teal", 
+                  boxToolSize = "sm",
+                  "Welchen Einfluss hat der Wohlstand auf die tägliche Versorgung mit Nahrungsmitteln pro Kopf?
+                  Während sich die Grafik oben auf die Kalorienversorgung bezieht, steht hier die tägliche Pro-Kopf Fettversorgung
+                  in Beziehung zu dem Bruttoinlandsprodukt (BIP) pro Kopf im Jahr 2011."),
+                 
+                
                   box(width="12",
-                      title="GDP1",
+                      title="Beeinflusst das GDP (BIP) die Fettversorgung?",
                       plotlyOutput("gdp1plot")
                       ),
+                
+                gradientBox(
+                  width = 12,
+                  title = "Zentral Afrika, Deutschland und USA im Vergleich ",
+                  icon = "fa fa-th",
+                  gradientColor = "teal", 
+                  boxToolSize = "sm",
+                  "Bestehen Unterschiede zwischen den Ländern? Schau dir den Zusammenhang in Ländern mit hören Einkommen und ärmeren Regionen an."),
+              
                   box(width="12",
-                      title="GDP2",
+                      title="Kontrast der Fettversorgung nach Wohlstand eines Landes ",
                       plotlyOutput("gdp2plot")    
                       )
-                          )
+             
+                        )             
           ),        
 
-      
 
 #Fourth tab content ----
     tabItem(tabName = "ta4",
               fluidRow(
                 
-      #Einleitungsbox           
-                  box(widht = "12",
-                       title = "Einleitung", 
-                       status = "warning",
-                       "..."
-                       ),
-                  
+      #Einleitungsbox   
+                column(
+                  width = 12,
+                  align = "center",
+                  flipBox(
+                    id = 1,
+                    main_img = "question2.png",
+                    header_img = "island.png",
+                    front_title = "Weltweite Verbreitung von Übergewicht und Adipositas",
+                    hr(),
+                    back_content = tagList(
+                      column(
+                        width = 12,
+                        align = "center",
+                        "Für die Beschreibung des Gesundheitszustandes einer Bevölkerung sind das
+                         Körpergewicht und die Körpergröße wichtige Merkmale. In den letzten Jahren ist die Prävelenz
+                         von Übergewicht und Adipositas stark angestiegen. Auf dieser Seite kannst du dir das Verhältnis von 
+                         Adipostas und Übergwicht in ausgewählten Ländern anschauen. Außerdem erfährst du mehr über die Prävelent von Übergewicht
+                         und Adipositas nach den Geschlechten. 
+                        "
+                      ),
+                      plotOutput("überundadiPlot")
+          
+                    )                       
+                  )
+                ),
+                
       #Infobox Differenzierung Übergewicht und Fettleibigkeit
                   infoBoxOutput("totalbox6", width = 12)
                   ,
                   box(width = "12",
-                      title = "Definition Übergewicht und Fettleibigkeit (Adipositas)",
                       status = "warning",
                       "Übergewicht und Fettleibigkeit (Adipositas) sind nicht dasselbe.
                        Übergewicht bedeutet, dass der Betroffene über seinem Normalgewicht liegt. Es handelt sich dabei um den Übergang vom Normalgewicht zur Adipositas. 
@@ -240,48 +298,85 @@ ui <- dashboardPage(
                       ),
       
       #SelectionInput Country für Plot1
-                  selectInput("countselect41","Select a Country", choices = indicator$Entity, multiple = TRUE, selected = c("Germany","United States","Central Africa Republic")),
+                gradientBox(
+                  width = 12,
+                  title = "Übergwicht und Fettleibigkeit im Überblick",
+                  icon = "fa fa-th",
+                  gradientColor = "teal", 
+                  boxToolSize = "sm", 
+                 footer = selectInput(
+                   "countselect41", "Wähle ein Land aus:",
+                    choices =indicator$Entity,
+                    multiple = TRUE,
+                    selected = c("Germany", "United States", "Central Africa Republic")
+                 ),
+                     
+        
+        "Schau dir die Verteilung von Übergewicht und Fettleibigkeit in verschiedenen Ländern der Welt an.  
+        ."
+      ),
+      
       
       #Plot1 Entwicklung Übergewicht und Fettleibigkeit           
                  box(width = "12",
                     title = "Übergewicht & Fettleibigkeit",
                     plotOutput("überfettplot")
-                    )
                     ),
 
-                  box(width = "12",
-                      title = "Einführung + Titel",
-                      status = "warning",
-                      "..."
+                  gradientBox(
+                    width = 12,
+                      title = "Prävelenz von Übergewicht und Fettleibigkeit nach Geschlechtern",
+                      icon = "fa fa-th",
+                      gradientColor = "teal", 
+                      boxToolSize = "sm", 
+                      footer_padding = FALSE,
+                      "Unterschieden sich die Geschlechter hinsichtlich der zunehmenden Prävelenz von Übergewicht und Adipositas?
+                       Im Jahr 2014 war fast die Hälfte der erwachsenen Frauen von Übergwicht oder Adipositas betroffen.
+                       Bei den Männern waren es sogar über die Hälfte."
                       ),
-                  box(width = "12",
-                     title = "Anzahl der übergewichtigen oder fettleibigen Personen in Deutschland im Jahr 2014 in Prozent:",
-                     status = "warning"
-                     ),
+                    
+    
+      
                   infoBoxOutput("totalbox7", width = 6)
                   ,
-                  infoBoxOutput("totalbox8", width = 6)
-                  ,
-
       
-      #SliderInput Year für Plot2
-                  sliderInput("select_year", label ="Select a Year",
-                              min = min(weight$Year),
-                              max = max(weight$Year),
-                              value = 2014),
+                  infoBoxOutput("totalbox8", width = 6)
+                  
+              ),
       
       #Plot2 Vergleich Männer und Frauen Übergewicht/Fettleibigkeit
 
              splitLayout(
                  box(width = "12",
-                   title = "Übergewicht Frau",
+                   title = "Prävelenz von Übergewicht und Fettleibigkeit bei Frauen",
                    plotlyOutput("womenplot")
                      ),
+                 
                  box(width = "12",
-                  title = "Übergwicht Mann",
+                  title = "Prävelenz von Übergewicht und Fettleibigkeit bei Männern",
                   plotlyOutput("manplot")
                 )
+              ),
+      
+      #SliderInput Year für Plot2
+      fluidRow(
+        gradientBox(
+          width = 12,
+          title = "Übergwicht und Fettleibigkeit im Verlauf der Jahre",
+          icon = "fa fa-th",
+          gradientColor = "teal", 
+          boxToolSize = "sm", 
+          footer = sliderInput(
+            "select_year", label ="Wähle einen Zeitraum",
+            min = min(weight$Year),
+            max = max(weight$Year),
+            value = 2014),
+            " Schaue dir an, wie sich die Geschlechter im Hinblick auf die beiden Krankheiten im Verlauf der Jahre verändert haben. "
+          )
+        
+      
               )
+           
             ),
 
 
@@ -362,21 +457,29 @@ ui <- dashboardPage(
 #Sixth tab contenct ----
     tabItem(tabName = "ta6",
             fluidRow(
-              
+            
+           
               mainPanel(tags$img (src = "woman2.png")),
-              
+             
+               
               box(widht = "12",
-               title = "Projekt", 
-               status = "warning",
+                title = "Projekt", 
+                status = "warning",
                 "..."
                  ),
-              actionLink("linkinfo", label = "Weitere Informationen zum Thema
+             
+             downloadButton("downloadData", "10 Regeln der DGE"),
+                
+            actionLink("linkinfo", label = "Weitere Informationen zum Thema
                          'Gesunde Ernährung' finden Sie hier.", icon=icon ("seedling")
-                         ),
+                      ),
               
-              actionLink("linkproject", label = "Ein weiteres spannendes Projekt zur Entwicklung der Ernährung finden Sie hier.", icon=icon ("external-link-alt"))
-                    )
-            ),
+            actionLink("linkproject", label = "Ein weiteres spannendes Projekt zur Entwicklung der Ernährung finden Sie hier.", icon=icon ("external-link-alt"))
+                
+            )
+                 ),
+            
+
       # Infos zum Proejkt In form
       # Broschüre als PDF downloaden
       # Link zu Freya und Nicoles App
@@ -533,7 +636,12 @@ ui <- dashboardPage(
     p31 <- temp31 %>% ggplot() + 
       aes(x = Year, y = `Daily caloric supply (kcal/person/day)`, color = Entity) + # x Achse bis 2013 anzeigen lassen?
       geom_line()+
-      theme_minimal() 
+      theme_minimal() +
+      labs(
+        x = "Jahr",
+        y = "Tägliche Kalorienzufuhr (in kcal pro Person/Tag)",
+        color = "Ausgewählte Länder",
+        capiton = "Quelle: OurWorldinData")
     ggplotly(p31)
   })
   
@@ -548,7 +656,11 @@ ui <- dashboardPage(
   p1 <- temp31 %>% ggplot() +
     aes(x = `GDP per capita (2011 international-$)`, y = `Daily per capita fat supply (grams per day) (g/person/day)`) +
     geom_point() +
-    theme_minimal() 
+    theme_minimal() +
+    labs(
+      x = "GDP (2001 international-$) pro Kopf (BIP)",
+      y = "Tägliche Fettversorgung (in gramm pro Person/Tag)"
+    )
   ggplotly(p1)
   })
   
@@ -563,10 +675,22 @@ ui <- dashboardPage(
     aes(x = `GDP per capita (2011 international-$)`, y = `Daily per capita fat supply (grams per day) (g/person/day)`, color = Entity, size = `Total population (Gapminder)`) +
     geom_point() +
     theme_minimal() +
-    scale_x_log10() 
+    scale_x_log10() +
+    labs(
+      x = "GDP (2001 international-$) pro Kopf (BIP)",
+      y = "Tägliche Fettversorgung (in gramm pro Person/Tag)",
+      color = "Ausgewhählte Länder (nach Größe der Gesamtbevölkerung")
   ggplotly(p)
 })
   
+  output$totalbox9 <- renderInfoBox({
+    infoBox(
+      "Tipp!",
+      paste0(25 + input$text, "Wähle einzelne Länder aus, dann kannst du sie besser miteinander vergleichen!"), 
+      icon = icon("lightbulb"),
+      color = "yellow"
+    )
+  })
 
 #Output Plot Tab 4----
   #Output Progess Box
@@ -575,9 +699,11 @@ ui <- dashboardPage(
   
   output$totalbox6 <- renderInfoBox({
     infoBox(
-      "Was ist der Unterschied zwischen Übergewicht und Fettleibigkeit (Adipositas)?", icon = icon("question"),
+      "Frage:",
+      paste0(25 + input$text, "Was ist der Unterschied zwischen Übergewicht und Fettleibigkeit (Adipositas)?"), icon = icon("question"),
       color = "red"
            )
+    
   })
 
   # (2) Output Vergleich Übergewicht/Fettleibigkeit
@@ -593,8 +719,10 @@ ui <- dashboardPage(
       labs(x="Länder",
            y="Indikator: Body-Mass-Index (BMI)",
            title= "Vergleich von Übergewicht und Fettleibigkeit nach Ländern",
-           fill = "Jahr")+
-      coord_flip()
+           fill = "Krankheitstyp",
+           caption = "Der Kranheitstyp bedeutet folgendes:
+           indicator_obes = Fettleibikeit | indicator_over = Übergewicht") +
+           coord_flip()
     
   })
   
@@ -605,12 +733,17 @@ ui <- dashboardPage(
   output$womenplot <- renderPlotly ({
     
     temp421 <- weight %>%
-      filter(Entity == c("Central African Republic", "Germany", "United States")) 
+      filter(Entity == c("Central African Republic", "Germany", "United States"))
+      
      
     
-   p421 <- temp421 %>%  ggplot() + 
+   p421 <- temp421 %>%   ggplot() + 
       aes(y = `f_Overweight or Obese (%)`,x = Year, colour = Entity) +
-        geom_line()
+      geom_line() +
+      labs(
+       x = "Jahr",
+       y = "Übergewichtige/fettleibigen Frauen (in %)",
+       color = "Ausgewählte Länder")
    ggplotly(p421)
    
   })
@@ -623,7 +756,11 @@ ui <- dashboardPage(
     
    p422 <- temp422 %>% ggplot() +
       aes(y = `m_Overweight or Obese (%)`, x = Year, color = Entity) + 
-      geom_line()
+      geom_line() +
+      labs(
+       x = "Jahr",
+       y =  "Übergewichtige/fettleibige Männer (in %)",
+       color = "Ausgewählte Länder")
     ggplotly(p422)
   })
   
@@ -692,7 +829,14 @@ ui <- dashboardPage(
 #Output Plot 6 ----
   
   output$text <- renderText({input$text})
-   
+  
+  output$downloadData <- downloadHandler (
+    filename = "DGE-Ernährungsregeln.pdf",
+    content = function(file) {
+      file.copy("https://www.dge.de/fileadmin/public/doc/fm/10-Regeln-der-DGE.pdf", file)
+    }
+    
+  ) 
 
 }
 
