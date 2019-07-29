@@ -25,6 +25,16 @@ library(shinydashboardPlus)
   mortality_select <- readxl::read_xlsx("global_mortality_selection.xlsx")
   indicator <- read.csv("indicator.csv", sep = ";")
 
+# Diese sind eventuell falsche Daten - Herausfiltern?
+# Zeile 7659: USA overweigt 1993
+# Zeile 7641: USA overweight 1975
+# Zeile 7669: USA overweight 2003
+# Zeile 7673: USA overweight 2007
+# Zeile 7676: USA overweight 2010
+# Zeile 2714: Germany overweight 2008
+# Zeile 2718: Germany overweight 2012
+# Zeile 2709: Germany overweight 2003
+    
 #UI ----
 # Define UI for application that draws a histogram
 
@@ -54,13 +64,19 @@ ui <- dashboardPage(
               fluidRow(
                 mainPanel(tags$img (src = "bacach.png")),
                
-                 box(width = 12,
-                    title = "Neue Ära der Gesundheit",
-                    status = "warning",
-                    "Das erste Mal in der Weltgeschichte sterben mehr Menschen auf unserem Planeten an den Folgen von 
+                gradientBox(
+                  width = 12,
+                  title = "Neue Ära der Gesundheit",
+                  icon = "fa fa-th",
+                  gradientColor = "teal", 
+                  boxToolSize = "sm", 
+                  # footer = 
+                  footer_padding = FALSE,
+                  "Das erste Mal in der Weltgeschichte sterben mehr Menschen auf unserem Planeten an den Folgen von 
                     Fettleibigkeit als an Hunger.[Quelle: Yuval Noah Harari] Woran liegt das? Das BMLE hat sich im Projekt Gesundheit 4.0 
-                    mit dieser Frage beschäftigt. Entdecken Sie wie sich die Entwicklung des Körpergewichts in den letzten Jahrzehnten 
-                    verändert hat und welche Faktoren dabei eine Rolle spielen. Viel Spaß beim Stöbern und Entdecken. Ihr BMLE")
+                  mit dieser Frage beschäftigt. Entdecken Sie wie sich die Entwicklung des Körpergewichts in den letzten Jahrzehnten 
+                  verändert hat und welche Faktoren dabei eine Rolle spielen. Viel Spaß beim Stöbern und Entdecken. Ihr BMLE"
+                )
               )
       ),
       
@@ -95,12 +111,10 @@ ui <- dashboardPage(
                     )
                   )
               ),
-                fluidRow(
-                  sidebarLayout(
-                  sidebarPanel(
-                    width = 12,
+            
                     gradientBox(
-                      title = "My gradient Box",
+                      width = 12,
+                      title = "Sterblichkeitsrate im Überblick",
                       icon = "fa fa-th",
                       gradientColor = "teal", 
                       boxToolSize = "sm", 
@@ -109,27 +123,32 @@ ui <- dashboardPage(
                         choices = mortality_select$Disease_type, 
                         multiple = TRUE, selected = "Diabetes"
                       ),
-                      "Schau dir an, wie sich die Sterblichkeitsrate im Hinblick auf 
+                      "Schau dir an, wie sich die Sterblichkeitsrate auf der Welt im Hinblick auf 
                       die beiden Krankheiten im Verlauf der Jahre geändert hat."
-                    )
-                    
-                  ),
+                    ),
+
                   box(width="12",
                       plotlyOutput("diseaseplot")
-                      )
-                ),
-                
+                      ),
+
+                    gradientBox(
+                      width = 12,
+                      title = "Auf einen Blick",
+                      icon = "fa fa-th",
+                      gradientColor = "teal", 
+                      boxToolSize = "sm",
+                      "Auf unserer Erde leben 7,47 Milliarden Menschen. 
+                      Knapp ein Drittel davon sterben jedes Jahr an einem Herzleiden."
+                    ),
+                    
                 infoBoxOutput("totalbox1", width = 6), 
                 infoBoxOutput("totalbox2", width = 6),
                 infoBoxOutput("totalbox3", width = 6),
                 infoBoxOutput("totalbox4", width = 6),
                     
-                
-                sidebarLayout(
-                  sidebarPanel(
-                    width = 12,
                     gradientBox(
-                      title = "My gradient Box",
+                      width = 12,
+                      title = "Länder im Kontrast",
                       icon = "fa fa-th",
                       gradientColor = "teal", 
                       boxToolSize = "sm", 
@@ -140,17 +159,13 @@ ui <- dashboardPage(
                       ),
                       "Hier kannst du dir die Entwicklung der Sterblichkeitsraten 
                       anschauen und dabei mehrere Länder miteinander vergleichen."
-                    )
-                  ),
-                 
+                    ),
+
                   box(width="12",
                       title="Entwicklung der Sterblichkeitsrate nach Ländern",
                       plotOutput("diseasecountplot")
                       )
-                  
-                ) 
-              )
-              
+
             )  
       ),    
   
@@ -278,28 +293,30 @@ ui <- dashboardPage(
               column(
                 width = 12,
                 align = "center",
-              flipBox(
+                flipBox(
                   id = 1,
-                  main_img = "question2.png",
-                  header_img = "island.png",
-                  front_title = "Was passiert mit uns?",
+                  main_img = "question.png",
+                  header_img = "forest.png",
+                  front_title = "Wie sich der Fleischkonsum verändert.",
+                  back_title = "Fleischkonsum",
                   hr(),
                   back_content = tagList(
                     column(
                       width = 12,
                       align = "center",
-                      "Der Fleischkonsum"
+                      "Der Fleischkonsum hat sich im Laufe der Jahre stark verändert. 
+                      Besonders auffällig sind die Unterschiede zwischen wohlhabenderen 
+                      Ländern und Entwicklungs- und Schwellenländern."
                     ),
-                    plotOutput("distPlot2")
+                    plotOutput("Plot2")
                     )
                   )
                   ),
               
-              sidebarLayout(
-                sidebarPanel(
-                  width = 12,
+
                   gradientBox(
-                    title = "My gradient Box",
+                    width = 12,
+                    title = "Fleischkonsum im Kontrast",
                     icon = "fa fa-th",
                     gradientColor = "teal", 
                     boxToolSize = "sm", 
@@ -308,27 +325,19 @@ ui <- dashboardPage(
                       choices = meat$Entity, 
                       multiple = TRUE, selected = c("Germany", "United States", "Central African Republic")
                     ),
-                    "Schau dir an, wie sich die Sterblichkeitsrate im Hinblick auf 
-                    die beiden Krankheiten im Verlauf der Jahre geändert hat."
-                  )
-                  
+                    "Wie viel Fleisch konsumieren wir eigentlich? 
+                    Vergleiche den Fleischkonsum unterschiedlicher Länder miteinander."
                   ),
+                  
                 box(width="12",
-                    title = "Fleischkonsum",
-                    plotOutput("fleischplot")
-                )
-              ),
+                    title = "Entwicklung der Menge an Fleischkonsum (Kilogramm pro Kopf im Jahr)",
+                    plotlyOutput("fleischplot")
+                ),
 
-              
-              infoBoxOutput("totalbox5", width = 12),
-              
-              
-              sidebarLayout(
-                sidebarPanel(
-                  width = 12,
                   gradientBox(
-                    title = "My gradient Box",
-                    icon = "fa fa-th",
+                    width = 12,
+                    title = "Was fällt hier auf?",
+                    icon = "fas fa-lightbulb",
                     gradientColor = "teal", 
                     boxToolSize = "sm", 
                     footer = selectInput(
@@ -336,16 +345,16 @@ ui <- dashboardPage(
                       choices = weight_comb$Entity, 
                       multiple = TRUE, selected = c("Germany", "United States", "Central African Republic")
                     ),
-                    "Schau dir an, wie sich die Sterblichkeitsrate im Hinblick auf 
-                    die beiden Krankheiten im Verlauf der Jahre geändert hat."
-                  )
-                  
+                    "Wir werden immer dicker! Woran kann das liegen? 
+                     Hier kannst du den Anteil der übergewichtigen Bevölkerung 
+                    der jeweiligen Länder miteinander vergleichen."
                   ),
+                  
                 box(width="12",
-                    title = "Übergewicht",
-                    plotOutput("overweightplot")
+                    title = "Übergewicht im Verlauf der Jahre",
+                    plotlyOutput("overweightplot")
                 )
-              )
+
             )
     ),    
     
@@ -353,6 +362,9 @@ ui <- dashboardPage(
 #Sixth tab contenct ----
     tabItem(tabName = "ta6",
             fluidRow(
+              
+              mainPanel(tags$img (src = "woman2.png")),
+              
               box(widht = "12",
                title = "Projekt", 
                status = "warning",
@@ -374,20 +386,43 @@ ui <- dashboardPage(
 #Seventh tab content----
     tabItem(tabName = "ta7",
             fluidRow(
-               box(width = 12,
-                  title = "Motivation",
-                  status = "warning",
-                  ""),
-               
-               box(width = 12,
-                   title = "Methodik",
-                   status = "warning",
-                   ""),
-               
-               box(width = 12,
-                   title = "Quellen, Urheberrechte & Lizenzen",
-                   status = "warning",
-                   "All unsere Daten sind von der Webseite 'Our World in Data'. Diese Daten sind frei zugänglich und verwendbar, wenn man die Nutung angibt. Alle Arbeiten sind unter der 'Creative Commons BY'-Lizenz.")
+              
+              gradientBox(
+                width = 12,
+                title = "Motivation",
+                icon = "fa fa-th",
+                gradientColor = "teal", 
+                boxToolSize = "sm", 
+                # footer = 
+                "Ziel der App ist, dass junge Erwachsene und Familien über die Folgen von ungesunder Ernährung aufgeklärt werden.
+                Dies soll der Prävention dienen und verdeutlichen, wie sich der Anteil an Übergewichtigen und Fettleibigen in
+                unserer Gesellschaft im Verlaufe der Jahre verändert hat."
+              ),
+              
+              gradientBox(
+                width = 12,
+                title = "Methodik",
+                icon = "fa fa-th",
+                gradientColor = "teal", 
+                boxToolSize = "sm", 
+                # footer = 
+                "Für dieses Projekt wurden mehrere Datensätze, die von der Plattform 'Our World in Data' stammen, einbezogen.
+                Zu Beginn wurden 17 Datensätze miteinander verglichen. Diese befassten sich mit Themen wie Sterblichkeitsrate,
+                Ernährung, Fettleibigkeit und Übergewicht, Fettkonsum, Fleischkonsum. Die Datensätze wurden bereinigt und 
+                teilweise zusammengefügt, sodass das Projekt auf Basis von sechs unterschiedlichen Datensätzen beruht."
+              ),
+              
+              gradientBox(
+                width = 12,
+                title = "Quellen, Urheberrechte & Lizenzen",
+                icon = "fa fa-th",
+                gradientColor = "teal", 
+                boxToolSize = "sm", 
+                # footer = 
+                "All unsere Daten sind von der Webseite 'Our World in Data'. 
+                Diese Daten sind frei zugänglich und verwendbar, sofern man die Nutzung angibt. 
+                Alle Arbeiten sind unter der 'Creative Commons BY'-Lizenz."
+              )
             )
     )   
    
@@ -429,7 +464,7 @@ ui <- dashboardPage(
       aes(x = year, y= `Disease (%)`, colour= Disease_type, group= Disease_type) + 
       geom_line() +
       labs(x="Jahre",
-           y="Sterblichkeitsrate (%)",
+           y="Sterblichkeitsrate auf der Welt (%)",
            title= "Wie hat sich die Sterblichkeitsrate im Verlauf der Jahre verändert?",
            colour = "Krankheiten")+
        theme_minimal() 
@@ -477,8 +512,8 @@ ui <- dashboardPage(
       aes(x = country, y= `Disease (%)`, fill= Disease_type, group= Disease_type)) + 
       geom_col() +
       scale_fill_discrete() +
-      labs(x="Jahre",
-           y="Länder",
+      labs(x="Länder",
+           y="Anteile der Sterblichkeit nach Ländern (%)",
            fill = "Krankheiten")+
       coord_flip()
     
@@ -612,42 +647,44 @@ ui <- dashboardPage(
   
 
 #Output Plot Tab 5----  
-  output$fleischplot <- renderPlot({
+  output$fleischplot <- renderPlotly({
     
-    temp5 <- meat %>% 
+    temp51 <- meat %>% 
     filter(Entity == c("Central African Republic", "Germany", "United States")) %>% 
      filter(Entity %in% input$countselect51) %>% filter(`Food Balance Sheets: Meat - Food supply quantity (kg/capita/yr) (FAO (2017)) (kg)` != "2007")
     
-    temp5 %>%      ggplot(
+    p51 <- temp51 %>%      ggplot(
       aes(x = Year, y = `Food Balance Sheets: Meat - Food supply quantity (kg/capita/yr) (FAO (2017)) (kg)`, group = Entity, colour = Entity)) + 
       geom_line() +
-        labs(x="Years",
-           y="Density",
-           title= "Food Supply quantity (kg/capita/year) over Years",
-           fill = "Food Supply quantity (kg/capita/year)")
+        labs(x="Jahre",
+           y="Menge an Fleischkonsum pro Kopf und Jahr (kg)",
+           colour = "Ausgewählte Länder")
+    ggplotly(p51)
+    
   })
 
-  output$totalbox5 <- renderInfoBox({
-    infoBox(
-      "Was fällt hier auf?", icon = icon("lightbulb"),
-      color = "green"
-    )
-  })  
+#  output$totalbox5 <- renderInfoBox({
+#    infoBox(
+#      "Was fällt hier auf?", icon = icon("lightbulb"),
+#      color = "green"
+#    )
+#  })  
   
-  output$overweightplot <- renderPlot({
+  output$overweightplot <- renderPlotly({
     
-    temp5 <- weight_comb %>% 
+    temp52 <- weight_comb %>% 
       filter(Entity == c("Central African Republic", "Germany", "United States")) %>% 
       filter(weight_type == "Overweight") %>% 
-      filter(Entity %in% input$countselect52) 
+      filter(Entity %in% input$countselect52)
     
-    temp5 %>%      ggplot(
+    p52 <- temp52 %>%      ggplot(
       aes(x = Year, y = weight_total, group = Entity, colour = Entity)) + 
       geom_line() +
-      labs(x="Years",
-           y="Overweight",
-           title= "Overweight over Years",
-           fill = "Land")
+      labs(x="Jahre",
+           y="Anteil der Bevölkerung mit Übergewicht (%)",
+           colour = "Ausgewählte Länder")
+    ggplotly(p52)
+    
   })
 
 
