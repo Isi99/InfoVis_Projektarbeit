@@ -462,19 +462,30 @@ ui <- dashboardPage(
               mainPanel(tags$img (src = "woman2.png")),
              
                
-              box(widht = "12",
-                title = "Projekt", 
-                status = "warning",
-                "..."
-                 ),
+              gradientBox(
+                widht = 12,
+                title = "Du willst mehr für auf eine gesunde Ernährung achten? Dann IN FORM-ier dich hier!",
+                icon = "fa fa-th",
+                gradientColor = "teal", 
+                boxToolSize = "sm", 
+                "Um mehr für die gesunde Ernährung und die eigene Gesundheit zu tun, wurde IN FORM - Deutschlands Initiative für gesunde Ernährung ins Leben gerufen, die
+                 zum Ziel hat, das Ernährungs- und Bewegungsverhalten in Deutschland bis zum Jahr 2020 nachhaltig zu verbessern. Diese Initative ist mehr als eine reine Übergewichtsprävention -
+                 es geht um die Prävention um Fehlernährung, Bewegungsmangel und damit zusammenhängende Krankheiten.
+                 Sowohl Erwachsene als auch insbesondere
+                 Kinder sollen lernen, gesünder zu leben und somit von einer erhöhten Lebensqualität
+                 und einer gesteigteren Leistungsfähigkeit in allen Lebensbereichen profitieren zu können.
+                 Der nationale Aktiosnplan IN FROM unterstütze bereits über 200 Projkete. In Zukunft stehen vor allem die 
+                 Etablierung geförderter Maßnahmen & Projekte, die Verarbeitung von neuen Erkentnissen sowie die Förderung zum Asutausch & zur Vernetzung zwischen Akteuren
+                 der unterschiedliche Projekte im Fokus. "
+                ),
              
-             downloadButton("downloadData", "10 Regeln der DGE"),
+            downloadButton("downloadData", "10 Regeln der DGE"),
                 
-            actionLink("linkinfo", label = "Weitere Informationen zum Thema
-                         'Gesunde Ernährung' finden Sie hier.", icon=icon ("seedling")
+            actionLink("linkinfo", label = "Weitere Informationen rund ums Thema
+                         'Gesunde Ernährung' sowie wie Rezeote und detallierte Projektbeschreibungen findest du hier.", icon=icon ("seedling")
                       ),
               
-            actionLink("linkproject", label = "Ein weiteres spannendes Projekt zur Entwicklung der Ernährung finden Sie hier.", icon=icon ("external-link-alt"))
+            actionLink("linkproject", label = "Ein weiteres spannendes Projekt zur Entwicklung der Ernährung findest du hier.", icon=icon ("external-link-alt"))
                 
             )
                  ),
@@ -678,8 +689,9 @@ ui <- dashboardPage(
     scale_x_log10() +
     labs(
       x = "GDP (2001 international-$) pro Kopf (BIP)",
-      y = "Tägliche Fettversorgung (in gramm pro Person/Tag)",
-      color = "Ausgewhählte Länder (nach Größe der Gesamtbevölkerung")
+      y = "Tägliche Fettversorgung (in gramm pro Person/Tag)") + 
+    guides(fill = FALSE)
+    
   ggplotly(p)
 })
   
