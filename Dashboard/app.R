@@ -49,7 +49,7 @@ ui <- dashboardPage(
                      menuItem("Was passiert mit uns?",tabName = "ta2",icon=icon("chart-line")),
                      menuItem("Globale Ernährung",tabName = "ta3",icon=icon("fas fa-utensils")),
                      menuItem("Übergewicht und Fettleibigkeit",tabName = "ta4",icon=icon("weight")),
-                     menuItem("Fleischkonsum",tabName = "ta5",icon=icon("drumstick-bite")),
+                     menuItem("Fleischkonsum",tabName = "ta5",icon=icon("bone")),
                      menuItem("In Form",tabName = "ta6",icon=icon("walking")),
                      menuItem("About this Project",tabName = "ta7",icon=icon("comment-alt"))
                    )  
@@ -75,7 +75,7 @@ ui <- dashboardPage(
                   "Das erste Mal in der Weltgeschichte sterben mehr Menschen auf unserem Planeten an den Folgen von 
                     Fettleibigkeit als an Hunger.[Quelle: Yuval Noah Harari] Woran liegt das? Das BMLE hat sich im Projekt Gesundheit 4.0 
                   mit dieser Frage beschäftigt. Entdecken Sie wie sich die Entwicklung des Körpergewichts in den letzten Jahrzehnten 
-                  verändert hat und welche Faktoren dabei eine Rolle spielen. Viel Spaß beim Stöbern und Entdecken. Ihr BMLE"
+                  verändert hat und welche Faktoren dabei eine Rolle spielen. Viel Spaß beim Stöbern und Entdecken. Dein BMLE"
                 )
               )
       ),
@@ -102,7 +102,7 @@ ui <- dashboardPage(
                         align = "center",
                         "Was passiert eigentlich mit uns? Erstmals in der Geschichte
                         sterben mehr Menschen an den Folgen von Übergewicht, als dass sie verhungern.
-                        Die beiden Grafiken sollen dies verdeutlichen. In der ersten Grafik
+                        Die beiden Grafiken sollen dies verdeutlichen. Die erste Grafik
                         zeigt, wie die Sterblichkeit im Verlauf der Jahre zugenommen hat.
                         Die zweite Grafik stellt die Sterblichkeitsrate der einzelnen Länder dar. 
                         Viel Spaß beim Explorieren!"
@@ -135,7 +135,8 @@ ui <- dashboardPage(
                       width = 12,
                       title = "Auf einen Blick",
                       icon = "fa fa-th",
-                      gradientColor = "teal", 
+                      gradientColor = "teal",
+                      footer_padding = FALSE,
                       boxToolSize = "sm",
                       "Auf unserer Erde leben 7,47 Milliarden Menschen. 
                       Knapp ein Drittel davon sterben jedes Jahr an einem Herzleiden."
@@ -162,7 +163,7 @@ ui <- dashboardPage(
                     ),
 
                   box(width="12",
-                      title="Entwicklung der Sterblichkeitsrate nach Ländern",
+                      title="Entwicklung der Sterblichkeitsrate nach Ländern [2014]",
                       plotOutput("diseasecountplot")
                       )
 
@@ -180,7 +181,7 @@ ui <- dashboardPage(
                   width = 12,
                   align = "center",
                   flipBox(
-                    id = 1,
+                    id = 2,
                     main_img = "question.png",
                     header_img = "island.png",
                     front_title = "Ernährung im Wandel der Zeit",
@@ -206,6 +207,7 @@ ui <- dashboardPage(
                   title = "Kalorienverbrauch im Überblick",
                   icon = "fa fa-th",
                   gradientColor = "teal", 
+                  footer_padding = FALSE,
                   boxToolSize = "sm",
                   "Wie viel Kalorien nehmen wir eigentlich täglich zu uns? Und welches Land verbraucht am meisten Kalorien?
                    Schau dir an, wie sich der Kalorienverbrauch in den Jahren von 1880 - 2013 verändert hat. "),
@@ -224,6 +226,7 @@ ui <- dashboardPage(
                   title = "Wohlstand und Fettversorgung  - ein Zusammenhang?",
                   icon = "fa fa-th",
                   gradientColor = "teal", 
+                  footer_padding = FALSE,
                   boxToolSize = "sm",
                   "Welchen Einfluss hat der Wohlstand auf die tägliche Versorgung mit Nahrungsmitteln pro Kopf?
                   Während sich die Grafik oben auf die Kalorienversorgung bezieht, steht hier die tägliche Pro-Kopf Fettversorgung
@@ -240,6 +243,7 @@ ui <- dashboardPage(
                   title = "Zentral Afrika, Deutschland und USA im Vergleich ",
                   icon = "fa fa-th",
                   gradientColor = "teal", 
+                  footer_padding = FALSE,
                   boxToolSize = "sm",
                   "Bestehen Unterschiede zwischen den Ländern? Schau dir den Zusammenhang in Ländern mit hören Einkommen und ärmeren Regionen an."),
               
@@ -261,7 +265,7 @@ ui <- dashboardPage(
                   width = 12,
                   align = "center",
                   flipBox(
-                    id = 1,
+                    id = 3,
                     main_img = "question2.png",
                     header_img = "island.png",
                     front_title = "Weltweite Verbreitung von Übergewicht und Adipositas",
@@ -300,7 +304,7 @@ ui <- dashboardPage(
       #SelectionInput Country für Plot1
                 gradientBox(
                   width = 12,
-                  title = "Übergwicht und Fettleibigkeit im Überblick",
+                  title = "Übergewicht und Fettleibigkeit im Überblick",
                   icon = "fa fa-th",
                   gradientColor = "teal", 
                   boxToolSize = "sm", 
@@ -325,11 +329,11 @@ ui <- dashboardPage(
 
                   gradientBox(
                     width = 12,
-                      title = "Prävelenz von Übergewicht und Fettleibigkeit nach Geschlechtern",
+                      title = "Prävalenz von Übergewicht und Fettleibigkeit nach Geschlechtern",
                       icon = "fa fa-th",
-                      gradientColor = "teal", 
-                      boxToolSize = "sm", 
+                      gradientColor = "teal",
                       footer_padding = FALSE,
+                      boxToolSize = "sm", 
                       "Unterschieden sich die Geschlechter hinsichtlich der zunehmenden Prävelenz von Übergewicht und Adipositas?
                        Im Jahr 2014 war fast die Hälfte der erwachsenen Frauen von Übergwicht oder Adipositas betroffen.
                        Bei den Männern waren es sogar über die Hälfte."
@@ -362,7 +366,7 @@ ui <- dashboardPage(
       fluidRow(
         gradientBox(
           width = 12,
-          title = "Übergwicht und Fettleibigkeit im Verlauf der Jahre",
+          title = "Übergewicht und Fettleibigkeit im Verlauf der Jahre",
           icon = "fa fa-th",
           gradientColor = "teal", 
           boxToolSize = "sm", 
@@ -370,6 +374,7 @@ ui <- dashboardPage(
             "select_year", label ="Wähle einen Zeitraum",
             min = min(weight$Year),
             max = max(weight$Year),
+            sep = "",
             value = 2014),
             " Schaue dir an, wie sich die Geschlechter im Hinblick auf die beiden Krankheiten im Verlauf der Jahre verändert haben. "
           )
@@ -389,7 +394,7 @@ ui <- dashboardPage(
                 width = 12,
                 align = "center",
                 flipBox(
-                  id = 1,
+                  id = 4,
                   main_img = "question.png",
                   header_img = "forest.png",
                   front_title = "Wie sich der Fleischkonsum verändert.",
@@ -459,14 +464,15 @@ ui <- dashboardPage(
             fluidRow(
             
            
-              mainPanel(tags$img (src = "woman2.png")),
+            mainPanel(tags$img (src = "woman2.png")),
              
                
               gradientBox(
-                widht = 12,
+                width =  12,
                 title = "Du willst mehr für auf eine gesunde Ernährung achten? Dann IN FORM-ier dich hier!",
                 icon = "fa fa-th",
                 gradientColor = "teal", 
+                footer_padding = FALSE,
                 boxToolSize = "sm", 
                 "Um mehr für die gesunde Ernährung und die eigene Gesundheit zu tun, wurde IN FORM - Deutschlands Initiative für gesunde Ernährung ins Leben gerufen, die
                  zum Ziel hat, das Ernährungs- und Bewegungsverhalten in Deutschland bis zum Jahr 2020 nachhaltig zu verbessern. Diese Initative ist mehr als eine reine Übergewichtsprävention -
@@ -479,15 +485,45 @@ ui <- dashboardPage(
                  der unterschiedliche Projekte im Fokus. "
                 ),
              
-            downloadButton("downloadData", "10 Regeln der DGE"),
-                
-            actionLink("linkinfo", label = "Weitere Informationen rund ums Thema
-                         'Gesunde Ernährung' sowie wie Rezeote und detallierte Projektbeschreibungen findest du hier.", icon=icon ("seedling")
-                      ),
+            fluidRow(
+              column(
+                width = 12,
+                align = "center",
+                appButton(
+                  url = "https://www.in-form.de/",
+                  label = "In Form",
+                  icon = "fa fa-seedling",
+                  enable_badge = TRUE,
+                  badgeColor = "purple",
+                  badgeLabel = "Neu"
+                ),
+                appButton(
+                  label = "Weiterfühhrende Projekte",
+                  icon = "fa fa-external-link-alt",
+                  enable_badge = FALSE,
+                  badgeColor = NULL,
+                  badgeLabel = NULL
+                ),
+                appButton(
+                  label = "Download",
+                  icon = "fa fa-download",
+                  enable_badge = FALSE,
+                  badgeColor = NULL,
+                  badgeLabel = NULL
+                )
+              )
               
-            actionLink("linkproject", label = "Ein weiteres spannendes Projekt zur Entwicklung der Ernährung findest du hier.", icon=icon ("external-link-alt"))
+              
+ #         downloadButton("downloadData", "10 Regeln der DGE"),
                 
-            )
+#           actionLink("linkinfo", label = "Weitere Informationen rund ums Thema
+ #                       'Gesunde Ernährung' sowie wie Rezeote und detallierte Projektbeschreibungen findest du hier.", icon=icon ("seedling")
+#                     ),
+              
+#           actionLink("linkproject", label = "Ein weiteres spannendes Projekt zur Entwicklung der Ernährung findest du hier.", icon=icon ("external-link-alt"))
+            
+            )  
+          )
                  ),
             
 
@@ -505,7 +541,8 @@ ui <- dashboardPage(
                 width = 12,
                 title = "Motivation",
                 icon = "fa fa-th",
-                gradientColor = "teal", 
+                gradientColor = "teal",
+                footer_padding = FALSE,
                 boxToolSize = "sm", 
                 # footer = 
                 "Ziel der App ist, dass junge Erwachsene und Familien über die Folgen von ungesunder Ernährung aufgeklärt werden.
@@ -518,6 +555,7 @@ ui <- dashboardPage(
                 title = "Methodik",
                 icon = "fa fa-th",
                 gradientColor = "teal", 
+                footer_padding = FALSE,
                 boxToolSize = "sm", 
                 # footer = 
                 "Für dieses Projekt wurden mehrere Datensätze, die von der Plattform 'Our World in Data' stammen, einbezogen.
@@ -531,6 +569,7 @@ ui <- dashboardPage(
                 title = "Quellen, Urheberrechte & Lizenzen",
                 icon = "fa fa-th",
                 gradientColor = "teal", 
+                footer_padding = FALSE,
                 boxToolSize = "sm", 
                 # footer = 
                 "All unsere Daten sind von der Webseite 'Our World in Data'. 
@@ -568,7 +607,7 @@ ui <- dashboardPage(
 #  output$text <- renderText({input$text})
   
 #Output Plot Tab 2----  
-  #Plot 21 Disease
+  #Plot 21 
   output$diseaseplot <- renderPlotly({
     
     temp21 <- mortality_select %>% 
@@ -581,7 +620,8 @@ ui <- dashboardPage(
            y="Sterblichkeitsrate auf der Welt (%)",
            title= "Wie hat sich die Sterblichkeitsrate im Verlauf der Jahre verändert?",
            colour = "Krankheiten")+
-       theme_minimal() 
+      scale_color_manual(values=c("#FACC2E", "#FE2E2E"))+
+       theme_minimal()
       ggplotly(p21)
   })
   
@@ -620,15 +660,17 @@ ui <- dashboardPage(
   output$diseasecountplot <- renderPlot({
     
     temp22 <- mortality_select %>% 
-      filter(country %in% input$countselect22) 
+      filter(country %in% input$countselect22) %>% filter(year == "2014")
     
     temp22 %>%      ggplot(
       aes(x = country, y= `Disease (%)`, fill= Disease_type, group= Disease_type)) + 
       geom_col() +
-      scale_fill_discrete() +
+     scale_fill_discrete() +
       labs(x="Länder",
            y="Anteile der Sterblichkeit nach Ländern (%)",
            fill = "Krankheiten")+
+     # scale_y_continuous(labels = scales::percent)+
+      ylim(0,50)+
       coord_flip()
     
   })
@@ -637,8 +679,6 @@ ui <- dashboardPage(
 #Output Plot Tab 3----
   
   ## (1) Daily caloric supply im Verlauf der Jahre
-  
-  
   output$caloricA2plot <- renderPlotly({
     
     temp31 <- supply %>%
@@ -729,7 +769,7 @@ ui <- dashboardPage(
       geom_col() +
      scale_fill_discrete() +
       labs(x="Länder",
-           y="Indikator: Body-Mass-Index (BMI)",
+           y="Indikator: Verbreitung von Übergewicht und Fettleibigkeit, gemessen am Body-Mass-Index (BMI) in %",
            title= "Vergleich von Übergewicht und Fettleibigkeit nach Ländern",
            fill = "Krankheitstyp",
            caption = "Der Kranheitstyp bedeutet folgendes:
