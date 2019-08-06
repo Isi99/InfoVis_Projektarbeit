@@ -662,7 +662,9 @@ ui <- dashboardPage(
     temp22 %>%      ggplot(
       aes(x = country, y= `Disease (%)`, fill= Disease_type, group= Disease_type)) + 
       geom_col() +
-     scale_fill_discrete() +
+      scale_fill_discrete() +
+      theme_minimal()+
+      theme(text = element_text(size = 15)) +
       labs(x="Länder",
            y="Anteile der Sterblichkeit nach Ländern (%)",
            fill = "Krankheiten")+
@@ -787,16 +789,17 @@ ui <- dashboardPage(
   
   # Übergewicht Frauen
   
-  output$womenplot <- renderPlotly ({
+ output$womenplot <- renderPlotly ({
     
-    temp421 <- weight %>%
-      filter(Entity == c("Central African Republic", "Germany", "United States"))
-      
-     
+  temp421 <- weight %>%
+   filter(Entity == c("Central African Republic", "Germany", "United States")) 
+    
+
     
    p421 <- temp421 %>%   ggplot() + 
-      aes(y = `f_Overweight or Obese (%)`,x = Year, colour = Entity) +
-      geom_line() +
+     aes(y = `f_Overweight or Obese (%)`,x = Year, colour = Entity) +
+     geom_line() +
+     theme_minimal() +
      scale_color_manual(values=c("#5F4C0B",
                                  "#31B404",
                                  "#0404B4"))+
@@ -806,7 +809,35 @@ ui <- dashboardPage(
        color = "Ausgewählte Länder")
    ggplotly(p421)
    
-  })
+   })
+  
+  # Test: Slider für Übergwicht Frauen
+  
+#  data_421 <- reactive  ({
+#    weight %>% na.omit() %>%
+#      filter(weight$Year == input$select_year)
+#      filter(weight$Entity == c("Central African Republic", "Germany", "United States")) 
+#    
+#  })
+  
+#  output$womenplot <- renderPlot ({
+#    data_421() %>%
+#     ggplot() + 
+#      aes(y = `f_Overweight or Obese (%)`,x = Year, colour = Entity) +
+#      geom_line() +
+#      theme_minimal() +
+#      scale_color_manual(values=c("#5F4C0B",
+#      "#31B404",
+#      "#0404B4"))+
+#      labs(
+#       x = "Jahr",
+#       y = "Übergewichtige/fettleibige Frauen (in %)",
+#       color = "Ausgewählte Länder")
+    
+# })
+      
+    
+
   
   # Übergewicht Männer
   output$manplot <- renderPlotly ({
@@ -817,6 +848,7 @@ ui <- dashboardPage(
    p422 <- temp422 %>% ggplot() +
       aes(y = `m_Overweight or Obese (%)`, x = Year, color = Entity) + 
       geom_line() +
+      theme_minimal() +
       scale_color_manual(values=c("#5F4C0B",
                                  "#31B404",
                                  "#0404B4"))+
