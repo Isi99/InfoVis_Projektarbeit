@@ -14,6 +14,7 @@ library(shinyWidgets)
 #install.packages("shinydashboardPlus")
 library(shinydashboardPlus)
 
+
 ### Datensätze einlesen ----
   meat <- read_rds("meatnew.rds")
   mortality <- read_rds("mortality.rds")
@@ -192,10 +193,10 @@ ui <- dashboardPage(
                         align = "center",
                         "Die Welt hat sich in den letzten Jahren stark verändert.
                          Die daraus resultierenden Folgen schlagen sich auch in unserem Essenverhalten wieder.
-                         Wärhend früher die Ernährung sehr abhängig von der Natur war und Mahlzeiten größtenteils zuhause verzerht worden sind,
-                         gibt es heute eine große Anzahl an Auswahlmöglichkeiten von Lebensmitteln, der Alltag ist von Hektik geprägt, sodass man
+                         Wärhend früher die Ernährung sehr abhängig von der Natur war und Mahlzeiten größtenteils zuhause verzehrt worden sind,
+                         gibt es heute eine große Anzahl an Auswahlmöglichkeiten von Lebensmitteln und der Alltag ist von Hektik geprägt, sodass man
                          auch mal schnell unterwegs isst. Zudem haben die Menschen heutzutage mehr Bewegungsmangel als früher.
-                         Die folgende Grafik zeigt, wie sich die tägliche Kalorienzufuhr im Laufe der Zeit in unterschiedlichen Ländern entwickelt hat."
+                         Die folgende Grafik zeigt, wie sich die tägliche Kalorienversorgung im Laufe der Zeit sowie in unterschiedlichen Ländern entwickelt hat."
                       ),
                       plotOutput("globalPlot")
                     )
@@ -204,17 +205,17 @@ ui <- dashboardPage(
             # Einleitung Kalorienverbrauch     
                 gradientBox(
                   width = 12,
-                  title = "Kalorienverbrauch im Überblick",
+                  title = "Kalorienversorgung im Überblick",
                   icon = "fa fa-th",
                   gradientColor = "teal", 
                   footer_padding = FALSE,
                   boxToolSize = "sm",
                   "Wie viel Kalorien nehmen wir eigentlich täglich zu uns? Und welches Land verbraucht am meisten Kalorien?
-                   Schau dir an, wie sich der Kalorienverbrauch in den Jahren von 1880 - 2013 verändert hat. "),
+                   Schau dir an, wie sich die Kalorienversorgung in den Jahren von 1800 - 2013 verändert hat. "),
                 
                   
                 box(width = "12",
-                      title = "Enwticklung der täglichen Kalorienversorgung im Laufe der Zeit",
+                      title = "",
                       plotlyOutput("caloricA2plot")
                         ),
                 
@@ -229,26 +230,28 @@ ui <- dashboardPage(
                   footer_padding = FALSE,
                   boxToolSize = "sm",
                   "Welchen Einfluss hat der Wohlstand auf die tägliche Versorgung mit Nahrungsmitteln pro Kopf?
-                  Während sich die Grafik oben auf die Kalorienversorgung bezieht, steht hier die tägliche Pro-Kopf Fettversorgung
-                  in Beziehung zu dem Bruttoinlandsprodukt (BIP) pro Kopf im Jahr 2011."),
+                  Während sich die Grafik oben auf die Kalorienversorgung bezieht, steht hier die tägliche Pro-Kopf-Fettversorgung
+                  in Beziehung zu dem 'Gross Domestic Product (offizielle Abkürzung: GDP)' pro Kopf im Jahr 2011. Das Gross Domestic Product (GDP) 
+                  entspricht dem deutschen Bruttoinlandsprodukt (BIP)"),
                  
                 
                   box(width="12",
-                      title="Beeinflusst das GDP (BIP) die Fettversorgung?",
+                      title = "",
                       plotlyOutput("gdp1plot")
                       ),
                 
                 gradientBox(
                   width = 12,
-                  title = "Zentral Afrika, Deutschland und USA im Vergleich ",
+                  title = "Zentralafrika, Deutschland und USA im Vergleich ",
                   icon = "fa fa-th",
                   gradientColor = "teal", 
                   footer_padding = FALSE,
                   boxToolSize = "sm",
-                  "Bestehen Unterschiede zwischen den Ländern? Schau dir den Zusammenhang in Ländern mit hören Einkommen und ärmeren Regionen an."),
+                  "Bestehen Unterschiede zwischen den Ländern? Schau dir den Zusammenhang 
+                  in Ländern mit höherem Einkommen und ärmeren Regionen an."),
               
                   box(width="12",
-                      title="Kontrast der Fettversorgung nach Wohlstand eines Landes ",
+                      title="",
                       plotlyOutput("gdp2plot")    
                       )
              
@@ -275,11 +278,10 @@ ui <- dashboardPage(
                         width = 12,
                         align = "center",
                         "Für die Beschreibung des Gesundheitszustandes einer Bevölkerung sind das
-                         Körpergewicht und die Körpergröße wichtige Merkmale. In den letzten Jahren ist die Prävelenz
-                         von Übergewicht und Adipositas stark angestiegen. Auf dieser Seite kannst du dir das Verhältnis von 
-                         Adipostas und Übergwicht in ausgewählten Ländern anschauen. Außerdem erfährst du mehr über die Prävelent von Übergewicht
-                         und Adipositas nach den Geschlechten. 
-                        "
+                         Körpergewicht und die Körpergröße wichtige Merkmale. In den letzten Jahren ist die Prävalenz
+                         von Übergewicht und Adipositas (wird oft auch als 'Fettleibigkeit' übersetzt) stark angestiegen. Auf dieser Seite kannst 
+                         du dir das Verhältnis von Übergwicht und Adipositas in ausgewählten Ländern anschauen.
+                         Außerdem erfährst du mehr über die Prävalenz von Übergewicht und Adipositas nach den Geschlechtern." 
                       ),
                       plotOutput("überundadiPlot")
           
@@ -290,21 +292,12 @@ ui <- dashboardPage(
       #Infobox Differenzierung Übergewicht und Fettleibigkeit
                   infoBoxOutput("totalbox6", width = 12)
                   ,
-                  box(width = "12",
-                      status = "warning",
-                      "Übergewicht und Fettleibigkeit (Adipositas) sind nicht dasselbe.
-                       Übergewicht bedeutet, dass der Betroffene über seinem Normalgewicht liegt. Es handelt sich dabei um den Übergang vom Normalgewicht zur Adipositas. 
-                       Der Begriff Adipositas bedeutet, dass jemand sehr starkes Übergewicht und dadurch einen krankhaft erhöhten Körperfettanteil hat. 
-                       Daher wird Adipositas auch Fettleibigkeit oder Fettsucht genannt.
-                       Zu Definition dient die Kennzahl des Body-Mass-Index (BMI).
-                       Ein BMI ab 25 kg/m2 gilt per Definition als Übergewicht, ein BMI von 30 kg/m2 und höher als Adipositas.
-                      (Quelle: https://www.vigo.de/rubriken/krankheit-und-therapie/stoffwechsel/lesen/uebergewicht-und-adipositas-volkskrankheiten.html)"
-                      ),
+                 
       
       #SelectionInput Country für Plot1
                 gradientBox(
                   width = 12,
-                  title = "Übergewicht und Fettleibigkeit im Überblick",
+                  title = "Übergewicht und Adipositas - eine Definition",
                   icon = "fa fa-th",
                   gradientColor = "teal", 
                   boxToolSize = "sm", 
@@ -315,26 +308,30 @@ ui <- dashboardPage(
                     selected = c("Germany", "United States", "Central Africa Republic")
                  ),
                      
-        
-        "Schau dir die Verteilung von Übergewicht und Fettleibigkeit in verschiedenen Ländern der Welt an.  
-        ."
+        "'Übergewicht und Adipositas (Fettleibigkeit) sind nicht dasselbe.
+        Übergewicht bedeutet, dass der Betroffene über seinem Normalgewicht liegt. Es handelt sich dabei um den Übergang vom Normalgewicht zur Adipositas. 
+        Der Begriff Adipositas bedeutet, dass jemand sehr starkes Übergewicht und dadurch einen krankhaft erhöhten Körperfettanteil hat. 
+        Daher wird Adipositas auch Fettleibigkeit oder Fettsucht genannt.
+        Zu Definition dient die Kennzahl des Body-Mass-Index (BMI).Ein BMI ab 25 kg/m2 gilt per Definition als Übergewicht, ein BMI von 30 kg/m2 und höher als Adipositas.'
+        (Quelle: https://www.vigo.de/rubriken/krankheit-und-therapie/stoffwechsel/lesen/uebergewicht-und-adipositas-volkskrankheiten.html).
+        \nSchau dir die Verteilung von Übergewicht und Fettleibigkeit in verschiedenen Ländern der Welt an."
       ),
       
       
       #Plot1 Entwicklung Übergewicht und Fettleibigkeit           
                  box(width = "12",
-                    title = "Übergewicht & Fettleibigkeit",
+                    title = "",
                     plotOutput("überfettplot")
                     ),
 
                   gradientBox(
                     width = 12,
-                      title = "Prävalenz von Übergewicht und Fettleibigkeit nach Geschlechtern",
+                      title = "Prävalenz von Übergewicht und Adipositas nach Geschlechtern",
                       icon = "fa fa-th",
                       gradientColor = "teal",
                       footer_padding = FALSE,
                       boxToolSize = "sm", 
-                      "Unterschieden sich die Geschlechter hinsichtlich der zunehmenden Prävelenz von Übergewicht und Adipositas?
+                      "Unterscheiden sich die Geschlechter hinsichtlich der zunehmenden Prävalenz von Übergewicht und Adipositas?
                        Im Jahr 2014 war fast die Hälfte der erwachsenen Frauen von Übergwicht oder Adipositas betroffen.
                        Bei den Männern waren es sogar über die Hälfte."
                       ),
@@ -352,12 +349,12 @@ ui <- dashboardPage(
 
              splitLayout(
                  box(width = "12",
-                   title = "Prävelenz von Übergewicht und Fettleibigkeit bei Frauen",
+                   title = "Prävalenz von Übergewicht und Fettleibigkeit bei Frauen",
                    plotlyOutput("womenplot")
                      ),
                  
                  box(width = "12",
-                  title = "Prävelenz von Übergewicht und Fettleibigkeit bei Männern",
+                  title = "Prävalenz von Übergewicht und Fettleibigkeit bei Männern",
                   plotlyOutput("manplot")
                 )
               ),
@@ -366,17 +363,17 @@ ui <- dashboardPage(
       fluidRow(
         gradientBox(
           width = 12,
-          title = "Übergewicht und Fettleibigkeit im Verlauf der Jahre",
+          title = "Übergewicht und Adipositas im Verlauf der Jahre",
           icon = "fa fa-th",
           gradientColor = "teal", 
           boxToolSize = "sm", 
           footer = sliderInput(
-            "select_year", label ="Wähle einen Zeitraum",
+            "select_year", label ="Wähle einen Zeitraum:",
             min = min(weight$Year),
             max = max(weight$Year),
             sep = "",
             value = 2014),
-            " Schaue dir an, wie sich die Geschlechter im Hinblick auf die beiden Krankheiten im Verlauf der Jahre verändert haben. "
+            " Schaue dir an, wie sich die Geschlechter im Hinblick auf die beiden Krankheiten im Verlauf der Jahre verändert haben."
           )
         
       
@@ -678,7 +675,7 @@ ui <- dashboardPage(
   
 #Output Plot Tab 3----
   
-  ## (1) Daily caloric supply im Verlauf der Jahre
+  ## (1) Abbildung: Entwicklung der Kalorienversorgung im Laufe der Zeit
   output$caloricA2plot <- renderPlotly({
     
     temp31 <- supply %>%
@@ -688,16 +685,18 @@ ui <- dashboardPage(
       aes(x = Year, y = `Daily caloric supply (kcal/person/day)`, color = Entity) + # x Achse bis 2013 anzeigen lassen?
       geom_line()+
       theme_minimal() +
+      scale_color_manual(values=c("#DBA901", "#00FFBF","#5F4C0B", "#21610B",
+                                  "#31B404", "#FF0080", "#5882FA", "#8A0829","#0404B4"))+
       labs(
+        title = "Entwicklung der täglichen Kalorienversorgung im Laufe der Zeit",
         x = "Jahr",
-        y = "Tägliche Kalorienzufuhr (in kcal pro Person/Tag)",
-        color = "Ausgewählte Länder",
-        capiton = "Quelle: OurWorldinData")
-    ggplotly(p31)
+        y = "Tägliche Kalorienversorgung (in kcal pro Person/Tag)",
+        color = "Ausgewählte Länder") 
+      ggplotly(p31)
   })
   
   
-  ## (2) BubbleChart: GDP per Capita und Daily per capita fat supply 
+  ## (2) BubbleChart: Beeinflusst das GDP die Fettversorgung? (GDP per Capita und Daily per capita fat supply) 
 
   output$gdp1plot <- renderPlotly({
   
@@ -709,8 +708,10 @@ ui <- dashboardPage(
     geom_point() +
     theme_minimal() +
     labs(
-      x = "GDP (2001 international-$) pro Kopf (BIP)",
-      y = "Tägliche Fettversorgung (in gramm pro Person/Tag)"
+      title = "Beeinflusst das GDP die Fettversorgung?",
+      x = "GDP (2001 international-$) pro Kopf",
+      y = "Tägliche Fettversorgung (in g pro Person/Tag)",
+      caption = "Die Daten stellen das Jahr 2013 dar."
     )
   ggplotly(p1)
   })
@@ -727,9 +728,11 @@ ui <- dashboardPage(
     geom_point() +
     theme_minimal() +
     scale_x_log10() +
+    scale_color_manual(values=c("#5F4C0B", "#31B404", "#0404B4"))+
     labs(
-      x = "GDP (2001 international-$) pro Kopf (BIP)",
-      y = "Tägliche Fettversorgung (in gramm pro Person/Tag)") + 
+      title = "Kontrast der Fettversorgung nach Wohlstand eines Landes",
+      x = "GDP (2001 international-$) pro Kopf",
+      y = "Tägliche Fettversorgung (in g pro Person/Tag)") + 
     guides(fill = FALSE)
     
   ggplotly(p)
@@ -740,7 +743,7 @@ ui <- dashboardPage(
       "Tipp!",
       paste0(25 + input$text, "Wähle einzelne Länder aus, dann kannst du sie besser miteinander vergleichen!"), 
       icon = icon("lightbulb"),
-      color = "yellow"
+      color = "green"
     )
   })
 
@@ -752,8 +755,8 @@ ui <- dashboardPage(
   output$totalbox6 <- renderInfoBox({
     infoBox(
       "Frage:",
-      paste0(25 + input$text, "Was ist der Unterschied zwischen Übergewicht und Fettleibigkeit (Adipositas)?"), icon = icon("question"),
-      color = "red"
+      paste0(25 + input$text, "Was ist der Unterschied zwischen Übergewicht und Adipositas?"), icon = icon("question"),
+      color = "green"
            )
     
   })
@@ -768,6 +771,8 @@ ui <- dashboardPage(
         aes(x = Entity, y = indicator_total, fill = indicator_type, group = indicator_type)) + 
       geom_col() +
      scale_fill_discrete() +
+     theme_minimal() +
+     theme(text = element_text(size = 15)) +
       labs(x="Länder",
            y="Indikator: Verbreitung von Übergewicht und Fettleibigkeit, gemessen am Body-Mass-Index (BMI) in %",
            title= "Vergleich von Übergewicht und Fettleibigkeit nach Ländern",
@@ -792,9 +797,12 @@ ui <- dashboardPage(
    p421 <- temp421 %>%   ggplot() + 
       aes(y = `f_Overweight or Obese (%)`,x = Year, colour = Entity) +
       geom_line() +
+     scale_color_manual(values=c("#5F4C0B",
+                                 "#31B404",
+                                 "#0404B4"))+
       labs(
        x = "Jahr",
-       y = "Übergewichtige/fettleibigen Frauen (in %)",
+       y = "Übergewichtige/fettleibige Frauen (in %)",
        color = "Ausgewählte Länder")
    ggplotly(p421)
    
@@ -809,6 +817,9 @@ ui <- dashboardPage(
    p422 <- temp422 %>% ggplot() +
       aes(y = `m_Overweight or Obese (%)`, x = Year, color = Entity) + 
       geom_line() +
+      scale_color_manual(values=c("#5F4C0B",
+                                 "#31B404",
+                                 "#0404B4"))+
       labs(
        x = "Jahr",
        y =  "Übergewichtige/fettleibige Männer (in %)",
