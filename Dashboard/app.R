@@ -843,10 +843,11 @@ ui <- dashboardPage(
     
   temp421 <- weight %>%
    filter(Entity == c("Central African Republic", "Germany", "United States")) 
-    
+# filter(weight$Year == input$select_year)
 
+  
     
-   p421 <- temp421 %>%   ggplot() + 
+   p421 <- temp421 %>%  ggplot() + 
      aes(y = `f_Overweight or Obese (%)`,x = Year, colour = Entity) +
      geom_line() +
      theme_minimal() +
@@ -863,7 +864,9 @@ ui <- dashboardPage(
   
   # Test: Slider für Übergwicht Frauen
   
-#  data_421 <- reactive  ({
+#temp_421 <- reactive  ({
+# filter(Year == input$select_year)
+    
 #    weight %>% na.omit() %>%
 #      filter(weight$Year == input$select_year)
 #      filter(weight$Entity == c("Central African Republic", "Germany", "United States")) 
