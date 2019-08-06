@@ -116,7 +116,7 @@ ui <- dashboardPage(
                     gradientBox(
                       width = 12,
                       title = "Sterblichkeitsrate im Überblick",
-                      icon = "fa fa-th",
+                      icon = "fa fa-history",
                       gradientColor = "teal", 
                       boxToolSize = "sm", 
                       footer = selectInput(
@@ -151,7 +151,7 @@ ui <- dashboardPage(
                     gradientBox(
                       width = 12,
                       title = "Länder im Kontrast",
-                      icon = "fa fa-th",
+                      icon = "fa fa-globe",
                       gradientColor = "teal", 
                       boxToolSize = "sm", 
                       footer = selectInput(
@@ -206,7 +206,7 @@ ui <- dashboardPage(
                 gradientBox(
                   width = 12,
                   title = "Kalorienversorgung im Überblick",
-                  icon = "fa fa-th",
+                  icon = "fa fa-history",
                   gradientColor = "teal", 
                   footer_padding = FALSE,
                   boxToolSize = "sm",
@@ -225,7 +225,7 @@ ui <- dashboardPage(
                 gradientBox(
                   width = 12,
                   title = "Wohlstand und Fettversorgung  - ein Zusammenhang?",
-                  icon = "fa fa-th",
+                  icon = "fa fa-coins",
                   gradientColor = "teal", 
                   footer_padding = FALSE,
                   boxToolSize = "sm",
@@ -243,7 +243,7 @@ ui <- dashboardPage(
                 gradientBox(
                   width = 12,
                   title = "Zentralafrika, Deutschland und USA im Vergleich ",
-                  icon = "fa fa-th",
+                  icon = "fa fa-globe",
                   gradientColor = "teal", 
                   footer_padding = FALSE,
                   boxToolSize = "sm",
@@ -290,15 +290,15 @@ ui <- dashboardPage(
                 ),
                 
       #Infobox Differenzierung Übergewicht und Fettleibigkeit
-                  infoBoxOutput("totalbox6", width = 12)
-                  ,
+#                  infoBoxOutput("totalbox6", width = 12)
+#                  ,
                  
       
       #SelectionInput Country für Plot1
                 gradientBox(
                   width = 12,
-                  title = "Übergewicht und Adipositas - eine Definition",
-                  icon = "fa fa-th",
+                  title = "Was ist der Unterschied zwischen Übergewicht und Adipositas?",
+                  icon = "fa fa-question",
                   gradientColor = "teal", 
                   boxToolSize = "sm", 
                  footer = selectInput(
@@ -314,20 +314,29 @@ ui <- dashboardPage(
         Daher wird Adipositas auch Fettleibigkeit oder Fettsucht genannt.
         Zu Definition dient die Kennzahl des Body-Mass-Index (BMI).Ein BMI ab 25 kg/m2 gilt per Definition als Übergewicht, ein BMI von 30 kg/m2 und höher als Adipositas.'
         (Quelle: https://www.vigo.de/rubriken/krankheit-und-therapie/stoffwechsel/lesen/uebergewicht-und-adipositas-volkskrankheiten.html).
-        \nSchau dir die Verteilung von Übergewicht und Fettleibigkeit in verschiedenen Ländern der Welt an."
-      ),
+        \nSchau dir die Verteilung von Übergewicht und Fettleibigkeit in verschiedenen Ländern der Welt zu unterschiedlichen Zeitpunkten an."
+                            ),
       
       
-      #Plot1 Entwicklung Übergewicht und Fettleibigkeit           
-                 box(width = "12",
+      #Plot1 Entwicklung Übergewicht und Fettleibigkeit 1990 vs. 2016       
+          
+                   box(width = 12,
                     title = "",
-                    plotOutput("überfettplot")
+                    plotOutput("überfettplot1975")
                     ),
-
+                  
+                   infoBoxOutput("totalboxüberfett", width = 12),
+                   
+                   box(width = 12,
+                    title = "",
+                    plotOutput("überfettplot2016")
+                    ),
+                   
+                   
                   gradientBox(
                     width = 12,
                       title = "Prävalenz von Übergewicht und Adipositas nach Geschlechtern",
-                      icon = "fa fa-th",
+                      icon = "fa fa-venus-mars",
                       gradientColor = "teal",
                       footer_padding = FALSE,
                       boxToolSize = "sm", 
@@ -364,7 +373,7 @@ ui <- dashboardPage(
         gradientBox(
           width = 12,
           title = "Übergewicht und Adipositas im Verlauf der Jahre",
-          icon = "fa fa-th",
+          icon = "fa fa-history",
           gradientColor = "teal", 
           boxToolSize = "sm", 
           footer = sliderInput(
@@ -379,6 +388,7 @@ ui <- dashboardPage(
       
               )
            
+    
             ),
 
 
@@ -414,7 +424,7 @@ ui <- dashboardPage(
                   gradientBox(
                     width = 12,
                     title = "Fleischkonsum im Kontrast",
-                    icon = "fa fa-th",
+                    icon = "fa fa-history",
                     gradientColor = "teal", 
                     boxToolSize = "sm", 
                     footer = selectInput(
@@ -487,7 +497,7 @@ ui <- dashboardPage(
                 width = 12,
                 align = "center",
                 appButton(
-                  url = "https://www.in-form.de/",
+                  url = "https://www.bmel.de/DE/Ernaehrung/GesundeErnaehrung/GesundeErnaehrung_node.html",
                   label = "In Form",
                   icon = "fa fa-seedling",
                   enable_badge = TRUE,
@@ -495,6 +505,7 @@ ui <- dashboardPage(
                   badgeLabel = "Neu"
                 ),
                 appButton(
+                  url = "https://frepai.shinyapps.io/milleniumdevelopmentgoals/",
                   label = "Weiterfühhrende Projekte",
                   icon = "fa fa-external-link-alt",
                   enable_badge = FALSE,
@@ -502,6 +513,7 @@ ui <- dashboardPage(
                   badgeLabel = NULL
                 ),
                 appButton(
+                  url = "https://www.dge.de/fileadmin/public/doc/fm/10-Regeln-der-DGE.pdf",
                   label = "Download",
                   icon = "fa fa-download",
                   enable_badge = FALSE,
@@ -617,7 +629,7 @@ ui <- dashboardPage(
            y="Sterblichkeitsrate auf der Welt (%)",
            title= "Wie hat sich die Sterblichkeitsrate im Verlauf der Jahre verändert?",
            colour = "Krankheiten")+
-      scale_color_manual(values=c("#FACC2E", "#FE2E2E"))+
+      scale_color_manual(values=c("#DF3A01","#FE9A2E"))+
        theme_minimal()
       ggplotly(p21)
   })
@@ -665,6 +677,7 @@ ui <- dashboardPage(
       scale_fill_discrete() +
       theme_minimal()+
       theme(text = element_text(size = 15)) +
+      scale_fill_manual(values=c("#DF3A01", "#FE9A2E"))+
       labs(x="Länder",
            y="Anteile der Sterblichkeit nach Ländern (%)",
            fill = "Krankheiten")+
@@ -714,7 +727,7 @@ ui <- dashboardPage(
       x = "GDP (2001 international-$) pro Kopf",
       y = "Tägliche Fettversorgung (in g pro Person/Tag)",
       caption = "Die Daten stellen das Jahr 2013 dar."
-    )
+        )
   ggplotly(p1)
   })
   
@@ -734,8 +747,9 @@ ui <- dashboardPage(
     labs(
       title = "Kontrast der Fettversorgung nach Wohlstand eines Landes",
       x = "GDP (2001 international-$) pro Kopf",
-      y = "Tägliche Fettversorgung (in g pro Person/Tag)") + 
-    guides(fill = FALSE)
+      y = "Tägliche Fettversorgung (in g pro Person/Tag)",
+      color = "Länder nach Größe") + 
+    guides(size = FALSE)
     
   ggplotly(p)
 })
@@ -754,35 +768,71 @@ ui <- dashboardPage(
   
   # (1) Überschrift Differenzierung Übergewicht und Fettleibigkeit 
   
-  output$totalbox6 <- renderInfoBox({
-    infoBox(
-      "Frage:",
-      paste0(25 + input$text, "Was ist der Unterschied zwischen Übergewicht und Adipositas?"), icon = icon("question"),
-      color = "green"
-           )
-    
-  })
+#  output$totalbox6 <- renderInfoBox({
+#    infoBox(
+#      "Frage:",
+#      paste0(25 + input$text, "Was ist der Unterschied zwischen Übergewicht und Adipositas?"), icon = icon("question"),
+#      color = "green"
+#           )
+#    
+#  })
 
-  # (2) Output Vergleich Übergewicht/Fettleibigkeit
-  output$überfettplot <- renderPlot({
+  # (2) Output Vergleich Übergewicht/Fettleibigkeit 1975
+  output$überfettplot1975 <- renderPlot({
     
     temp41 <- indicator %>%
-      filter(Entity %in% input$countselect41) 
+      filter(Entity %in% input$countselect41) %>%
+      filter(Year == 1975)
     
   temp41 %>% ggplot( 
-        aes(x = Entity, y = indicator_total, fill = indicator_type, group = indicator_type)) + 
-      geom_col() +
+     aes(x = Entity, y = indicator_total, fill = indicator_type, group = indicator_type)) + 
+     geom_col() +
      scale_fill_discrete() +
      theme_minimal() +
      theme(text = element_text(size = 15)) +
-      labs(x="Länder",
+     scale_fill_manual(values = c("#F5DA81", "#8A0829"))+
+     labs(x="Länder",
            y="Indikator: Verbreitung von Übergewicht und Fettleibigkeit, gemessen am Body-Mass-Index (BMI) in %",
-           title= "Vergleich von Übergewicht und Fettleibigkeit nach Ländern",
+           title= "Vergleich von Übergewicht und Fettleibigkeit nach Ländern [1990]",
            fill = "Krankheitstyp",
            caption = "Der Kranheitstyp bedeutet folgendes:
            indicator_obes = Fettleibikeit | indicator_over = Übergewicht") +
            coord_flip()
     
+  })
+  
+  # Output Vergleich Übergewicht/Fettleibigkeit 2016
+  
+  output$überfettplot2016 <- renderPlot({
+    
+    temp411 <- indicator %>%
+      filter(Entity %in% input$countselect41) %>%
+      filter(Year == 2016)
+    
+    temp411 %>% ggplot( 
+      aes(x = Entity, y = indicator_total, fill = indicator_type, group = indicator_type)) + 
+      geom_col() +
+      scale_fill_discrete() +
+      theme_minimal() +
+      theme(text = element_text(size = 15)) +
+      scale_fill_manual(values = c("#F5DA81", "#8A0829"))+
+      labs(x="Länder",
+           y="Indikator: Verbreitung von Übergewicht und Fettleibigkeit, gemessen am Body-Mass-Index (BMI) in %",
+           title= "Vergleich von Übergewicht und Fettleibigkeit nach Ländern [2016]",
+           fill = "Krankheitstyp",
+           caption = "Der Kranheitstyp bedeutet folgendes:
+           indicator_obes = Fettleibikeit | indicator_over = Übergewicht") +
+      coord_flip()
+    
+  })
+  
+  # Infobox Vergleich
+  
+  output$totalboxüberfett <- renderInfoBox({
+    infoBox(
+      "Frage:", paste0(25 + input$text,"Wie sieht die Verteilung 41 Jahre später aus?"), icon = icon("question"),
+      color = "green"
+    )
   })
   
   # (3) Entwicklung und Kontrast Übergewicht und Fettleibigkeit 
@@ -850,8 +900,8 @@ ui <- dashboardPage(
       geom_line() +
       theme_minimal() +
       scale_color_manual(values=c("#5F4C0B",
-                                 "#31B404",
-                                 "#0404B4"))+
+                                  "#31B404",
+                                  "#0404B4"))+
       labs(
        x = "Jahr",
        y =  "Übergewichtige/fettleibige Männer (in %)",
@@ -888,6 +938,9 @@ ui <- dashboardPage(
     p51 <- temp51 %>%      ggplot(
       aes(x = Year, y = `Food Balance Sheets: Meat - Food supply quantity (kg/capita/yr) (FAO (2017)) (kg)`, group = Entity, colour = Entity)) + 
       geom_line() +
+      scale_color_manual(values=c("#5F4C0B",
+                                  "#31B404",
+                                  "#0404B4"))+
         labs(x="Jahre",
            y="Menge an Fleischkonsum pro Kopf und Jahr (kg)",
            colour = "Ausgewählte Länder")
@@ -912,6 +965,9 @@ ui <- dashboardPage(
     p52 <- temp52 %>%      ggplot(
       aes(x = Year, y = weight_total, group = Entity, colour = Entity)) + 
       geom_line() +
+      scale_color_manual(values=c("#5F4C0B",
+                                  "#31B404",
+                                  "#0404B4"))+
       labs(x="Jahre",
            y="Anteil der Bevölkerung mit Übergewicht (%)",
            colour = "Ausgewählte Länder")
