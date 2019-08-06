@@ -843,28 +843,47 @@ ui <- dashboardPage(
     
   temp421 <- weight %>%
    filter(Entity == c("Central African Republic", "Germany", "United States")) 
-# filter(weight$Year == input$select_year)
 
-  
-    
-   p421 <- temp421 %>%  ggplot() + 
-     aes(y = `f_Overweight or Obese (%)`,x = Year, colour = Entity) +
-     geom_line() +
-     theme_minimal() +
-     scale_color_manual(values=c("#5F4C0B",
-                                 "#31B404",
-                                 "#0404B4"))+
-      labs(
-       x = "Jahr",
-       y = "Übergewichtige/fettleibige Frauen (in %)",
-       color = "Ausgewählte Länder")
-   ggplotly(p421)
+# bisherige Visualsierung     
+#   p421 <- temp421 %>%  ggplot() + 
+#     aes(y = `f_Overweight or Obese (%)`,x = Year, colour = Entity) +
+#     geom_line() +
+#     theme_minimal() +
+#     scale_color_manual(values=c("#5F4C0B",
+#                                 "#31B404",
+#                                 "#0404B4"))+
+#      labs(
+#       x = "Jahr",
+#       y = "Übergewichtige/fettleibige Frauen (in %)",
+#       color = "Ausgewählte Länder")
+#   ggplotly(p421)
    
-   })
+#   })
   
-  # Test: Slider für Übergwicht Frauen
-  
-#temp_421 <- reactive  ({
+  # Test: Slider für Übergwicht Frauen plotly Alternataive?
+
+ p421 <- temp421 %>%
+   plot_ly(
+     x = ~Year,
+     y = ~ `f_Overweight or Obese (%)`,
+     color = ~ Entity,
+     frame = ~ Year, 
+     text = ~ Entity,
+     hoverinfo = "text",
+     type = 'scatter',
+     mode = 'markers'
+   ) %>%
+   layout(
+     xaxis = list(
+       type ="log"
+     )
+   )
+ggplotly(p421)  
+
+ })
+ 
+# TEST TEST TEST 
+# temp_421 <- reactive  ({
 # filter(Year == input$select_year)
     
 #    weight %>% na.omit() %>%
