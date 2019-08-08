@@ -72,17 +72,21 @@ library(codebook)
 #weight_comb <- weight_over %>% full_join(weight_under)
 #write_rds(weight_comb,"weight_comb.rds")
 
+#write.table(weight_comb,"weight_comb_new.csv", sep=";")
+#weight_comb <- read.csv("weight_comb_new.csv", sep = ";")
+#write_rds(weight_comb, "weight_comb_new.rds")
+
 ###Neue Datensätze einlesen ----
-meat <- read_rds("meatnew.rds")
-mortality <- read_rds("mortality.rds")
+#meat <- read_rds("meatnew.rds")
+#mortality <- read_rds("mortality.rds")
 #indicator_weight <- read_rds("prevalence_overweight.rds")
-supply <- read_rds("supply.rds")
-weight <- read_rds("weight.rds")
-obes_region <- read_rds("obes_region.rds")
-weight_comb <- read_rds("weight_comb.rds")
+#supply <- read_rds("supply.rds")
+#weight <- read_rds("weight.rds")
+#obes_region <- read_rds("obes_region.rds")
+#weight_comb <- read_rds("weight_comb.rds")
 
 #write.table(indicator_weight, "indicator.csv", sep=";")
-indicator <- read.csv("indicator.csv", sep = ";")
+#indicator <- read.csv("indicator.csv", sep = ";")
 
 
 #Untergewicht aus App gelöscht

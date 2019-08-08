@@ -22,20 +22,10 @@ library(shinydashboardPlus)
   supply <- read_rds("supply.rds")
   weight <- read_rds("weight.rds")
   obes_region <- read_rds("obes_region.rds")
-  weight_comb <- read_rds("weight_comb.rds")
+  weight_comb <- read_rds("weight_comb_new.rds")
   mortality_select <- readxl::read_xlsx("global_mortality_selection.xlsx")
   indicator <- read.csv("indicator.csv", sep = ";")
 
-# Diese sind eventuell falsche Daten - Herausfiltern?
-# Zeile 7659: USA overweigt 1993
-# Zeile 7641: USA overweight 1975
-# Zeile 7669: USA overweight 2003
-# Zeile 7673: USA overweight 2007
-# Zeile 7676: USA overweight 2010
-# Zeile 2714: Germany overweight 2008
-# Zeile 2718: Germany overweight 2012
-# Zeile 2709: Germany overweight 2003
-    
 #UI ----
 # Define UI for application that draws a histogram
 
@@ -43,6 +33,7 @@ ui <- dashboardPage(
   skin = "green",
   dashboardHeader(title = "Gesundheit 4.0"),
   dashboardSidebar(width = 250,
+                   collapsed = TRUE,
 
 #Menü einrichten----
                    sidebarMenu(
@@ -57,6 +48,9 @@ ui <- dashboardPage(
   ),
   
   dashboardBody(
+    tags$head(
+      tags$link(rel = "stylesheet", type = "text/css", href = "header.css")
+    ),
     tabItems(
 
       
@@ -67,16 +61,16 @@ ui <- dashboardPage(
                
                 gradientBox(
                   width = 12,
-                  title = "Neue Ära der Gesundheit",
                   icon = "fa fa-th",
-                  gradientColor = "teal", 
+                  title = "Neue Ära der Gesundheit",
+                  gradientColor = "green", 
                   boxToolSize = "sm", 
                   # footer = 
                   footer_padding = FALSE,
-                  "Das erste Mal in der Weltgeschichte sterben mehr Menschen auf unserem Planeten an den Folgen von 
+                  h4("Das erste Mal in der Weltgeschichte sterben mehr Menschen auf unserem Planeten an den Folgen von 
                     Fettleibigkeit als an Hunger.[Quelle: Yuval Noah Harari] Woran liegt das? Das BMLE hat sich im Projekt Gesundheit 4.0 
-                  mit dieser Frage beschäftigt. Entdecken Sie wie sich die Entwicklung des Körpergewichts in den letzten Jahrzehnten 
-                  verändert hat und welche Faktoren dabei eine Rolle spielen. Viel Spaß beim Stöbern und Entdecken. Dein BMLE"
+                  mit dieser Frage beschäftigt. Entdecke wie sich die Entwicklung des Körpergewichts in den letzten Jahrzehnten 
+                  verändert hat und welche Faktoren dabei eine Rolle spielen. Viel Spaß beim Stöbern und Entdecken. Dein BMLE")
                 )
               )
       ),
@@ -93,8 +87,8 @@ ui <- dashboardPage(
                   align = "center",
                   flipBox(
                     id = 1,
-                    main_img = "question2.png",
-                    header_img = "island.png",
+                    main_img = "circle.png",
+                    header_img = "header1.png",
                     front_title = "Was passiert mit uns?",
                     hr(),
                     back_content = tagList(
@@ -117,7 +111,7 @@ ui <- dashboardPage(
                       width = 12,
                       title = "Sterblichkeitsrate im Überblick",
                       icon = "fa fa-history",
-                      gradientColor = "teal", 
+                      gradientColor = "green", 
                       boxToolSize = "sm", 
                       footer = selectInput(
                         "diseasselect","Wähle eine Krankheit", 
@@ -136,7 +130,7 @@ ui <- dashboardPage(
                       width = 12,
                       title = "Auf einen Blick",
                       icon = "fa fa-th",
-                      gradientColor = "teal",
+                      gradientColor = "green",
                       footer_padding = FALSE,
                       boxToolSize = "sm",
                       "Auf unserer Erde leben 7,47 Milliarden Menschen. 
@@ -152,7 +146,7 @@ ui <- dashboardPage(
                       width = 12,
                       title = "Länder im Kontrast",
                       icon = "fa fa-globe",
-                      gradientColor = "teal", 
+                      gradientColor = "green", 
                       boxToolSize = "sm", 
                       footer = selectInput(
                         "countselect22","Select a Country",
@@ -183,8 +177,8 @@ ui <- dashboardPage(
                   align = "center",
                   flipBox(
                     id = 2,
-                    main_img = "question.png",
-                    header_img = "island.png",
+                    main_img = "circle.png",
+                    header_img = "header2.png",
                     front_title = "Ernährung im Wandel der Zeit",
                     hr(),
                     back_content = tagList(
@@ -207,7 +201,7 @@ ui <- dashboardPage(
                   width = 12,
                   title = "Kalorienversorgung im Überblick",
                   icon = "fa fa-history",
-                  gradientColor = "teal", 
+                  gradientColor = "green", 
                   footer_padding = FALSE,
                   boxToolSize = "sm",
                   "Wie viel Kalorien nehmen wir eigentlich täglich zu uns? Und welches Land verbraucht am meisten Kalorien?
@@ -226,7 +220,7 @@ ui <- dashboardPage(
                   width = 12,
                   title = "Wohlstand und Fettversorgung  - ein Zusammenhang?",
                   icon = "fa fa-coins",
-                  gradientColor = "teal", 
+                  gradientColor = "green", 
                   footer_padding = FALSE,
                   boxToolSize = "sm",
                   "Welchen Einfluss hat der Wohlstand auf die tägliche Versorgung mit Nahrungsmitteln pro Kopf?
@@ -244,7 +238,7 @@ ui <- dashboardPage(
                   width = 12,
                   title = "Zentralafrika, Deutschland und USA im Vergleich ",
                   icon = "fa fa-globe",
-                  gradientColor = "teal", 
+                  gradientColor = "green", 
                   footer_padding = FALSE,
                   boxToolSize = "sm",
                   "Bestehen Unterschiede zwischen den Ländern? Schau dir den Zusammenhang 
@@ -269,8 +263,8 @@ ui <- dashboardPage(
                   align = "center",
                   flipBox(
                     id = 3,
-                    main_img = "question2.png",
-                    header_img = "island.png",
+                    main_img = "circle.png",
+                    header_img = "header3.png",
                     front_title = "Weltweite Verbreitung von Übergewicht und Adipositas",
                     hr(),
                     back_content = tagList(
@@ -299,7 +293,7 @@ ui <- dashboardPage(
                   width = 12,
                   title = "Was ist der Unterschied zwischen Übergewicht und Adipositas?",
                   icon = "fa fa-question",
-                  gradientColor = "teal", 
+                  gradientColor = "green", 
                   boxToolSize = "sm", 
                  footer = selectInput(
                    "countselect41", "Wähle ein Land aus:",
@@ -337,7 +331,7 @@ ui <- dashboardPage(
                     width = 12,
                       title = "Prävalenz von Übergewicht und Adipositas nach Geschlechtern",
                       icon = "fa fa-venus-mars",
-                      gradientColor = "teal",
+                      gradientColor = "green",
                       footer_padding = FALSE,
                       boxToolSize = "sm", 
                       "Unterscheiden sich die Geschlechter hinsichtlich der zunehmenden Prävalenz von Übergewicht und Adipositas?
@@ -374,7 +368,7 @@ ui <- dashboardPage(
           width = 12,
           title = "Übergewicht und Adipositas im Verlauf der Jahre",
           icon = "fa fa-history",
-          gradientColor = "teal", 
+          gradientColor = "green", 
           boxToolSize = "sm", 
           footer = sliderInput(
             "select_year", label ="Wähle einen Zeitraum:",
@@ -402,8 +396,8 @@ ui <- dashboardPage(
                 align = "center",
                 flipBox(
                   id = 4,
-                  main_img = "question.png",
-                  header_img = "forest.png",
+                  main_img = "circle.png",
+                  header_img = "header4.png",
                   front_title = "Wie sich der Fleischkonsum verändert.",
                   back_title = "Fleischkonsum",
                   hr(),
@@ -425,7 +419,7 @@ ui <- dashboardPage(
                     width = 12,
                     title = "Fleischkonsum im Kontrast",
                     icon = "fa fa-history",
-                    gradientColor = "teal", 
+                    gradientColor = "green", 
                     boxToolSize = "sm", 
                     footer = selectInput(
                       "countselect51","Wähle ein Land", 
@@ -445,7 +439,7 @@ ui <- dashboardPage(
                     width = 12,
                     title = "Was fällt hier auf?",
                     icon = "fas fa-lightbulb",
-                    gradientColor = "teal", 
+                    gradientColor = "green", 
                     boxToolSize = "sm", 
                     footer = selectInput(
                       "countselect52","Wähle ein Land", 
@@ -478,7 +472,7 @@ ui <- dashboardPage(
                 width =  12,
                 title = "Du willst mehr für auf eine gesunde Ernährung achten? Dann IN FORM-ier dich hier!",
                 icon = "fa fa-th",
-                gradientColor = "teal", 
+                gradientColor = "green", 
                 footer_padding = FALSE,
                 boxToolSize = "sm", 
                 "Um mehr für die gesunde Ernährung und die eigene Gesundheit zu tun, wurde IN FORM - Deutschlands Initiative für gesunde Ernährung ins Leben gerufen, die
@@ -550,7 +544,7 @@ ui <- dashboardPage(
                 width = 12,
                 title = "Motivation",
                 icon = "fa fa-th",
-                gradientColor = "teal",
+                gradientColor = "green",
                 footer_padding = FALSE,
                 boxToolSize = "sm", 
                 # footer = 
@@ -563,7 +557,7 @@ ui <- dashboardPage(
                 width = 12,
                 title = "Methodik",
                 icon = "fa fa-th",
-                gradientColor = "teal", 
+                gradientColor = "green", 
                 footer_padding = FALSE,
                 boxToolSize = "sm", 
                 # footer = 
@@ -577,7 +571,7 @@ ui <- dashboardPage(
                 width = 12,
                 title = "Quellen, Urheberrechte & Lizenzen",
                 icon = "fa fa-th",
-                gradientColor = "teal", 
+                gradientColor = "green", 
                 footer_padding = FALSE,
                 boxToolSize = "sm", 
                 # footer = 
@@ -632,6 +626,7 @@ ui <- dashboardPage(
       scale_color_manual(values=c("#DF3A01","#FE9A2E"))+
        theme_minimal()
       ggplotly(p21)
+
   })
   
   #Output Progess Box
@@ -864,7 +859,7 @@ ui <- dashboardPage(
 
  p421 <- temp421 %>%
    plot_ly(
-     x = ~Year,
+     x = ~ Year,
      y = ~ `f_Overweight or Obese (%)`,
      color = ~ Entity,
      frame = ~ Year, 
