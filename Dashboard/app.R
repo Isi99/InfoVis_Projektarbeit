@@ -14,7 +14,6 @@ library(shinyWidgets)
 #install.packages("shinydashboardPlus")
 library(shinydashboardPlus)
 
-
 ### Datensätze einlesen ----
   meat <- read_rds("meatnew.rds")
   mortality <- read_rds("mortality.rds")
@@ -25,6 +24,8 @@ library(shinydashboardPlus)
   weight_comb <- read_rds("weight_comb_new.rds")
   mortality_select <- readxl::read_xlsx("global_mortality_selection.xlsx")
   indicator <- read.csv("indicator.csv", sep = ";")
+  #tab4_weight <- read_rds("tab4_weight.rds")
+  tab4_weight <- read.csv("20190908_weight.csv", sep = ";")
 
 #UI ----
 # Define UI for application that draws a histogram
@@ -57,7 +58,7 @@ ui <- dashboardPage(
 #First tab content---- 
       tabItem(tabName = "ta1", 
               fluidRow(
-                mainPanel(tags$img (src = "bacach.png")),
+                mainPanel(tags$img (src = "bacach2.png")),
                
                 gradientBox(
                   width = 12,
@@ -465,7 +466,7 @@ ui <- dashboardPage(
             fluidRow(
             
            
-            mainPanel(tags$img (src = "woman2.png")),
+            mainPanel(tags$img (src = "woman3.png")),
              
                
               gradientBox(
@@ -576,7 +577,7 @@ ui <- dashboardPage(
                 boxToolSize = "sm", 
                 # footer = 
                 "All unsere Daten sind von der Webseite 'Our World in Data'. 
-                Diese Daten sind frei zugänglich und verwendbar, sofern man die Nutzung angibt. 
+                Diese Daten sind frei zugänglich und verwendbar, sofern die Nutzung angeben wird. 
                 Alle Arbeiten sind unter der 'Creative Commons BY'-Lizenz."
               )
             )
@@ -623,7 +624,7 @@ ui <- dashboardPage(
            y="Sterblichkeitsrate auf der Welt (%)",
            title= "Wie hat sich die Sterblichkeitsrate im Verlauf der Jahre verändert?",
            colour = "Krankheiten")+
-      scale_color_manual(values=c("#DF3A01","#FE9A2E"))+
+      scale_color_manual(values=c("#FE9A2E","#DF3A01"))+
        theme_minimal()
       ggplotly(p21)
 
@@ -836,8 +837,7 @@ ui <- dashboardPage(
   
  output$womenplot <- renderPlotly ({
     
-  temp421 <- weight %>%
-   filter(Entity == c("Central African Republic", "Germany", "United States")) 
+  temp421 <- tab4_weight
 
 # bisherige Visualsierung     
 #   p421 <- temp421 %>%  ggplot() + 
@@ -860,13 +860,14 @@ ui <- dashboardPage(
  p421 <- temp421 %>%
    plot_ly(
      x = ~ Year,
-     y = ~ `f_Overweight or Obese (%)`,
+     y = ~ `f_Overweight.or.Obese....`,
+     size = ~ `Daily.caloric.supply..per.person...kcal.person.day.`,
      color = ~ Entity,
-     frame = ~ Year, 
+     frame = ~ Year,
      text = ~ Entity,
      hoverinfo = "text",
      type = 'scatter',
-     mode = 'markers'
+    mode = 'markers'
    ) %>%
    layout(
      xaxis = list(

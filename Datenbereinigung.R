@@ -76,6 +76,10 @@ library(codebook)
 #weight_comb <- read.csv("weight_comb_new.csv", sep = ";")
 #write_rds(weight_comb, "weight_comb_new.rds")
 
+#write.table(weight, "20190908_weight.csv", sep=";")
+#tab4_weight <- read.csv("20190908_weight.csv", sep = ";")
+#write_rds(tab4_weight, "tab4_weight.rds")
+
 ###Neue Datensätze einlesen ----
 #meat <- read_rds("meatnew.rds")
 #mortality <- read_rds("mortality.rds")
