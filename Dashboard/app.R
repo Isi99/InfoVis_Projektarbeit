@@ -623,7 +623,8 @@ ui <- dashboardPage(
       labs(x="Jahre",
            y="Sterblichkeitsrate auf der Welt (%)",
            title= "Wie hat sich die Sterblichkeitsrate im Verlauf der Jahre verändert?",
-           colour = "Krankheiten")+
+           colour = "Krankheiten",
+           caption = "Diabetes = dt. Diabetes | Cardivascular diseases = dt. Herz-Kreislauf-Erkrankung") +
       scale_color_manual(values=c("#FE9A2E","#DF3A01"))+
        theme_minimal()
       ggplotly(p21)
@@ -676,7 +677,8 @@ ui <- dashboardPage(
       scale_fill_manual(values=c("#DF3A01", "#FE9A2E"))+
       labs(x="Länder",
            y="Anteile der Sterblichkeit nach Ländern (%)",
-           fill = "Krankheiten")+
+           fill = "Krankheiten",
+           caption = "Diabetes = dt. Diabetes | Cardivascular diseases = dt. Herz-Kreislauf-Erkrankung") +
      # scale_y_continuous(labels = scales::percent)+
       ylim(0,50)+
       coord_flip()
@@ -719,7 +721,7 @@ ui <- dashboardPage(
     geom_point() +
     theme_minimal() +
     labs(
-      title = "Beeinflusst das GDP die Fettversorgung?",
+      title = "Beeinflusst das GDP die Fettversorgung? [Jahr 2013]",
       x = "GDP (2001 international-$) pro Kopf",
       y = "Tägliche Fettversorgung (in g pro Person/Tag)",
       caption = "Die Daten stellen das Jahr 2013 dar."
@@ -871,8 +873,17 @@ ui <- dashboardPage(
    ) %>%
    layout(
      xaxis = list(
-       type ="log"
+       type ="log",
+       title = "Jahr"
+     ),
+     yaxis = list(
+       title = "Übergewichtige/fettleibige Frauen (in %)"
      )
+        
+     
+     #color = list(
+      # (values=c("#5F4C0B","#31B404", "#0404B4"))
+     #)
    )
 ggplotly(p421)  
 
