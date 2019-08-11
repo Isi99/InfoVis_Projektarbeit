@@ -62,8 +62,8 @@ ui <- dashboardPage(
                
                 gradientBox(
                   width = 12,
-                  icon = "fa fa-th",
-                  title = "Neue Ära der Gesundheit",
+                 # icon = "fa fa-th",
+                  title = h2(p(strong ("Neue Ära der Gesundheit"))),
                   gradientColor = "green", 
                   boxToolSize = "sm", 
                   # footer = 
@@ -96,12 +96,12 @@ ui <- dashboardPage(
                       column(
                         width = 12,
                         align = "center",
-                        "Was passiert eigentlich mit uns? Erstmals in der Geschichte
+                        h4("Was passiert eigentlich mit uns? Erstmals in der Geschichte
                         sterben mehr Menschen an den Folgen von Übergewicht, als dass sie verhungern.
                         Die beiden Grafiken sollen dies verdeutlichen. Die erste Grafik
                         zeigt, wie die Sterblichkeit im Verlauf der Jahre zugenommen hat.
                         Die zweite Grafik stellt die Sterblichkeitsrate der einzelnen Länder dar. 
-                        Viel Spaß beim Explorieren!"
+                        Viel Spaß beim Explorieren!")
                         ),
                       plotOutput("distPlot")
                     )
@@ -110,7 +110,7 @@ ui <- dashboardPage(
             
                     gradientBox(
                       width = 12,
-                      title = "Sterblichkeitsrate im Überblick",
+                      title = p(strong ("Sterblichkeitsrate im Überblick")),
                       icon = "fa fa-history",
                       gradientColor = "green", 
                       boxToolSize = "sm", 
@@ -119,8 +119,9 @@ ui <- dashboardPage(
                         choices = mortality_select$Disease_type, 
                         multiple = TRUE, selected = "Diabetes"
                       ),
-                      "Schau dir an, wie sich die Sterblichkeitsrate auf der Welt im Hinblick auf 
-                      die beiden Krankheiten im Verlauf der Jahre geändert hat."
+                      h4("Schau dir an, wie sich die Sterblichkeitsrate auf der Welt im Hinblick auf 
+                      die beiden Krankheiten, Diabetes (Engl.: Diabetes) und Herz-Kreislauf-Erkrankungen 
+                         (Engl.: Cardiovascular-diseases), im Verlauf der Jahre geändert hat.")
                     ),
 
                   box(width="12",
@@ -129,13 +130,13 @@ ui <- dashboardPage(
 
                     gradientBox(
                       width = 12,
-                      title = "Auf einen Blick",
+                      title = p(strong("Auf einen Blick")),
                       icon = "fa fa-th",
                       gradientColor = "green",
                       footer_padding = FALSE,
                       boxToolSize = "sm",
-                      "Auf unserer Erde leben 7,47 Milliarden Menschen. 
-                      Knapp ein Drittel davon sterben jedes Jahr an einem Herzleiden."
+                      h4("Auf unserer Erde leben 7,47 Milliarden Menschen. 
+                      Knapp ein Drittel davon sterben jedes Jahr an einem Herzleiden.")
                     ),
                     
                 infoBoxOutput("totalbox1", width = 6), 
@@ -145,7 +146,7 @@ ui <- dashboardPage(
                     
                     gradientBox(
                       width = 12,
-                      title = "Länder im Kontrast",
+                      title = p(strong("Länder im Kontrast")),
                       icon = "fa fa-globe",
                       gradientColor = "green", 
                       boxToolSize = "sm", 
@@ -154,8 +155,8 @@ ui <- dashboardPage(
                         choices = mortality_select$country,
                         multiple = TRUE, selected = c("Germany","United States")
                       ),
-                      "Hier kannst du dir die Entwicklung der Sterblichkeitsraten 
-                      anschauen und dabei mehrere Länder miteinander vergleichen."
+                      h4("Hier kannst du dir die Entwicklung der Sterblichkeitsraten 
+                      anschauen und dabei mehrere Länder miteinander vergleichen.")
                     ),
 
                   box(width="12",
@@ -186,12 +187,12 @@ ui <- dashboardPage(
                       column(
                         width = 12,
                         align = "center",
-                        "Die Welt hat sich in den letzten Jahren stark verändert.
+                        h4("Die Welt hat sich in den letzten Jahren stark verändert.
                          Die daraus resultierenden Folgen schlagen sich auch in unserem Essenverhalten wieder.
                          Wärhend früher die Ernährung sehr abhängig von der Natur war und Mahlzeiten größtenteils zuhause verzehrt worden sind,
                          gibt es heute eine große Anzahl an Auswahlmöglichkeiten von Lebensmitteln und der Alltag ist von Hektik geprägt, sodass man
                          auch mal schnell unterwegs isst. Zudem haben die Menschen heutzutage mehr Bewegungsmangel als früher.
-                         Die folgende Grafik zeigt, wie sich die tägliche Kalorienversorgung im Laufe der Zeit sowie in unterschiedlichen Ländern entwickelt hat."
+                         Die folgende Grafik zeigt, wie sich die tägliche Kalorienversorgung im Laufe der Zeit sowie in unterschiedlichen Ländern entwickelt hat.")
                       ),
                       plotOutput("globalPlot")
                     )
@@ -200,14 +201,14 @@ ui <- dashboardPage(
             # Einleitung Kalorienverbrauch     
                 gradientBox(
                   width = 12,
-                  title = "Kalorienversorgung im Überblick",
+                  title = p(strong ("Kalorienversorgung im Überblick")),
                   icon = "fa fa-history",
                   gradientColor = "green", 
                   footer_padding = FALSE,
                   boxToolSize = "sm",
-                  "Wie viel Kalorien nehmen wir eigentlich täglich zu uns? Und welches Land verbraucht am meisten Kalorien?
-                   Schau dir an, wie sich die Kalorienversorgung in den Jahren von 1800 - 2013 verändert hat. "),
-                
+                  h4("Wie viel Kalorien nehmen wir eigentlich täglich zu uns? Und welches Land verbraucht am meisten Kalorien?
+                   Schau dir an, wie sich die Kalorienversorgung in den Jahren von 1800 - 2013 verändert hat. ")
+                ),
                   
                 box(width = "12",
                       title = "",
@@ -219,15 +220,16 @@ ui <- dashboardPage(
              # Einleitung Wohlstand und Kalorienverbrauch     
                 gradientBox(
                   width = 12,
-                  title = "Wohlstand und Fettversorgung  - ein Zusammenhang?",
+                  title = p(strong ("Wohlstand und Fettversorgung  - ein Zusammenhang?")),
                   icon = "fa fa-coins",
                   gradientColor = "green", 
                   footer_padding = FALSE,
                   boxToolSize = "sm",
-                  "Welchen Einfluss hat der Wohlstand auf die tägliche Versorgung mit Nahrungsmitteln pro Kopf?
+                  h4("Welchen Einfluss hat der Wohlstand auf die tägliche Versorgung mit Nahrungsmitteln pro Kopf?
                   Während sich die Grafik oben auf die Kalorienversorgung bezieht, steht hier die tägliche Pro-Kopf-Fettversorgung
                   in Beziehung zu dem 'Gross Domestic Product (offizielle Abkürzung: GDP)' pro Kopf im Jahr 2011. Das Gross Domestic Product (GDP) 
-                  entspricht dem deutschen Bruttoinlandsprodukt (BIP)"),
+                  entspricht dem deutschen Bruttoinlandsprodukt (BIP)")
+                  ),
                  
                 
                   box(width="12",
@@ -237,13 +239,14 @@ ui <- dashboardPage(
                 
                 gradientBox(
                   width = 12,
-                  title = "Zentralafrika, Deutschland und USA im Vergleich ",
+                  title = p(strong ("Zentralafrika, Deutschland und USA im Vergleich ")),
                   icon = "fa fa-globe",
                   gradientColor = "green", 
                   footer_padding = FALSE,
                   boxToolSize = "sm",
-                  "Bestehen Unterschiede zwischen den Ländern? Schau dir den Zusammenhang 
-                  in Ländern mit höherem Einkommen und ärmeren Regionen an."),
+                  h4("Bestehen Unterschiede zwischen den Ländern? Schau dir den Zusammenhang 
+                  in Ländern mit höherem Einkommen und ärmeren Regionen an.")
+                     ),
               
                   box(width="12",
                       title="",
@@ -272,11 +275,11 @@ ui <- dashboardPage(
                       column(
                         width = 12,
                         align = "center",
-                        "Für die Beschreibung des Gesundheitszustandes einer Bevölkerung sind das
+                        h4("Für die Beschreibung des Gesundheitszustandes einer Bevölkerung sind das
                          Körpergewicht und die Körpergröße wichtige Merkmale. In den letzten Jahren ist die Prävalenz
                          von Übergewicht und Adipositas (wird oft auch als 'Fettleibigkeit' übersetzt) stark angestiegen. Auf dieser Seite kannst 
                          du dir das Verhältnis von Übergwicht und Adipositas in ausgewählten Ländern anschauen.
-                         Außerdem erfährst du mehr über die Prävalenz von Übergewicht und Adipositas nach den Geschlechtern." 
+                         Außerdem erfährst du mehr über die Prävalenz von Übergewicht und Adipositas nach den Geschlechtern.")
                       ),
                       plotOutput("überundadiPlot")
           
@@ -292,7 +295,7 @@ ui <- dashboardPage(
       #SelectionInput Country für Plot1
                 gradientBox(
                   width = 12,
-                  title = "Was ist der Unterschied zwischen Übergewicht und Adipositas?",
+                  title = p(strong ("Was ist der Unterschied zwischen Übergewicht und Adipositas?")),
                   icon = "fa fa-question",
                   gradientColor = "green", 
                   boxToolSize = "sm", 
@@ -303,13 +306,13 @@ ui <- dashboardPage(
                     selected = c("Germany", "United States", "Central Africa Republic")
                  ),
                      
-        "'Übergewicht und Adipositas (Fettleibigkeit) sind nicht dasselbe.
+        h4("'Übergewicht und Adipositas (Fettleibigkeit) sind nicht dasselbe.
         Übergewicht bedeutet, dass der Betroffene über seinem Normalgewicht liegt. Es handelt sich dabei um den Übergang vom Normalgewicht zur Adipositas. 
         Der Begriff Adipositas bedeutet, dass jemand sehr starkes Übergewicht und dadurch einen krankhaft erhöhten Körperfettanteil hat. 
         Daher wird Adipositas auch Fettleibigkeit oder Fettsucht genannt.
-        Zu Definition dient die Kennzahl des Body-Mass-Index (BMI).Ein BMI ab 25 kg/m2 gilt per Definition als Übergewicht, ein BMI von 30 kg/m2 und höher als Adipositas.'
-        (Quelle: https://www.vigo.de/rubriken/krankheit-und-therapie/stoffwechsel/lesen/uebergewicht-und-adipositas-volkskrankheiten.html).
-        \nSchau dir die Verteilung von Übergewicht und Fettleibigkeit in verschiedenen Ländern der Welt zu unterschiedlichen Zeitpunkten an."
+        Zu Definition dient die Kennzahl des Body-Mass-Index (BMI).Ein BMI ab 25 kg/m2 gilt per Definition als Übergewicht, ein BMI von 30 kg/m2 und höher als Adipositas.'"),
+        h5("(Quelle: https://www.vigo.de/rubriken/krankheit-und-therapie/stoffwechsel/lesen/uebergewicht-und-adipositas-volkskrankheiten.html)."),
+        h4("Schau dir die Verteilung von Übergewicht und Fettleibigkeit in verschiedenen Ländern der Welt zu unterschiedlichen Zeitpunkten an.")
                             ),
       
       
@@ -330,32 +333,32 @@ ui <- dashboardPage(
   # Entwicklung nach Geschlechtern                 
                   gradientBox(
                     width = 12,
-                      title = "Prävalenz von Übergewicht und Adipositas nach Geschlechtern",
+                      title = p(strong ("Prävalenz von Übergewicht und Adipositas nach Geschlechtern")),
                       icon = "fa fa-venus-mars",
                       gradientColor = "green",
                       footer_padding = FALSE,
                       boxToolSize = "sm", 
-                      "Unterscheiden sich die Geschlechter hinsichtlich der zunehmenden Prävalenz von Übergewicht und Adipositas?
+                      h4("Unterscheiden sich die Geschlechter hinsichtlich der zunehmenden Prävalenz von Übergewicht und Adipositas?
                        Im Jahr 2014 war fast die Hälfte der erwachsenen Frauen von Übergwicht oder Adipositas betroffen.
-                       Bei den Männern waren es sogar über die Hälfte."
+                       Bei den Männern waren es sogar über die Hälfte.")
                       ),
                     
     
       
-                  infoBoxOutput("totalbox7", width = 6)
-                  ,
+                  infoBoxOutput("totalbox7", width = 6),
+                  
       
                   infoBoxOutput("totalbox8", width = 6),
 
 # Vergleich Männer und Frauen im Verlauf der Jahre
                   gradientBox(
                      width = 12,
-                      title = "Übergewicht und Adipositas im Verlauf der Jahre",
+                      title = p(strong ("Übergewicht und Adipositas im Verlauf der Jahre")),
                       icon = "fa fa-history",
                       gradientColor = "green", 
                       boxToolSize = "sm", 
                       footer_padding = FALSE,
-                       " Schaue dir an, wie sich die Geschlechter im Hinblick auf die beiden Krankheiten im Verlauf der Jahre verändert haben."
+                       h4("Schaue dir an, wie sich die Geschlechter im Hinblick auf die beiden Krankheiten im Verlauf der Jahre verändert haben.")
                       )
                   
               ),
@@ -417,9 +420,9 @@ ui <- dashboardPage(
                     column(
                       width = 12,
                       align = "center",
-                      "Der Fleischkonsum hat sich im Laufe der Jahre stark verändert. 
+                      h4("Der Fleischkonsum hat sich im Laufe der Jahre stark verändert. 
                       Besonders auffällig sind die Unterschiede zwischen wohlhabenderen 
-                      Ländern und Entwicklungs- und Schwellenländern."
+                      Ländern und Entwicklungs- und Schwellenländern.")
                     ),
                     plotOutput("Plot2")
                     )
@@ -429,7 +432,7 @@ ui <- dashboardPage(
 
                   gradientBox(
                     width = 12,
-                    title = "Fleischkonsum im Kontrast",
+                    title = p(strong ("Fleischkonsum im Kontrast")),
                     icon = "fa fa-history",
                     gradientColor = "green", 
                     boxToolSize = "sm", 
@@ -438,8 +441,8 @@ ui <- dashboardPage(
                       choices = meat$Entity, 
                       multiple = TRUE, selected = c("Germany", "United States", "Central African Republic")
                     ),
-                    "Wie viel Fleisch konsumieren wir eigentlich? 
-                    Vergleiche den Fleischkonsum unterschiedlicher Länder miteinander."
+                    h4("Wie viel Fleisch konsumieren wir eigentlich? 
+                    Vergleiche den Fleischkonsum unterschiedlicher Länder miteinander.")
                   ),
                   
                 box(width="12",
@@ -449,7 +452,7 @@ ui <- dashboardPage(
 
                   gradientBox(
                     width = 12,
-                    title = "Was fällt hier auf?",
+                    title = p(strong ("Was fällt hier auf?")),
                     icon = "fas fa-lightbulb",
                     gradientColor = "green", 
                     boxToolSize = "sm", 
@@ -458,9 +461,9 @@ ui <- dashboardPage(
                       choices = weight_comb$Entity, 
                       multiple = TRUE, selected = c("Germany", "United States", "Central African Republic")
                     ),
-                    "Wir werden immer dicker! Woran kann das liegen? 
+                    h4("Wir werden immer dicker! Woran kann das liegen? 
                      Hier kannst du den Anteil der übergewichtigen Bevölkerung 
-                    der jeweiligen Länder miteinander vergleichen."
+                    der jeweiligen Länder miteinander vergleichen.")
                   ),
                   
                 box(width="12",
@@ -482,12 +485,12 @@ ui <- dashboardPage(
                
               gradientBox(
                 width =  12,
-                title = "Du willst mehr für auf eine gesunde Ernährung achten? Dann IN FORM-ier dich hier!",
-                icon = "fa fa-th",
+                title = h2(p(strong ("Du willst mehr für auf eine gesunde Ernährung achten? Dann IN FORM-ier dich hier!"))),
+                #icon = "fa fa-th",
                 gradientColor = "green", 
                 footer_padding = FALSE,
                 boxToolSize = "sm", 
-                "Um mehr für die gesunde Ernährung und die eigene Gesundheit zu tun, wurde IN FORM - Deutschlands Initiative für gesunde Ernährung ins Leben gerufen, die
+                h4("Um mehr für die gesunde Ernährung und die eigene Gesundheit zu tun, wurde IN FORM - Deutschlands Initiative für gesunde Ernährung ins Leben gerufen, die
                  zum Ziel hat, das Ernährungs- und Bewegungsverhalten in Deutschland bis zum Jahr 2020 nachhaltig zu verbessern. Diese Initative ist mehr als eine reine Übergewichtsprävention -
                  es geht um die Prävention um Fehlernährung, Bewegungsmangel und damit zusammenhängende Krankheiten.
                  Sowohl Erwachsene als auch insbesondere
@@ -495,7 +498,7 @@ ui <- dashboardPage(
                  und einer gesteigteren Leistungsfähigkeit in allen Lebensbereichen profitieren zu können.
                  Der nationale Aktiosnplan IN FROM unterstütze bereits über 200 Projkete. In Zukunft stehen vor allem die 
                  Etablierung geförderter Maßnahmen & Projekte, die Verarbeitung von neuen Erkentnissen sowie die Förderung zum Asutausch & zur Vernetzung zwischen Akteuren
-                 der unterschiedliche Projekte im Fokus. "
+                 der unterschiedliche Projekte im Fokus.")
                 ),
              
             fluidRow(
@@ -554,42 +557,42 @@ ui <- dashboardPage(
               
               gradientBox(
                 width = 12,
-                title = "Motivation",
+                title = p(strong ("Motivation")),
                 icon = "fa fa-th",
                 gradientColor = "green",
                 footer_padding = FALSE,
                 boxToolSize = "sm", 
                 # footer = 
-                "Ziel der App ist, dass junge Erwachsene und Familien über die Folgen von ungesunder Ernährung aufgeklärt werden.
+                h4("Ziel der App ist, dass junge Erwachsene und Familien über die Folgen von ungesunder Ernährung aufgeklärt werden.
                 Dies soll der Prävention dienen und verdeutlichen, wie sich der Anteil an Übergewichtigen und Fettleibigen in
-                unserer Gesellschaft im Verlaufe der Jahre verändert hat."
+                unserer Gesellschaft im Verlaufe der Jahre verändert hat.")
               ),
               
               gradientBox(
                 width = 12,
-                title = "Methodik",
+                title = p(strong ("Methodik")),
                 icon = "fa fa-th",
                 gradientColor = "green", 
                 footer_padding = FALSE,
                 boxToolSize = "sm", 
                 # footer = 
-                "Für dieses Projekt wurden mehrere Datensätze, die von der Plattform 'Our World in Data' stammen, einbezogen.
+                h4("Für dieses Projekt wurden mehrere Datensätze, die von der Plattform 'Our World in Data' stammen, einbezogen.
                 Zu Beginn wurden 17 Datensätze miteinander verglichen. Diese befassten sich mit Themen wie Sterblichkeitsrate,
                 Ernährung, Fettleibigkeit und Übergewicht, Fettkonsum, Fleischkonsum. Die Datensätze wurden bereinigt und 
-                teilweise zusammengefügt, sodass das Projekt auf Basis von sechs unterschiedlichen Datensätzen beruht."
+                teilweise zusammengefügt, sodass das Projekt auf Basis von sechs unterschiedlichen Datensätzen beruht.")
               ),
               
               gradientBox(
                 width = 12,
-                title = "Quellen, Urheberrechte & Lizenzen",
+                title = p(strong ("Quellen, Urheberrechte & Lizenzen")),
                 icon = "fa fa-th",
                 gradientColor = "green", 
                 footer_padding = FALSE,
                 boxToolSize = "sm", 
                 # footer = 
-                "All unsere Daten sind von der Webseite 'Our World in Data'. 
+                h4("All unsere Daten sind von der Webseite 'Our World in Data'. 
                 Diese Daten sind frei zugänglich und verwendbar, sofern die Nutzung angeben wird. 
-                Alle Arbeiten sind unter der 'Creative Commons BY'-Lizenz."
+                Alle Arbeiten sind unter der 'Creative Commons BY'-Lizenz.")
               )
             )
     )   
@@ -685,11 +688,10 @@ ui <- dashboardPage(
       scale_fill_discrete() +
       theme_minimal()+
       theme(text = element_text(size = 15)) +
-      scale_fill_manual(values=c("#DF3A01", "#FE9A2E"))+
+      scale_fill_manual(values=c("#FF0000", "#ffa500"))+
       labs(x="Länder",
            y="Anteile der Sterblichkeit nach Ländern (%)",
-           fill = "Krankheiten",
-           caption = "Diabetes = dt. Diabetes | Cardivascular diseases = dt. Herz-Kreislauf-Erkrankung") +
+           fill = "Krankheiten") +
      # scale_y_continuous(labels = scales::percent)+
       ylim(0,50)+
       coord_flip()
@@ -799,7 +801,7 @@ ui <- dashboardPage(
      scale_fill_discrete() +
      theme_minimal() +
      theme(text = element_text(size = 15)) +
-     scale_fill_manual(values = c("#F5DA81", "#8A0829"))+
+     scale_fill_manual(values = c("#00868B","#7FFFD4"))+
      labs(x="Länder",
            y="Indikator: Verbreitung von Übergewicht und Fettleibigkeit, gemessen am Body-Mass-Index (BMI) in %",
            title= "Vergleich von Übergewicht und Fettleibigkeit nach Ländern [1990]",
@@ -824,7 +826,7 @@ ui <- dashboardPage(
       scale_fill_discrete() +
       theme_minimal() +
       theme(text = element_text(size = 15)) +
-      scale_fill_manual(values = c("#F5DA81", "#8A0829"))+
+      scale_fill_manual(values = c("#00868B","#7FFFD4"))+
       labs(x="Länder",
            y="Indikator: Verbreitung von Übergewicht und Fettleibigkeit, gemessen am Body-Mass-Index (BMI) in %",
            title= "Vergleich von Übergewicht und Fettleibigkeit nach Ländern [2016]",
@@ -869,6 +871,7 @@ ui <- dashboardPage(
 #   })
   
   # Test: Slider für Übergwicht Frauen plotly Alternataive?
+  
 
  p421 <- temp421 %>%
    plot_ly(
@@ -891,7 +894,7 @@ ui <- dashboardPage(
        title = "Übergewichtige/fettleibige Frauen (in %)"
      )
 #    marker = list (
-#    color = (values = c("#5F4C0B","#31B404", "#0404B4"))
+#    colors = pal
 #    )
      
         
