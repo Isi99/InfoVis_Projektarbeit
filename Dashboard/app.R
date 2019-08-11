@@ -296,7 +296,7 @@ ui <- dashboardPage(
                   icon = "fa fa-question",
                   gradientColor = "green", 
                   boxToolSize = "sm", 
-                 footer = selectInput(
+                  footer = selectInput(
                    "countselect41", "Wähle ein Land aus:",
                     choices =indicator$Entity,
                     multiple = TRUE,
@@ -327,7 +327,7 @@ ui <- dashboardPage(
                     plotOutput("überfettplot2016")
                     ),
                    
-                   
+  # Entwicklung nach Geschlechtern                 
                   gradientBox(
                     width = 12,
                       title = "Prävalenz von Übergewicht und Adipositas nach Geschlechtern",
@@ -345,7 +345,18 @@ ui <- dashboardPage(
                   infoBoxOutput("totalbox7", width = 6)
                   ,
       
-                  infoBoxOutput("totalbox8", width = 6)
+                  infoBoxOutput("totalbox8", width = 6),
+
+# Vergleich Männer und Frauen im Verlauf der Jahre
+                  gradientBox(
+                     width = 12,
+                      title = "Übergewicht und Adipositas im Verlauf der Jahre",
+                      icon = "fa fa-history",
+                      gradientColor = "green", 
+                      boxToolSize = "sm", 
+                      footer_padding = FALSE,
+                       " Schaue dir an, wie sich die Geschlechter im Hinblick auf die beiden Krankheiten im Verlauf der Jahre verändert haben."
+                      )
                   
               ),
       
@@ -361,30 +372,30 @@ ui <- dashboardPage(
                   title = "Prävalenz von Übergewicht und Fettleibigkeit bei Männern",
                   plotlyOutput("manplot")
                 )
-              ),
+              )
       
       #SliderInput Year für Plot2
-      fluidRow(
-        gradientBox(
-          width = 12,
-          title = "Übergewicht und Adipositas im Verlauf der Jahre",
-          icon = "fa fa-history",
-          gradientColor = "green", 
-          boxToolSize = "sm", 
-          footer = sliderInput(
-            "select_year", label ="Wähle einen Zeitraum:",
-            min = min(weight$Year),
-            max = max(weight$Year),
-            sep = "",
-            value = 2014),
-            " Schaue dir an, wie sich die Geschlechter im Hinblick auf die beiden Krankheiten im Verlauf der Jahre verändert haben."
-          )
+#      fluidRow(
+#        gradientBox(
+#          width = 12,
+#          title = "Übergewicht und Adipositas im Verlauf der Jahre",
+#          icon = "fa fa-history",
+#          gradientColor = "green", 
+#          boxToolSize = "sm", 
+#          footer = sliderInput(
+#            "select_year", label ="Wähle einen Zeitraum:",
+#            min = min(weight$Year),
+#            max = max(weight$Year),
+#            sep = "",
+#            value = 2014),
+#            " Schaue dir an, wie sich die Geschlechter im Hinblick auf die beiden Krankheiten im Verlauf der Jahre verändert haben."
+#          )
         
       
-              )
+              ),
            
     
-            ),
+            
 
 
 #Fifth tab content----
@@ -869,7 +880,7 @@ ui <- dashboardPage(
      text = ~ Entity,
      hoverinfo = "text",
      type = 'scatter',
-    mode = 'markers'
+     mode = 'markers'
    ) %>%
    layout(
      xaxis = list(
@@ -879,6 +890,10 @@ ui <- dashboardPage(
      yaxis = list(
        title = "Übergewichtige/fettleibige Frauen (in %)"
      )
+#    marker = list (
+#    color = (values = c("#5F4C0B","#31B404", "#0404B4"))
+#    )
+     
         
      
      #color = list(
