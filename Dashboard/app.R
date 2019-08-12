@@ -69,8 +69,8 @@ ui <- dashboardPage(
                   # footer = 
                   footer_padding = FALSE,
                   h4("Das erste Mal in der Weltgeschichte sterben mehr Menschen auf unserem Planeten an den Folgen von 
-                    Fettleibigkeit als an Hunger.[Quelle: Yuval Noah Harari] Woran liegt das? Das BMLE hat sich im Projekt Gesundheit 4.0 
-                  mit dieser Frage beschäftigt. Entdecke wie sich die Entwicklung des Körpergewichts in den letzten Jahrzehnten 
+                    Fettleibigkeit als an Hunger. [Quelle: Yuval Noah Harari] Woran liegt das? Das BMLE hat sich im Projekt Gesundheit 4.0 
+                  mit dieser Frage beschäftigt. Entdecke, wie sich die Entwicklung des Körpergewichts in den letzten Jahrzehnten 
                   verändert hat und welche Faktoren dabei eine Rolle spielen. Viel Spaß beim Stöbern und Entdecken. Dein BMLE")
                 )
               )
@@ -188,10 +188,10 @@ ui <- dashboardPage(
                         width = 12,
                         align = "center",
                         h4("Die Welt hat sich in den letzten Jahren stark verändert.
-                         Die daraus resultierenden Folgen schlagen sich auch in unserem Essenverhalten wieder.
-                         Wärhend früher die Ernährung sehr abhängig von der Natur war und Mahlzeiten größtenteils zuhause verzehrt worden sind,
-                         gibt es heute eine große Anzahl an Auswahlmöglichkeiten von Lebensmitteln und der Alltag ist von Hektik geprägt, sodass man
-                         auch mal schnell unterwegs isst. Zudem haben die Menschen heutzutage mehr Bewegungsmangel als früher.
+                         Die daraus resultierenden Folgen schlagen sich auch in unserem Essensverhalten wieder.
+                         Während früher die Ernährung sehr abhängig von der Natur war und Mahlzeiten größtenteils zuhause verzehrt worden sind,
+                         gibt es heutzutage eine große Anzahl an Auswahlmöglichkeiten von Lebensmitteln und der Alltag ist von Hektik geprägt, sodass man
+                         auch mal schnell unterwegs eine Mahlzeit isst. Zudem haben die Menschen heute mehr Bewegungsmangel als früher.
                          Die folgende Grafik zeigt, wie sich die tägliche Kalorienversorgung im Laufe der Zeit sowie in unterschiedlichen Ländern entwickelt hat.")
                       ),
                       plotOutput("globalPlot")
@@ -227,8 +227,8 @@ ui <- dashboardPage(
                   boxToolSize = "sm",
                   h4("Welchen Einfluss hat der Wohlstand auf die tägliche Versorgung mit Nahrungsmitteln pro Kopf?
                   Während sich die Grafik oben auf die Kalorienversorgung bezieht, steht hier die tägliche Pro-Kopf-Fettversorgung
-                  in Beziehung zu dem 'Gross Domestic Product (offizielle Abkürzung: GDP)' pro Kopf im Jahr 2011. Das Gross Domestic Product (GDP) 
-                  entspricht dem deutschen Bruttoinlandsprodukt (BIP)")
+                  in Beziehung zu dem 'Gross Domestic Product (offizielle Abkürzung: GDP)'  in international-$ pro Kopf im Jahr 2011. Das Gross Domestic Product (GDP) 
+                  entspricht dem deutschen Bruttoinlandsprodukt (BIP).")
                   ),
                  
                 
@@ -276,10 +276,10 @@ ui <- dashboardPage(
                         width = 12,
                         align = "center",
                         h4("Für die Beschreibung des Gesundheitszustandes einer Bevölkerung sind das
-                         Körpergewicht und die Körpergröße wichtige Merkmale. In den letzten Jahren ist die Prävalenz
+                         Körpergewicht und die Körpergröße wichtige Merkmale. In den letzten Jahren ist die Prävalenz (Häufigkeit einer Krankheit)
                          von Übergewicht und Adipositas (wird oft auch als 'Fettleibigkeit' übersetzt) stark angestiegen. Auf dieser Seite kannst 
                          du dir das Verhältnis von Übergwicht und Adipositas in ausgewählten Ländern anschauen.
-                         Außerdem erfährst du mehr über die Prävalenz von Übergewicht und Adipositas nach den Geschlechtern.")
+                         Außerdem erfährst du mehr über die Häufigkeiten der beiden Krankheiten nach den Geschlechtern.")
                       ),
                       plotOutput("überundadiPlot")
           
@@ -309,10 +309,10 @@ ui <- dashboardPage(
         h4("'Übergewicht und Adipositas (Fettleibigkeit) sind nicht dasselbe.
         Übergewicht bedeutet, dass der Betroffene über seinem Normalgewicht liegt. Es handelt sich dabei um den Übergang vom Normalgewicht zur Adipositas. 
         Der Begriff Adipositas bedeutet, dass jemand sehr starkes Übergewicht und dadurch einen krankhaft erhöhten Körperfettanteil hat. 
-        Daher wird Adipositas auch Fettleibigkeit oder Fettsucht genannt.
-        Zu Definition dient die Kennzahl des Body-Mass-Index (BMI).Ein BMI ab 25 kg/m2 gilt per Definition als Übergewicht, ein BMI von 30 kg/m2 und höher als Adipositas.'"),
-        h5("(Quelle: https://www.vigo.de/rubriken/krankheit-und-therapie/stoffwechsel/lesen/uebergewicht-und-adipositas-volkskrankheiten.html)."),
-        h4("Schau dir die Verteilung von Übergewicht und Fettleibigkeit in verschiedenen Ländern der Welt zu unterschiedlichen Zeitpunkten an.")
+        Daher wird Adipositas auch Fettleibigkeit oder Fettsucht genannt [...].
+        Zur Definition dient die Kennzahl des Body-Mass-Index (BMI).Ein BMI ab 25 kg/m2 gilt per Definition als Übergewicht, ein BMI von 30 kg/m2 und höher als Adipositas.'"),
+        h5("[Quelle: https://www.vigo.de/rubriken/krankheit-und-therapie/stoffwechsel/lesen/uebergewicht-und-adipositas-volkskrankheiten.html]."),
+        h4("Schau dir die Verteilung von Übergewicht und Adipositas in verschiedenen Ländern der Welt zu unterschiedlichen Zeitpunkten an.")
                             ),
       
       
@@ -358,7 +358,8 @@ ui <- dashboardPage(
                       gradientColor = "green", 
                       boxToolSize = "sm", 
                       footer_padding = FALSE,
-                       h4("Schaue dir an, wie sich die Geschlechter im Hinblick auf die beiden Krankheiten im Verlauf der Jahre verändert haben.")
+                       h4("Schaue dir an, wie sich die Geschlechter im Hinblick auf die beiden Krankheiten im Verlauf der Jahre verändert haben.
+                           Die sich verändernde Größe der Kreise für das jeweilige Land stellt zusätzlich die tägliche Kalorienversorgung in kcal pro Person/Tag dar.")
                       )
                   
               ),
@@ -367,12 +368,12 @@ ui <- dashboardPage(
 
              splitLayout(
                  box(width = "12",
-                   title = "Prävalenz von Übergewicht und Fettleibigkeit bei Frauen",
+                   title = "Prävalenz von Übergewicht und Adipositas bei Frauen",
                    plotlyOutput("womenplot")
                      ),
                  
                  box(width = "12",
-                  title = "Prävalenz von Übergewicht und Fettleibigkeit bei Männern",
+                  title = "Prävalenz von Übergewicht und Adipositas bei Männern",
                   plotlyOutput("manplot")
                 )
               )
@@ -446,7 +447,7 @@ ui <- dashboardPage(
                   ),
                   
                 box(width="12",
-                    title = "Entwicklung der Menge an Fleischkonsum (Kilogramm pro Kopf im Jahr)",
+                    title = "",
                     plotlyOutput("fleischplot")
                 ),
 
@@ -467,7 +468,7 @@ ui <- dashboardPage(
                   ),
                   
                 box(width="12",
-                    title = "Übergewicht im Verlauf der Jahre",
+                    title = "",
                     plotlyOutput("overweightplot")
                 )
 
@@ -490,13 +491,13 @@ ui <- dashboardPage(
                 gradientColor = "green", 
                 footer_padding = FALSE,
                 boxToolSize = "sm", 
-                h4("Um mehr für die gesunde Ernährung und die eigene Gesundheit zu tun, wurde IN FORM - Deutschlands Initiative für gesunde Ernährung ins Leben gerufen, die
-                 zum Ziel hat, das Ernährungs- und Bewegungsverhalten in Deutschland bis zum Jahr 2020 nachhaltig zu verbessern. Diese Initative ist mehr als eine reine Übergewichtsprävention -
-                 es geht um die Prävention um Fehlernährung, Bewegungsmangel und damit zusammenhängende Krankheiten.
+                h4("Um mehr für die gesunde Ernährung und die eigene Gesundheit zu tun, wurde 'IN FORM' - Deutschlands Initiative für gesunde Ernährung ins Leben gerufen. Die Initative verfolgt
+                 das Ziel, das Ernährungs- und Bewegungsverhalten in Deutschland bis zum Jahr 2020 nachhaltig zu verbessern. Es ist mehr als eine reine Übergewichtsprävention -
+                 es geht um die Prävention von Fehlernährung, Bewegungsmangel und damit zusammenhängenden Krankheiten.
                  Sowohl Erwachsene als auch insbesondere
                  Kinder sollen lernen, gesünder zu leben und somit von einer erhöhten Lebensqualität
-                 und einer gesteigteren Leistungsfähigkeit in allen Lebensbereichen profitieren zu können.
-                 Der nationale Aktiosnplan IN FROM unterstütze bereits über 200 Projkete. In Zukunft stehen vor allem die 
+                 und einer gesteigerten Leistungsfähigkeit in allen Lebensbereichen profitieren zu können.
+                 Der nationale Aktiosnplan 'IN FROM' unterstütze bereits über 200 Projkete. In Zukunft stehen vor allem die 
                  Etablierung geförderter Maßnahmen & Projekte, die Verarbeitung von neuen Erkentnissen sowie die Förderung zum Asutausch & zur Vernetzung zwischen Akteuren
                  der unterschiedliche Projekte im Fokus.")
                 ),
@@ -734,10 +735,10 @@ ui <- dashboardPage(
     geom_point() +
     theme_minimal() +
     labs(
-      title = "Beeinflusst das GDP die Fettversorgung? [Jahr 2013]",
-      x = "GDP (2001 international-$) pro Kopf",
-      y = "Tägliche Fettversorgung (in g pro Person/Tag)",
-      caption = "Die Daten stellen das Jahr 2013 dar."
+      title = "Beeinflusst das GDP die Fettversorgung? [2013]",
+      x = "GDP pro Kopf",
+      y = "Tägliche Fettversorgung (in g pro Person/Tag)"
+#     caption = "Die Daten stellen das Jahr 2013 dar."
         )
   ggplotly(p1)
   })
@@ -756,8 +757,8 @@ ui <- dashboardPage(
     scale_x_log10() +
     scale_color_manual(values=c("#5F4C0B", "#31B404", "#0404B4"))+
     labs(
-      title = "Kontrast der Fettversorgung nach Wohlstand eines Landes",
-      x = "GDP (2001 international-$) pro Kopf",
+      title = "Kontrast der täglichen Fettversorgung nach Wohlstand eines Landes",
+      x = "GDP pro Kopf",
       y = "Tägliche Fettversorgung (in g pro Person/Tag)",
       color = "Länder nach Größe") + 
     guides(size = FALSE)
@@ -804,10 +805,10 @@ ui <- dashboardPage(
      scale_fill_manual(values = c("#00868B","#7FFFD4"))+
      labs(x="Länder",
            y="Indikator: Verbreitung von Übergewicht und Fettleibigkeit, gemessen am Body-Mass-Index (BMI) in %",
-           title= "Vergleich von Übergewicht und Fettleibigkeit nach Ländern [1990]",
+           title= "Vergleich von Übergewicht und Fettleibigkeit nach Ländern [1975]",
            fill = "Krankheitstyp",
-           caption = "Der Kranheitstyp bedeutet folgendes:
-           indicator_obes = Fettleibikeit | indicator_over = Übergewicht") +
+           caption = "Der Kranheitstyp bedeutet Folgendes:
+           indicator_obes = Adipositas (Fettleibigkeit) | indicator_over = Übergewicht") +
            coord_flip()
     
   })
@@ -831,8 +832,8 @@ ui <- dashboardPage(
            y="Indikator: Verbreitung von Übergewicht und Fettleibigkeit, gemessen am Body-Mass-Index (BMI) in %",
            title= "Vergleich von Übergewicht und Fettleibigkeit nach Ländern [2016]",
            fill = "Krankheitstyp",
-           caption = "Der Kranheitstyp bedeutet folgendes:
-           indicator_obes = Fettleibikeit | indicator_over = Übergewicht") +
+           caption = "Der Kranheitstyp bedeutet Folgendes:
+           indicator_obes = Adipostias (Fettleibigkeit) | indicator_over = Übergewicht") +
       coord_flip()
     
   })
@@ -842,7 +843,7 @@ ui <- dashboardPage(
   output$totalboxüberfett <- renderInfoBox({
     infoBox(
       "Frage:", paste0(25 + input$text,"Wie sieht die Verteilung 41 Jahre später aus?"), icon = icon("question"),
-      color = "green"
+       color = "green"
     )
   })
   
@@ -870,7 +871,7 @@ ui <- dashboardPage(
    
 #   })
   
-  # Test: Slider für Übergwicht Frauen plotly Alternataive?
+  # Test: Slider für Übergwicht Frauen Plotly Alternataive?
   
 
  p421 <- temp421 %>%
@@ -893,16 +894,18 @@ ui <- dashboardPage(
      yaxis = list(
        title = "Übergewichtige/fettleibige Frauen (in %)"
      )
+       )
+#     text = list(
+#     color = (values = c("#5F4C0B","#31B404", "#0404B4"))
+#     )
+#     )
 #    marker = list (
 #    colors = pal
 #    )
-     
-        
-     
      #color = list(
       # (values=c("#5F4C0B","#31B404", "#0404B4"))
      #)
-   )
+#   )
 ggplotly(p421)  
 
  })
@@ -937,23 +940,50 @@ ggplotly(p421)
 
   
   # Übergewicht Männer
-  output$manplot <- renderPlotly ({
-    
-    temp422 <- weight %>%
-      filter(Entity == c("Central African Republic", "Germany", "United States")) 
-    
-   p422 <- temp422 %>% ggplot() +
-      aes(y = `m_Overweight or Obese (%)`, x = Year, color = Entity) + 
-      geom_line() +
-      theme_minimal() +
-      scale_color_manual(values=c("#5F4C0B",
-                                  "#31B404",
-                                  "#0404B4"))+
-      labs(
-       x = "Jahr",
-       y =  "Übergewichtige/fettleibige Männer (in %)",
-       color = "Ausgewählte Länder")
-    ggplotly(p422)
+ output$manplot <- renderPlotly ({
+   
+   temp422 <- tab4_weight
+   
+ p422 <- temp422 %>%
+   plot_ly(
+     x = ~ Year,
+     y = ~ `m_Overweight.or.Obese....`,
+     size = ~ `Daily.caloric.supply..per.person...kcal.person.day.`,
+     color = ~ Entity,
+     frame = ~ Year,
+     text = ~ Entity,
+     hoverinfo = "text",
+     type = 'scatter',
+     mode = 'markers'
+   ) %>%
+   layout(
+     xaxis = list(
+       type ="log",
+       title = "Jahr"
+     ),
+     yaxis = list(
+       title = "Übergewichtige/fettleibige Männer (in %)"
+     )
+   )
+     
+# bisherige Visualisierung     
+#  output$manplot <- renderPlotly ({
+#    
+#    temp422 <- weight %>%
+#      filter(Entity == c("Central African Republic", "Germany", "United States")) 
+#    
+#   p422 <- temp422 %>% ggplot() +
+#      aes(y = `m_Overweight or Obese (%)`, x = Year, color = Entity) + 
+#      geom_line() +
+#      theme_minimal() +
+#      scale_color_manual(values=c("#5F4C0B",
+#                                  "#31B404",
+#                                  "#0404B4"))+
+#      labs(
+#       x = "Jahr",
+#       y =  "Übergewichtige/fettleibige Männer (in %)",
+#       color = "Ausgewählte Länder")
+#    ggplotly(p422)
   })
   
   # (2.1= Infoboxen einfügen: DEU 2014: 48,6 % Frauen übergewichtig, 64% Männer !!!
@@ -988,7 +1018,9 @@ ggplotly(p421)
       scale_color_manual(values=c("#5F4C0B",
                                   "#31B404",
                                   "#0404B4"))+
-        labs(x="Jahre",
+        labs(
+          title = "Entwicklung der Menge an Fleischkonsum (Kilogramm pro Kopf im Jahr)",
+           x="Jahre",
            y="Menge an Fleischkonsum pro Kopf und Jahr (kg)",
            colour = "Ausgewählte Länder")
     ggplotly(p51)
@@ -1015,7 +1047,9 @@ ggplotly(p421)
       scale_color_manual(values=c("#5F4C0B",
                                   "#31B404",
                                   "#0404B4"))+
-      labs(x="Jahre",
+      labs(
+        title = "Übergewicht im Verlauf der Jahre",
+          x="Jahre",
            y="Anteil der Bevölkerung mit Übergewicht (%)",
            colour = "Ausgewählte Länder")
     ggplotly(p52)
