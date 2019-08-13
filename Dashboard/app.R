@@ -4,6 +4,7 @@ library(shinydashboard)
 library(tidyverse)
 library(ggplot2)
 #install.packages("plotly")
+#install.packages("shinydashboard")
 #install.packages("gapminder")
 library(plotly)
 library(gapminder)
@@ -215,7 +216,7 @@ ui <- dashboardPage(
                       plotlyOutput("caloricA2plot")
                         ),
                 
-                infoBoxOutput("totalbox9", width = 12),
+ #               infoBoxOutput("totalbox9", width = 12),
                    
              # Einleitung Wohlstand und Kalorienverbrauch     
                 gradientBox(
@@ -278,7 +279,7 @@ ui <- dashboardPage(
                         h4("Für die Beschreibung des Gesundheitszustandes einer Bevölkerung sind das
                          Körpergewicht und die Körpergröße wichtige Merkmale. In den letzten Jahren ist die Prävalenz (Häufigkeit einer Krankheit)
                          von Übergewicht und Adipositas (wird oft auch als 'Fettleibigkeit' übersetzt) stark angestiegen. Auf dieser Seite kannst 
-                         du dir das Verhältnis von Übergwicht und Adipositas in ausgewählten Ländern anschauen.
+                         du dir das Verhältnis von Übergewicht und Adipositas in ausgewählten Ländern anschauen.
                          Außerdem erfährst du mehr über die Häufigkeiten der beiden Krankheiten nach den Geschlechtern.")
                       ),
                       plotOutput("überundadiPlot")
@@ -437,11 +438,7 @@ ui <- dashboardPage(
                     icon = "fa fa-history",
                     gradientColor = "green", 
                     boxToolSize = "sm", 
-                    footer = selectInput(
-                      "countselect51","Wähle ein Land", 
-                      choices = meat$Entity, 
-                      multiple = TRUE, selected = c("Germany", "United States", "Central African Republic")
-                    ),
+                    footer_padding = FALSE,
                     h4("Wie viel Fleisch konsumieren wir eigentlich? 
                     Vergleiche den Fleischkonsum unterschiedlicher Länder miteinander.")
                   ),
@@ -457,12 +454,8 @@ ui <- dashboardPage(
                     icon = "fas fa-lightbulb",
                     gradientColor = "green", 
                     boxToolSize = "sm", 
-                    footer = selectInput(
-                      "countselect52","Wähle ein Land", 
-                      choices = weight_comb$Entity, 
-                      multiple = TRUE, selected = c("Germany", "United States", "Central African Republic")
-                    ),
-                    h4("Wir werden immer dicker! Woran kann das liegen? 
+                    footer_padding = FALSE,
+                      h4("Wir werden immer dicker! Woran kann das liegen? 
                      Hier kannst du den Anteil der übergewichtigen Bevölkerung 
                     der jeweiligen Länder miteinander vergleichen.")
                   ),
@@ -497,9 +490,9 @@ ui <- dashboardPage(
                  Sowohl Erwachsene als auch insbesondere
                  Kinder sollen lernen, gesünder zu leben und somit von einer erhöhten Lebensqualität
                  und einer gesteigerten Leistungsfähigkeit in allen Lebensbereichen profitieren zu können.
-                 Der nationale Aktiosnplan 'IN FROM' unterstütze bereits über 200 Projkete. In Zukunft stehen vor allem die 
-                 Etablierung geförderter Maßnahmen & Projekte, die Verarbeitung von neuen Erkentnissen sowie die Förderung zum Asutausch & zur Vernetzung zwischen Akteuren
-                 der unterschiedliche Projekte im Fokus.")
+                 Der nationale Aktiosnplan 'IN FROM' unterstütze bereits über 200 Projekte. In Zukunft stehen vor allem die 
+                 Etablierung geförderter Maßnahmen & Projekte, die Verarbeitung von neuen Erkentnissen sowie die Förderung zum Austausch & zur Vernetzung zwischen Akteuren
+                 der unterschiedlichen Projekte im Fokus.")
                 ),
              
             fluidRow(
@@ -593,7 +586,7 @@ ui <- dashboardPage(
                 # footer = 
                 h4("All unsere Daten sind von der Webseite 'Our World in Data'. 
                 Diese Daten sind frei zugänglich und verwendbar, sofern die Nutzung angeben wird. 
-                Alle Arbeiten sind unter der 'Creative Commons BY'-Lizenz.")
+                Alle Arbeiten sind unter der 'Creative Commons BY'-Lizenz' lizensiert.")
               )
             )
     )   
@@ -766,14 +759,14 @@ ui <- dashboardPage(
   ggplotly(p)
 })
   
-  output$totalbox9 <- renderInfoBox({
-    infoBox(
-      "Tipp!",
-      paste0(25 + input$text, "Wähle einzelne Länder aus, dann kannst du sie besser miteinander vergleichen!"), 
-      icon = icon("lightbulb"),
-      color = "green"
-    )
-  })
+#  output$totalbox9 <- renderInfoBox({
+#    infoBox(
+#      "Tipp!",
+#      paste0(25 + input$text, "Wähle einzelne Länder aus, dann kannst du sie besser miteinander vergleichen!"), 
+#      icon = icon("lightbulb"),
+#      color = "green"
+#    )
+#  })
 
 #Output Plot Tab 4----
   #Output Progess Box
@@ -1010,7 +1003,7 @@ ggplotly(p421)
     
     temp51 <- meat %>% 
     filter(Entity == c("Central African Republic", "Germany", "United States")) %>% 
-     filter(Entity %in% input$countselect51) %>% filter(`Food Balance Sheets: Meat - Food supply quantity (kg/capita/yr) (FAO (2017)) (kg)` != "2007")
+      filter(`Food Balance Sheets: Meat - Food supply quantity (kg/capita/yr) (FAO (2017)) (kg)` != "2007")
     
     p51 <- temp51 %>%      ggplot(
       aes(x = Year, y = `Food Balance Sheets: Meat - Food supply quantity (kg/capita/yr) (FAO (2017)) (kg)`, group = Entity, colour = Entity)) + 
@@ -1038,9 +1031,8 @@ ggplotly(p421)
     
     temp52 <- weight_comb %>% 
       filter(Entity == c("Central African Republic", "Germany", "United States")) %>% 
-      filter(weight_type == "Overweight") %>% 
-      filter(Entity %in% input$countselect52)
-    
+      filter(weight_type == "Overweight")  
+ 
     p52 <- temp52 %>%      ggplot(
       aes(x = Year, y = weight_total, group = Entity, colour = Entity)) + 
       geom_line() +
