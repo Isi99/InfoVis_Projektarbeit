@@ -1,0 +1,12 @@
+name: Dashboard
+title: Dashboard
+username:
+account: cappturing090217
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1084185
+bundleId: 2315963
+url: https://cappturing090217.shinyapps.io/Dashboard/
+when: 1565718799.36151
+asMultiple: FALSE
+asStatic: FALSE
