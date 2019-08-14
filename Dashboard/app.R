@@ -216,7 +216,7 @@ ui <- dashboardPage(
                       plotlyOutput("caloricA2plot")
                         ),
                 
- #               infoBoxOutput("totalbox9", width = 12),
+                infoBoxOutput("totalbox9", width = 12),
                    
              # Einleitung Wohlstand und Kalorienverbrauch     
                 gradientBox(
@@ -479,7 +479,7 @@ ui <- dashboardPage(
                
               gradientBox(
                 width =  12,
-                title = h2(p(strong ("Du willst mehr für auf eine gesunde Ernährung achten? Dann IN FORM-ier dich hier!"))),
+                title = h2(p(strong ("Du willst mehr auf eine gesunde Ernährung achten? Dann IN FORM-ier dich hier!"))),
                 #icon = "fa fa-th",
                 gradientColor = "green", 
                 footer_padding = FALSE,
@@ -759,14 +759,14 @@ ui <- dashboardPage(
   ggplotly(p)
 })
   
-#  output$totalbox9 <- renderInfoBox({
-#    infoBox(
-#      "Tipp!",
-#      paste0(25 + input$text, "Wähle einzelne Länder aus, dann kannst du sie besser miteinander vergleichen!"), 
-#      icon = icon("lightbulb"),
-#      color = "green"
-#    )
-#  })
+  output$totalbox9 <- renderInfoBox({
+    infoBox(
+      "Tipp!",
+      paste0(25 + input$text, "Wähle einzelne Länder aus, dann kannst du sie besser miteinander vergleichen!"), 
+      icon = icon("lightbulb"),
+      color = "green"
+    )
+  })
 
 #Output Plot Tab 4----
   #Output Progess Box
