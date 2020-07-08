@@ -1,6 +1,6 @@
 #Bibliotheken laden
 library(shiny)
-#library(shinydashboard)
+library(shinydashboard)
 library(tidyverse)
 library(ggplot2)
 #install.packages("plotly")
@@ -13,7 +13,7 @@ library(png)
 #install.packages("shinyWidgets")
 library(shinyWidgets)
 #install.packages("shinydashboardPlus")
-#library(shinydashboardPlus)
+library(shinydashboardPlus)
 
 ### Datensätze einlesen ----
   meat <- read_rds("meatnew.rds")
